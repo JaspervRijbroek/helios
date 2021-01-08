@@ -54,7 +54,7 @@ export class UserController {
                     realName: {},
                     reasonCode: {},
                     remoteUserId: 1000000000001,
-                    securityToken: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+                    securityToken: user.token,
                     starterPackEntitlementTag: user.starter_pack,
                     status: {},
                     subscribeMsg: 'false',
