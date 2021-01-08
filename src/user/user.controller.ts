@@ -67,6 +67,7 @@ export class UserController {
     }
 
     @Get('getusersettings')
+    @UseGuards(AuthGuard('securitytoken'))
     getUserSettings() {
         return {
             User_Settings: {
@@ -102,6 +103,7 @@ export class UserController {
     }
 
     @Get('getblockeduserlist')
+    @UseGuards(AuthGuard('securitytoken'))
     getBlockedUserList() {
         return {
             ArrayOflong: {}
@@ -109,6 +111,7 @@ export class UserController {
     }
 
     @Get('getblockersbyusers')
+    @UseGuards(AuthGuard('securitytoken'))
     getBlockersByUsers() {
         return {
             ArrayOflong: {}

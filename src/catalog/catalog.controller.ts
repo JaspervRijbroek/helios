@@ -1,7 +1,9 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Product } from './product.entity';
 
 @Controller()
+@UseGuards(AuthGuard('securitytoken'))
 export class CatalogController {
     @Get('catalog/productsInCategory')
     async getProductsInCategory(@Req() req: any) {

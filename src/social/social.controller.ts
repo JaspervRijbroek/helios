@@ -2,9 +2,9 @@ import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
+@UseGuards(AuthGuard('securitytoken'))
 export class SocialController {
     @Get('getfriendlistfromuserid')
-    @UseGuards(AuthGuard('securitytoken'))
     getFriendsList() {
         return {
             PersonaFriendsList: {
