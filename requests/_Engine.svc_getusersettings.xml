@@ -1,0 +1,23 @@
+<User_Settings>
+    <CarCacheAgeLimit>600</CarCacheAgeLimit>
+    <IsRaceNowEnabled>true</IsRaceNowEnabled>
+    <MaxCarCacheSize>250</MaxCarCacheSize>
+    <MinRaceNowLevel>2</MinRaceNowLevel>
+    <VoipAvailable>false</VoipAvailable>
+    <activatedHolidaySceneryGroups>
+        <a:string>SCENERY_GROUP_NORMAL</a:string>
+        <a:string>PLACEHOLDER</a:string>
+    </activatedHolidaySceneryGroups>
+    <activeHolidayIds>
+        <a:long>0</a:long>
+        <a:long>9</a:long>
+    </activeHolidayIds>
+    <disactivatedHolidaySceneryGroups>
+        <a:string>SCENERY_GROUP_NORMAL_DISABLE</a:string>
+        <a:string>PLACEHOLDER</a:string>
+    </disactivatedHolidaySceneryGroups>
+    <firstTimeLogin>true</firstTimeLogin>
+    <maxLevel>70</maxLevel>
+    <starterPackApplied>true</starterPackApplied>
+    <userId>1</userId>
+</User_Settings>

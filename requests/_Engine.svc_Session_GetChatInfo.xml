@@ -1,0 +1,9 @@
+<chatServer>
+    <Rooms>
+        <chatRoom>
+            <channelCount>2</channelCount>
+            <longName>TXT_CHAT_LANG_ENGLISH</longName>
+            <shortName>EN</shortName>
+        </chatRoom>
+    </Rooms>
+</chatServer>

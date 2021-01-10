@@ -1,0 +1,148 @@
+<InventoryTrans>
+    <InventoryItems>
+        <InventoryItemTrans>
+            <EntitlementTag>runflattires</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-537557654</Hash>
+            <InventoryId>1</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>3757409642</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>trafficmagnet</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>125509666</Hash>
+            <InventoryId>2</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>125509666</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>instantcooldown</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-1692359144</Hash>
+            <InventoryId>3</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>2602608152</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>shield</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-364944936</Hash>
+            <InventoryId>4</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>3930022360</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>slingshot</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>2236629</Hash>
+            <InventoryId>5</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>2236629</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>ready</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>957701799</Hash>
+            <InventoryId>6</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>49</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>957701799</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>juggernaut</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>1805681994</Hash>
+            <InventoryId>7</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>1805681994</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>emergencyevade</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-611661916</Hash>
+            <InventoryId>8</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>3683305380</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>team_emergencyevade</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-1564932069</Hash>
+            <InventoryId>9</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>2730035227</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>nosshot</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>-1681514783</Hash>
+            <InventoryId>10</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>46</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>2613452513</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>onemorelap</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>1627606782</Hash>
+            <InventoryId>11</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>1627606782</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+        <InventoryItemTrans>
+            <EntitlementTag>team_slingshot</EntitlementTag>
+            <ExpirationDate/>
+            <Hash>1113720384</Hash>
+            <InventoryId>12</InventoryId>
+            <ProductId>DO NOT USE ME</ProductId>
+            <RemainingUseCount>50</RemainingUseCount>
+            <ResellPrice>0</ResellPrice>
+            <Status>ACTIVE</Status>
+            <StringHash>1113720384</StringHash>
+            <VirtualItemType>powerup</VirtualItemType>
+        </InventoryItemTrans>
+    </InventoryItems>
+</InventoryTrans>
