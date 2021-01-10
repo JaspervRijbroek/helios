@@ -3,7 +3,8 @@
  */
 
 import { green, yellow } from "chalk";
-import { config } from "dotenv/types";
+import { config } from "dotenv";
+import SoapServer from "../servers/soap/server";
 
 export default class Game {
     static instance: Game;
@@ -29,6 +30,7 @@ export default class Game {
         // Start the various servers,
         // I still need to think about it to make this threaded.
         // This still is a possibility.
+        new SoapServer().start();
     }
 
     showHeader() {

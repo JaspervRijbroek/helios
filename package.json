@@ -1,5 +1,5 @@
 {
-    "name": "zeus",
+    "name": "helios",
     "description": "A need for speed world server emulator",
     "dependencies": {
         "chalk": "^4.1.0",

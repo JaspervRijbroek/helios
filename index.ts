@@ -1,6 +1,4 @@
-import Express, {Request, Response, static as staticPath} from 'express';
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
 // import AnnouncementsController from './app/controllers/announcements';
 // import CarsController from './app/controllers/cars';
 // import CatalogController from './app/controllers/catalog';
@@ -20,11 +18,12 @@ import {createConnection} from 'typeorm';
 // import { User } from './app/models/user';
 
 import './lib/game';
+import Game from './lib/game';
 
 global.debug = require('debug')('nfsw:http');
 
-const app = Express();
-const port = 1337;
+Game.getInstance()
+    .start()
 
 // createConnection().then(() => {
 //     global.debug('Database connection created!');
@@ -73,7 +72,3 @@ const port = 1337;
 
 // app.set('etag', false);
 // app.disable('x-powered-by');
-
-app.listen(port, () => {
-    global.debug(`Server started on port: ${port}`);
-});
