@@ -88,14 +88,10 @@ export default class PersonaController extends BaseController {
 
     @Route('get', 'personas/:personaId/carslots')
     getCarSlots(req: Request) {
-        console.log('Called');
+        
 
         return {
             CarSlotInfoTrans: {
-                '@': {
-                    xmlns: "http://schemas.datacontract.org/2004/07/Victory.DataLayer.Serialization",
-                    'xmlns:i': "http://www.w3.org/2001/XMLSchema-instance"
-                },
                 CarsOwnedByPersona: [{
                     OwnedCarTrans: {
                         CustomCar: {
@@ -586,8 +582,14 @@ export default class PersonaController extends BaseController {
     }
 
     @Route('post', 'User/SecureLoginPersona')
-    secureLoginPersona(req: Request) {
+    async secureLoginPersona(req: any) {
         // @TODO: This is an XMPP function.
+        // But also set the current persona to the user.
+        let user = req.user;
+
+        user.currentPersona = req.body.personaId;
+        await user.save();
+
         return {};
     }
 

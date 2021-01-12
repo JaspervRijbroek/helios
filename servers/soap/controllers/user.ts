@@ -1,29 +1,36 @@
-import {Request, Response} from 'express'
+import { Request, Response } from 'express'
 import { Controller, Route } from '../decorators/routing';
 import BaseController from "../../../lib/controller";
+import { User } from '../../../entities/user';
+import { Persona } from '../../../entities/persona';
 
 @Controller()
 export default class UserController extends BaseController {
     @Route('post', 'User/GetPermanentSession')
     async getPermanentSession(req: any) {
+        let user = req.user as User,
+            personas = await user.personas || [];
+
         return {
             UserInfo: {
                 defaultPersonaIdx: 0,
                 personas: {
-                    ProfileData: {
-                        Boost: 50000,
-                        Cash: 1000000,
-                        IconIndex: 26,
-                        Level: 2,
-                        Motto: 'Online First!',
-                        Name: 'jasper199069',
-                        PercentToLevel: '0',
-                        PersonaId: '100',
-                        Rating: '1067',
-                        Rep: '0',
-                        RepAtCurrentLevel: '0',
-                        ccar: {}
-                    }
+                    ProfileData: personas.map((persona: Persona) => {
+                        return {
+                            Boost: persona.boost,
+                            Cash: persona.cash,
+                            IconIndex: persona.icon,
+                            Level: persona.level,
+                            Motto: persona.motto,
+                            Name: persona.name,
+                            PercentToLevel: persona.level_percentage,
+                            PersonaId: persona.id,
+                            Rating: persona.rating,
+                            Rep: persona.rep,
+                            RepAtCurrentLevel: persona.rep_level,
+                            ccar: {}
+                        }
+                    })
                 },
                 user: {
                     address1: {},
@@ -34,7 +41,7 @@ export default class UserController extends BaseController {
                     email: {},
                     emailStatus: {},
                     firstName: {},
-                    fullGameAccess: 'false',
+                    fullGameAccess: user.full_access,
                     gender: {},
                     idDigits: {},
                     isComplete: 'false',
@@ -48,12 +55,12 @@ export default class UserController extends BaseController {
                     realName: {},
                     reasonCode: {},
                     remoteUserId: 1000000000001,
-                    securityToken: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
-                    starterPackEntitlementTag: '',
+                    securityToken: user.token,
+                    starterPackEntitlementTag: user.starter_pack,
                     status: {},
                     subscribeMsg: 'false',
                     tosVersion: {},
-                    userId: '11111111',
+                    userId: user.id,
                     username: {}
                 }
             }
@@ -61,7 +68,7 @@ export default class UserController extends BaseController {
     }
 
     @Route('get', 'getusersettings')
-    getUserSettings(req: Request) {
+    getUserSettings(req: any) {
         return {
             User_Settings: {
                 CarCacheAgeLimit: 600,

@@ -8,6 +8,16 @@ export default class FreeroamServer {
         this.server = createSocket('udp4', () => {
             console.log('Connected!');
         })
+
+        this.server.on('error', (err) => {
+            console.log(`server error:\n${err.stack}`);
+            this.server.close();
+        });
+
+        this.server.on('message', (msg, rinfo) => {
+            console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+        });
+
         // this.server = createServer(() => {
         //     console.log('Connected');
         // })

@@ -20,3 +20,9 @@ services:
       MYSQL_DATABASE: "zeus"
     volumes:
       - "./.docker/storage/mysql:/var/lib/mysql"
+  xmpp:
+    image: "prosody/prosody"
+    ports:
+      - "5222:5222"
+      - "81:80"
+      - "444:443"

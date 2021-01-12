@@ -28,14 +28,14 @@ export default class ChatClient extends EventEmitter {
     sendHandshake() {
         this.isConnected = true;
 
-        // [
-        //     `<stream:stream xmlns='jabber:client' xml:lang='en' xmlns:stream='http://etherx.jabber.org/streams' from='127.0.0.1' id='174159513' version='1.0'><stream:features><starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/></stream:features>`,
-        //     `<proceed xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>`
-        // ].forEach(packet => {
-        //     this.socket.write(packet);
-        // });
+        [
+            `<stream:stream xmlns='jabber:client' xml:lang='en' xmlns:stream='http://etherx.jabber.org/streams' from='127.0.0.1' id='174159513' version='1.0'><stream:features />`,
+            `<proceed xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>`
+        ].forEach(packet => {
+            this.socket.write(packet);
+        });
 
-        // // Wrap into a tlssocket.
+        // Wrap into a tlssocket.
         // this.socket = new TLSSocket(this.socket, {
         //     isServer: true,
         //     key: readFileSync(join(process.cwd(), 'public', 'resources', 'selfsigned.key')),
@@ -45,5 +45,14 @@ export default class ChatClient extends EventEmitter {
         // });
 
         // this.bindEvents();
+
+        [
+            "<stream:stream xmlns='jabber:client' xml:lang='en' xmlns:stream='http://etherx.jabber.org/streams' from='127.0.0.1' id='5000000000000A' version='1.0'><stream:features/>",
+            "",
+            "<iq id='EA-Chat-2' type='result' xml:lang='en'/>",
+            ""
+        ].forEach(packet => {
+            this.socket.write(packet);
+        })
     }
 }

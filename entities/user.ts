@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Persona } from "./persona";
 
 @Entity()
@@ -20,6 +20,10 @@ export class User extends BaseEntity {
 
     @Column()
     password?: string;
+
+    @OneToOne(() => Persona)
+    @JoinColumn()
+    currentPersona?: Persona;
 
     @OneToMany(() => Persona, persona => persona.user)
     personas?: Promise<Persona[]>;

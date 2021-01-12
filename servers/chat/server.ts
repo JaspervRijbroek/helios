@@ -11,8 +11,8 @@ export default class ChatServer {
 
             this.clients.push(client)
 
-            client.on('packet', this.handlePacket);
-            client.on('close', this.closeSocket);
+            client.on('packet', this.handlePacket.bind(this));
+            client.on('close', this.closeSocket.bind(this));
         });
     }
 
