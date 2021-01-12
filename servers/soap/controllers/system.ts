@@ -1,13 +1,14 @@
-import { Request, Response } from "express";
-import { Controller, Route } from "../decorators/routing";
+import {Request, Response} from "express";
+import {Controller, Route} from "../decorators/routing";
+import BaseController from "../../../lib/controller";
 
 @Controller()
-export default class SystemController {
+export default class SystemController extends BaseController {
     @Route('get', 'systeminfo')
-    getSystemInfo(req: Request, res: Response) {
+    getSystemInfo(req: Request) {
         let date = new Date();
 
-        return res.json({
+        return {
             SystemInfo: {
                 Branch: 'production',
                 ChangeList: 620384,
@@ -26,27 +27,27 @@ export default class SystemController {
                 PortalStoreFailurePage: 'world.needforspeed.com/webkit/pageLoadError',
                 PortalTimeOut: 60000,
                 ShardName: 'APEX',
-                Time: `2021-01-02T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.0000000+00:00`,
+                Time: date.toISOString(),
                 Version: 2578,
             }
-        })
+        };
     }
 
     @Route('get', 'getrebroadcasters')
-    getRebroadcasters(req: Request, res: Response) {
-        return res.json({
+    getRebroadcasters(req: Request) {
+        return {
             ArrayOfUdpRelayInfo: {
                 UdpRelayInfo: {
                     Host: '127.0.0.1',
-                    Port: 9999
+                    Port: process.env.FREEROAM_PORT
                 }
             }
-        })
+        };
     }
 
     @Route('get', 'getregioninfo')
-    getRegionInfo(req: Request, res: Response) {
-        return res.json({
+    getRegionInfo(req: Request) {
+        return {
             RegionInfo: {
                 CountdownProposalInMilliseconds: 3000,
                 DirectConnectTimeoutInMilliseconds: 1000,
@@ -56,16 +57,16 @@ export default class SystemController {
                 UdpRelayBandwidthInBps: 9600,
                 UdpRelayTimeoutInMilliseconds: 60000
             }
-        })
+        };
     }
 
     @Route('post', 'heartbeat')
-    getHeartbeat(req: Request, res: Response) {
-        return res.json({
+    getHeartbeat(req: Request) {
+        return {
             HeartBeat: {
                 MetagameFlags: 2,
                 enabledBitField: 0
             }
-        });
+        };
     }
 }

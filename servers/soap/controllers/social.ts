@@ -1,11 +1,12 @@
-import { Request, Response } from "express";
-import { Controller, Route } from "../decorators/routing";
+import {Request, Response} from "express";
+import {Controller, Route} from "../decorators/routing";
+import BaseController from "../../../lib/controller";
 
 @Controller()
-export default class SocialController {
+export default class SocialController extends BaseController {
     @Route('get', 'getfriendlistfromuserid')
-    getFriendsList(req: Request, res: Response) {
-        return res.json({
+    getFriendsList(req: Request) {
+        return {
             PersonaFriendsList: {
                 FriendPersona: {
                     FriendPersona: [{
@@ -20,12 +21,12 @@ export default class SocialController {
                     }]
                 }
             }
-        })
+        };
     }
 
     @Route('get', 'getsocialsettings')
-    getSocialSettings(req: Request, res: Response) {
-        return res.json({
+    getSocialSettings(req: Request) {
+        return {
             SocialSettings: {
                 AppearOffline: false,
                 DeclineGroupInvite: 0,
@@ -35,6 +36,6 @@ export default class SocialController {
                 ShowNewsOnSignIn: false,
                 ShowOnlyPlayersInSameChatChannel: false,
             }
-        });
+        };
     }
 }

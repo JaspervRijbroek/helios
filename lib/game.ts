@@ -4,10 +4,13 @@
 
 import { green, yellow } from "chalk";
 import { config } from "dotenv";
-import SoapServer from "../servers/soap/server";
+import { glob } from "glob";
+import { ChildProcess, fork } from "child_process";
+import { join } from "path";
 
 export default class Game {
     static instance: Game;
+    serverInstances: ChildProcess[] = [];
 
     static getInstance(): Game {
         if(!this.instance) {
@@ -27,10 +30,20 @@ export default class Game {
             this.showHeader();
         }
 
-        // Start the various servers,
-        // I still need to think about it to make this threaded.
-        // This still is a possibility.
-        new SoapServer().start();
+        this.serverInstances = this.getServerPaths()
+            .map((serverPath: string) => {
+                return fork(serverPath);
+            });
+
+        // new FreeroamServer().start();
+        // new SoapServer().start();
+        // new ChatServer().start();
+    }
+
+    getServerPaths(): string[] {
+        return glob.sync(
+            join(__dirname, '..', 'servers', '*', 'index.ts')
+        );
     }
 
     showHeader() {

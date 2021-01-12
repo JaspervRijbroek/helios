@@ -1,33 +1,29 @@
 import {Request, Response} from 'express'
 import { Controller, Route } from '../decorators/routing';
+import BaseController from "../../../lib/controller";
 
 @Controller()
-export default class UserController {
+export default class UserController extends BaseController {
     @Route('post', 'User/GetPermanentSession')
-    async getPermanentSession(req: any, res: Response) {
-        let token = req.headers['securitytoken'] || false,
-            personas = (await req.user.personas) || [];
-
-        return res.json({
+    async getPermanentSession(req: any) {
+        return {
             UserInfo: {
                 defaultPersonaIdx: 0,
                 personas: {
-                    ProfileData: personas.map((persona: any) => {
-                        return {
-                            Boost: persona.boost,
-                            Cash: persona.cash,
-                            IconIndex: persona.icon,
-                            Level: persona.level,
-                            Motto: persona.motto,
-                            Name: persona.name,
-                            PercentToLevel: persona.level_percentage,
-                            PersonaId: persona.id,
-                            Rating: persona.rating,
-                            Rep: persona.rep,
-                            RepAtCurrentLevel: persona.rep_level,
-                            ccar: {}
-                        }
-                    })
+                    ProfileData: {
+                        Boost: 50000,
+                        Cash: 1000000,
+                        IconIndex: 26,
+                        Level: 2,
+                        Motto: 'Online First!',
+                        Name: 'jasper199069',
+                        PercentToLevel: '0',
+                        PersonaId: '100',
+                        Rating: '1067',
+                        Rep: '0',
+                        RepAtCurrentLevel: '0',
+                        ccar: {}
+                    }
                 },
                 user: {
                     address1: {},
@@ -38,7 +34,7 @@ export default class UserController {
                     email: {},
                     emailStatus: {},
                     firstName: {},
-                    fullGameAccess: req.user.full_access,
+                    fullGameAccess: 'false',
                     gender: {},
                     idDigits: {},
                     isComplete: 'false',
@@ -53,20 +49,20 @@ export default class UserController {
                     reasonCode: {},
                     remoteUserId: 1000000000001,
                     securityToken: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
-                    starterPackEntitlementTag: req.user.starter_pack,
+                    starterPackEntitlementTag: '',
                     status: {},
                     subscribeMsg: 'false',
                     tosVersion: {},
-                    userId: req.user.id,
+                    userId: '11111111',
                     username: {}
                 }
             }
-        });
+        };
     }
 
     @Route('get', 'getusersettings')
-    getUserSettings(req: Request, res: Response) {
-        return res.json({
+    getUserSettings(req: Request) {
+        return {
             User_Settings: {
                 CarCacheAgeLimit: 600,
                 IsRaceNowEnabled: 'true',
@@ -96,27 +92,27 @@ export default class UserController {
                 starterPackApplied: 'true',
                 userId: req.headers['userid']
             }
-        })
+        };
     }
 
     @Route('post', 'User/SecureLogout')
-    secureLogout(req: Request, res: Response) {
+    secureLogout(req: Request) {
         console.log(req.body);
 
-        return res.status(200).send();
+        return {};
     }
 
     @Route('get', 'getblockeduserlist')
-    getBlockedUserList(req: Request, res: Response) {
-        return res.json({
+    getBlockedUserList(req: Request) {
+        return {
             ArrayOflong: {}
-        });
+        };
     }
 
     @Route('get', 'getblockersbyusers')
-    getBlockersByUsers(req: Request, res: Response) {
-        return res.json({
+    getBlockersByUsers(req: Request) {
+        return {
             ArrayOflong: {}
-        });
+        };
     }
 }

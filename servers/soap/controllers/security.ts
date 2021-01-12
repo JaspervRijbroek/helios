@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
+import BaseController from "../../../lib/controller";
 
 @Controller()
-export default class SecurityController {
+export default class SecurityController extends BaseController {
     @Route('get', 'security/fraudConfig')
-    getConfig(req: Request, res: Response) {
-        return res.json({
+    getConfig(req: Request) {
+        return {
             FraudConfig: {
                 enabledBitField: 12,
                 gameFileFreq: 1000000,
@@ -13,6 +14,6 @@ export default class SecurityController {
                 startUpFreq: 1000000,
                 userID: 11111111
             }
-        });
+        };
     }
 }

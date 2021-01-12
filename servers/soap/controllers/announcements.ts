@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
 import { parse } from "url";
 import { Controller, Route } from "../decorators/routing";
+import BaseController from '../../../lib/controller';
 
 @Controller()
-export default class AnnouncementsController {
+export default class AnnouncementsController extends BaseController {
     @Route('get', 'LoginAnnouncements')
-    getLoginAnnouncements(req: Request, res: Response) {
+    getLoginAnnouncements(req: Request) {
         let urlParts = parse(req.url);
 
-        return res.json({
+        return {
             LoginAnnouncementsDefinition: {
                 Announcements: {
                     LoginAnnouncementDefinition: [{
@@ -39,6 +40,6 @@ export default class AnnouncementsController {
                 },
                 ImagesPath: 'http://localhost:1337/Engine.svc/announcements'
             }
-        });
+        };
     }
 }

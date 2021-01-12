@@ -1,16 +1,17 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
-import { Product } from "../models/product";
+import BaseController from '../../../lib/controller';
+import {Product} from "../../../entities/product";
 
 @Controller()
-export default class CatalogController {
+export default class CatalogController extends BaseController {
     @Route('get', 'catalog/productsInCategory')
-    async getProductsInCategory(req: Request, res: Response) {
+    async getProductsInCategory(req: Request) {
         let products = await Product.find({
             category: req.query.categoryName as string
         });
 
-        return res.json({
+        return {
             ArrayOfProductTrans: {
                 ProductTrans: products.map((product: Product) => {
                     return {
@@ -36,6 +37,6 @@ export default class CatalogController {
                     }
                 })
             }
-        });
+        };
     }
 }

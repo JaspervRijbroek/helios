@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
+import BaseController from '../../../lib/controller';
 
 @Controller()
-export default class CarsController {
+export default class CarsController extends BaseController {
     @Route('get', 'carclasses')
-    getCarClasses(req: Request, res: Response) {
-        return res.json({
+    getCarClasses(req: Request) {
+        return {
             ArrayOfCarClass: {
                 CarClass: [{
                     CarClassHash: -2142411446,
@@ -33,13 +34,13 @@ export default class CarsController {
                     MinRating: 400,
                 }]
             }
-        });
+        };
     }
 
     @Route('put', 'personas/:personaId/cars')
-    updateCarSpecs(req: Request, res: Response) {
+    updateCarSpecs(req: Request) {
         console.log(req.body.OwnedCarTrans.CustomCar);
 
-        return res.json('');
+        return {};
     }
 }

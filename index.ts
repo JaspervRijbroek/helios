@@ -55,12 +55,7 @@ Game.getInstance()
 //     SystemController,
 //     UserController
 // ].forEach((Controller: any) => {
-//     let instance = new Controller();
-
-//     Reflect.getMetadata('routes', Controller)
-//         .forEach((route: IRouteDefinition) => {
-//             app[route.method](route.path, instance[route.methodName]);
-//         })
+//     
 // });
 
 // app.use((req: Request, res: Response, next: Function) => {

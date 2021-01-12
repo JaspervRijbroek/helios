@@ -1,29 +1,28 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
+import BaseController from "../../../lib/controller";
 
 
 @Controller()
-export default class LoggingController {
+export default class LoggingController extends BaseController {
     @Route('get', 'logging/client')
-    getLoggingClient(req: Request, res: Response) {
-        return res.json({
+    getLoggingClient(req: Request) {
+        return {
             ClientConfigTrans: {
                 clientConfigs: {}
             }
-        });
+        };
     }
 
     @Route('post', '//logging/client/Server', false)
-    receiveServerLog(req: Request, res: Response) {
+    receiveServerLog(req: Request) {
         console.log(req.body);
 
-        return res.end();
+        return {};
     }
 
     @Route('post', '//logging/client/Multiplayer', false)
-    receiveMultiplayerLog(req: Request, res: Response) {
-        console.log(req.body);
-
-        return res.end();
+    receiveMultiplayerLog(req: Request) {
+        return {};
     }
 }

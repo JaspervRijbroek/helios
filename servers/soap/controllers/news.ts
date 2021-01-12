@@ -1,12 +1,13 @@
-import { Request, Response } from "express";
-import { Controller, Route } from "../decorators/routing";
+import {Request, Response} from "express";
+import {Controller, Route} from "../decorators/routing";
+import BaseController from "../../../lib/controller";
 
 @Controller()
-export default class NewsController {
+export default class NewsController extends BaseController {
     @Route('get', 'NewsArticles')
-    getNewsArticles(req: Request, res: Response) {
-        return res.json({
+    getNewsArticles(req: Request) {
+        return {
             NewsArticles: {}
-        })
+        };
     }
 }

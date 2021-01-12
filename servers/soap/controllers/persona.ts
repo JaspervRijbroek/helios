@@ -1,12 +1,13 @@
-import { json, Request, Response } from "express";
-import { Controller, Route } from "../decorators/routing";
-import { Persona } from "../models/persona";
+import {json, Request, Response} from "express";
+import {Controller, Route} from "../decorators/routing";
+import BaseController from "../../../lib/controller";
+import {Persona} from "../../../entities/persona";
 
 @Controller()
-export default class PersonaController {
+export default class PersonaController extends BaseController {
     @Route('get', 'DriverPersona/GetExpLevelPointsMap')
-    getLevelMap(req: Request, res: Response) {
-        return res.json({
+    getLevelMap(req: Request) {
+        return {
             ArrayOfint: {
                 int: [
                     100,
@@ -82,12 +83,14 @@ export default class PersonaController {
                     17829625
                 ]
             }
-        })
+        };
     }
 
     @Route('get', 'personas/:personaId/carslots')
-    getCarSlots(req: Request, res: Response) {
-        return res.json({
+    getCarSlots(req: Request) {
+        console.log('Called');
+
+        return {
             CarSlotInfoTrans: {
                 '@': {
                     xmlns: "http://schemas.datacontract.org/2004/07/Victory.DataLayer.Serialization",
@@ -533,12 +536,12 @@ export default class PersonaController {
                 },
                 OwnedCarSlotsCount: 5
             }
-        })
+        };
     }
 
     @Route('get', 'DriverPersona/GetPersonaInfo')
-    getPersonaInformation(req: Request, res: Response) {
-        return res.json({
+    getPersonaInformation(req: Request) {
+        return {
             ProfileData: {
                 Badges: {
                     BadgePacket: [{
@@ -579,18 +582,18 @@ export default class PersonaController {
                 RepAtCurrentLevel: 0,
                 Score: 5400,
             }
-        })
+        };
     }
 
     @Route('post', 'User/SecureLoginPersona')
-    secureLoginPersona(req: Request, res: Response) {
+    secureLoginPersona(req: Request) {
         // @TODO: This is an XMPP function.
-        return res.json({});
+        return {};
     }
 
     @Route('get', 'personas/inventory/objects')
-    getInventoryObjects(req: Request, res: Response) {
-        return res.json({
+    getInventoryObjects(req: Request) {
+        return {
             InventoryTrans: {
                 InventoryItems: {
                     InventoryItemTrans: [{
@@ -734,12 +737,12 @@ export default class PersonaController {
             SkillModPartsUsedSlotCount: 0,
             VisualPartsCapacity: 300,
             VisualPartsUsedSlotCount: 0,
-        });
+        };
     }
 
-    @Route('get', 'DriverPersona/GetPersonaBaseFromList')
-    getBaseFromList(req: Request, res: Response) {
-        return res.json({
+    @Route('post', 'DriverPersona/GetPersonaBaseFromList')
+    getBaseFromList(req: Request) {
+        return {
             ArrayOfPersonaBase: {
                 PersonaBase: [{
                     Badges: {
@@ -779,37 +782,37 @@ export default class PersonaController {
                     UserId: 11111111,
                 }]
             }
-        })
+        };
     }
 
     @Route('post', 'DriverPersona/ReserveName')
-    async reserveName(req: Request, res: Response): Promise<Response> {
+    async reserveName(req: Request): Promise<any> {
         let name = req.query.name as string,
             existingPersonas = await Persona.find({
                 name
             });
 
         if (existingPersonas.length) {
-            return res.json({
+            return {
                 ArrayOfstring: {
                     string: ['NONE']
                 }
-            })
+            };
         }
 
-        return res.json({
+        return {
             ArrayOfstring: {}
-        })
+        }
     }
 
     @Route('post', 'DriverPersona/CreatePersona')
-    async createPersona(req: any, res: Response): Promise<Response> {
+    async createPersona(req: any): Promise<any> {
         let persona = new Persona();
         persona.user = req.user;
 
         console.log(req.body);
         console.log(req.headers);
 
-        return res.json('');
+        return {};
     }
 }
