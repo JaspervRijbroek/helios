@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { parse } from "js2xmlparser";
 import { gzipSync } from "zlib";
-import { User } from '../entities/user';
+import { User } from '../database/entities/user';
 import {writeFileSync} from "fs";
 import { parse as parseUri } from 'url';
 

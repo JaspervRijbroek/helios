@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';
-import {Product} from "../../../entities/product";
+import {Product} from "../../../database/entities/product";
 
 @Controller()
 export default class CatalogController extends BaseController {

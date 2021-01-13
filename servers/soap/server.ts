@@ -3,11 +3,6 @@ import { glob } from 'glob';
 import { join } from 'path';
 import Controller from '../../lib/controller';
 import { IRouteDefinition } from './decorators/routing';
-import {createConnection, createConnections} from "typeorm";
-import {User} from "../../entities/user";
-import {Car} from "../../entities/car";
-import {Persona} from "../../entities/persona";
-import {Product} from "../../entities/product";
 
 export default class SoapServer {
     server: any;

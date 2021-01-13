@@ -23,7 +23,7 @@ createConnection({
     username: (process.env.DB_USER as string),
     password: (process.env.DB_PASS as string),
     database: (process.env.DB_NAME as string),
-    entities: [join(__dirname, '..', '..', 'entities', '**', '*.ts')],
+    entities: [join(__dirname, '..', '..', 'database', 'entities', '**', '*.ts')],
     synchronize: true
 });
 

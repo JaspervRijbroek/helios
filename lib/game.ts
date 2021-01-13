@@ -53,5 +53,6 @@ export default class Game {
         console.log(green('/ __  /  __/ | | (_) \\__ \\'));
         console.log(green('\\/ /_/ \\___|_|_|\\___/|___/'));
         console.log(yellow('                   A NFS: World Server'));
+        console.log();
     }
 }

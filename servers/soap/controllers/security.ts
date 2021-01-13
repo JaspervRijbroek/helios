@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from "../../../lib/controller";
-import { User } from "../../../entities/user";
+import { User } from "../../../database/entities/user";
 
 @Controller()
 export default class SecurityController extends BaseController {

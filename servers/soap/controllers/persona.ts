@@ -1,7 +1,7 @@
 import {json, Request, Response} from "express";
 import {Controller, Route} from "../decorators/routing";
 import BaseController from "../../../lib/controller";
-import {Persona} from "../../../entities/persona";
+import {Persona} from "../../../database/entities/persona";
 
 @Controller()
 export default class PersonaController extends BaseController {
@@ -579,18 +579,6 @@ export default class PersonaController extends BaseController {
                 Score: 5400,
             }
         };
-    }
-
-    @Route('post', 'User/SecureLoginPersona')
-    async secureLoginPersona(req: any) {
-        // @TODO: This is an XMPP function.
-        // But also set the current persona to the user.
-        let user = req.user;
-
-        user.currentPersona = req.body.personaId;
-        await user.save();
-
-        return {};
     }
 
     @Route('get', 'personas/inventory/objects')
