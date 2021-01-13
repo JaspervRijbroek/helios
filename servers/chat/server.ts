@@ -19,11 +19,12 @@ export default class ChatServer {
     handlePacket(client: ChatClient, packet: any) {
         // We are working with streams in XML.
         // Most packeges we can parse except for one.
-        console.log(packet);
-
         if(!client.isConnected) {
             client.sendHandshake();
         }
+
+        // Get the package type. I first need to parse it.
+        // I need a good parser, after that I will trigger a handler.
     }
 
     closeSocket(client: ChatClient) {

@@ -1,13 +1,10 @@
 import { EventEmitter } from "events";
-import { readFileSync } from "fs";
 import { Socket } from "net";
-import { join, resolve } from "path";
-import { TLSSocket } from "tls";
-import { toJson } from "xml2json";
+import {Parser} from "@xmpp/xml";
 
 export default class ChatClient extends EventEmitter {
     isConnected: boolean = false;
-    isShakingHands: boolean = false;
+    parser: Parser = new Parser();
 
     constructor(public socket: Socket) {
         super();
@@ -17,12 +14,15 @@ export default class ChatClient extends EventEmitter {
 
     bindEvents() {
         this.socket.on('data', (packet: Buffer) => {
-            if(packet.toString() === '</stream:stream>') {
-                return this.emit('close', this);
-            }
-
-            this.emit('packet', this, packet.toString());
+            this.parser.on('element', this._onElement.bind(this))
+                .write(packet);
         });
+    }
+
+    _onElement(element) {
+        let isStanza = ['iq', 'presence', 'message'].includes(element.name);
+
+        this.emit(isStanza ? 'stanza' : 'nonstanza', element);
     }
 
     sendHandshake() {
@@ -34,25 +34,5 @@ export default class ChatClient extends EventEmitter {
         ].forEach(packet => {
             this.socket.write(packet);
         });
-
-        // Wrap into a tlssocket.
-        // this.socket = new TLSSocket(this.socket, {
-        //     isServer: true,
-        //     key: readFileSync(join(process.cwd(), 'public', 'resources', 'selfsigned.key')),
-        //     cert: readFileSync(join(process.cwd(), 'public', 'resources', 'selfsigned.cer')),
-        //     passphrase: '123456',
-        //     rejectUnauthorized: false
-        // });
-
-        // this.bindEvents();
-
-        [
-            "<stream:stream xmlns='jabber:client' xml:lang='en' xmlns:stream='http://etherx.jabber.org/streams' from='127.0.0.1' id='5000000000000A' version='1.0'><stream:features/>",
-            "",
-            "<iq id='EA-Chat-2' type='result' xml:lang='en'/>",
-            ""
-        ].forEach(packet => {
-            this.socket.write(packet);
-        })
     }
 }
