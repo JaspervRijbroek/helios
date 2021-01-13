@@ -13,16 +13,19 @@ export default class ChatClient extends EventEmitter {
     };
 
     bindEvents() {
+        this.parser.on('element', this._onElement.bind(this));
+        this.parser.on('start', this.sendHandshake.bind(this));
+        // this.parser.on('end', this.sendHandshake.bind(this));
+
         this.socket.on('data', (packet: Buffer) => {
-            this.parser.on('element', this._onElement.bind(this))
-                .write(packet);
+            this.parser.write(packet);
         });
     }
 
-    _onElement(element) {
+    _onElement(element: any) {
         let isStanza = ['iq', 'presence', 'message'].includes(element.name);
 
-        this.emit(isStanza ? 'stanza' : 'nonstanza', element);
+        this.emit(isStanza ? 'stanza' : 'nonstanza', this, element);
     }
 
     sendHandshake() {

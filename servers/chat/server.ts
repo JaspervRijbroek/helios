@@ -9,22 +9,18 @@ export default class ChatServer {
         this.server = createServer((socket) => {
             let client = new ChatClient(socket)
 
+            global.debug('Client connected');
             this.clients.push(client)
 
-            client.on('packet', this.handlePacket.bind(this));
+            client.on('stanza', this.handlePacket.bind(this));
             client.on('close', this.closeSocket.bind(this));
         });
     }
 
     handlePacket(client: ChatClient, packet: any) {
-        // We are working with streams in XML.
-        // Most packeges we can parse except for one.
-        if(!client.isConnected) {
-            client.sendHandshake();
-        }
-
         // Get the package type. I first need to parse it.
         // I need a good parser, after that I will trigger a handler.
+        console.log(packet);
     }
 
     closeSocket(client: ChatClient) {
