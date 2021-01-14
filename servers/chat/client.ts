@@ -3,8 +3,9 @@ import { Socket } from "net";
 import {Parser} from "@xmpp/xml";
 
 export default class ChatClient extends EventEmitter {
-    isConnected: boolean = false;
     parser: Parser = new Parser();
+    isShakingHands: boolean = true;
+    personaId: number = 0;
 
     constructor(public socket: Socket) {
         super();
@@ -29,8 +30,6 @@ export default class ChatClient extends EventEmitter {
     }
 
     sendHandshake() {
-        this.isConnected = true;
-
         [
             `<stream:stream xmlns='jabber:client' xml:lang='en' xmlns:stream='http://etherx.jabber.org/streams' from='127.0.0.1' id='174159513' version='1.0'><stream:features />`,
             `<proceed xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>`
