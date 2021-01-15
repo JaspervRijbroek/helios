@@ -32,7 +32,7 @@ export default class ChatServer {
     handlePacket(client: ChatClient, packet: any) {
         // Get the package type. I first need to parse it.
         // I need a good parser, after that I will trigger a handler.
-        console.log(packet);
+        console.log(packet.name);
 
         // Get the handler of the current packet.
         if(this.handlers.has(packet.name)) {

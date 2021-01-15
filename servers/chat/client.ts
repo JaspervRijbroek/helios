@@ -1,11 +1,11 @@
 import { EventEmitter } from "events";
 import { Socket } from "net";
-import {Parser} from "@xmpp/xml";
+import {Element, Parser} from "@xmpp/xml";
 
 export default class ChatClient extends EventEmitter {
     parser: Parser = new Parser();
     isShakingHands: boolean = true;
-    personaId: number = 0;
+    personaId: number|string = 0;
 
     constructor(public socket: Socket) {
         super();
@@ -26,6 +26,7 @@ export default class ChatClient extends EventEmitter {
     _onElement(element: any) {
         let isStanza = ['iq', 'presence', 'message'].includes(element.name);
 
+        console.log(element.toString());
         this.emit(isStanza ? 'stanza' : 'nonstanza', this, element);
     }
 
@@ -36,5 +37,10 @@ export default class ChatClient extends EventEmitter {
         ].forEach(packet => {
             this.socket.write(packet);
         });
+    }
+
+    send(xml: Element) {
+        global.debug('Sending XMPP response to client: ' + xml.toString());
+        this.socket.write(xml.toString())
     }
 }

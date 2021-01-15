@@ -5,7 +5,7 @@ export default class GetIqResponse {
     constructor(public username: string) {}
 
     send(client: ChatClient) {
-        let response = xml(
+        client.send(xml(
             'iq',
             {
                 type: 'result',
@@ -34,10 +34,7 @@ export default class GetIqResponse {
                     'query'
                 )
             )
-        );
-
-        console.log(`Sending to client: ${response.toString()}`);
-        client.socket.write(response.toString());
+        ));
     }
 }
 

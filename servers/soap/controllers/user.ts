@@ -94,7 +94,7 @@ export default class UserController extends BaseController {
                         'PLACEHOLDER'
                     ]
                 },
-                firstTimeLogin: 'true',
+                firstTimeLogin: 'false',
                 maxLevel: 70,
                 starterPackApplied: 'true',
                 userId: req.headers['userid']
