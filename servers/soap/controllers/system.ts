@@ -38,8 +38,8 @@ export default class SystemController extends BaseController {
         return {
             ArrayOfUdpRelayInfo: {
                 UdpRelayInfo: {
-                    Host: '127.0.0.1',
-                    Port: process.env.FREEROAM_PORT
+                    // Host: '127.0.0.1',
+                    // Port: process.env.FREEROAM_PORT
                 }
             }
         };

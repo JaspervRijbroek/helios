@@ -28,40 +28,17 @@ export default class UserController extends BaseController {
                             Rating: persona.rating,
                             Rep: persona.rep,
                             RepAtCurrentLevel: persona.rep_level,
-                            ccar: {}
+                            Score: persona.score
                         }
                     })
                 },
                 user: {
-                    address1: {},
-                    address2: {},
-                    country: {},
-                    dateCreated: {},
-                    dob: {},
-                    email: {},
-                    emailStatus: {},
-                    firstName: {},
-                    fullGameAccess: user.full_access,
-                    gender: {},
-                    idDigits: {},
+                    fullGameAccess: user.full_access ? 'true': 'false',
                     isComplete: 'false',
-                    landlinePhone: {},
-                    language: {},
-                    lastAuthDate: {},
-                    lastName: {},
-                    mobile: {},
-                    nickname: {},
-                    postalCode: {},
-                    realName: {},
-                    reasonCode: {},
-                    remoteUserId: 1000000000001,
+                    remoteUserId: 0,
                     securityToken: user.token,
-                    starterPackEntitlementTag: user.starter_pack,
-                    status: {},
                     subscribeMsg: 'false',
-                    tosVersion: {},
                     userId: user.id,
-                    username: {}
                 }
             }
         };
@@ -69,6 +46,8 @@ export default class UserController extends BaseController {
 
     @Route('get', 'getusersettings')
     getUserSettings(req: any) {
+        let user = req.user as User;
+
         return {
             User_Settings: {
                 CarCacheAgeLimit: 600,
@@ -97,7 +76,7 @@ export default class UserController extends BaseController {
                 firstTimeLogin: 'false',
                 maxLevel: 70,
                 starterPackApplied: 'true',
-                userId: req.headers['userid']
+                userId: user.id
             }
         };
     }

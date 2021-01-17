@@ -28,13 +28,13 @@ export default class SocialController extends BaseController {
     getSocialSettings(req: Request) {
         return {
             SocialSettings: {
-                AppearOffline: false,
+                AppearOffline: 'false',
                 DeclineGroupInvite: 0,
-                DeclineIncommingFriendRequests: false,
+                DeclineIncommingFriendRequests: 'false',
                 DeclinePrivateInvite: 0,
-                HideOfflineFriends: false,
-                ShowNewsOnSignIn: false,
-                ShowOnlyPlayersInSameChatChannel: false,
+                HideOfflineFriends: 'false',
+                ShowNewsOnSignIn: 'false',
+                ShowOnlyPlayersInSameChatChannel: 'false',
             }
         };
     }

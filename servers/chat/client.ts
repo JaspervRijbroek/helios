@@ -16,7 +16,9 @@ export default class ChatClient extends EventEmitter {
     bindEvents() {
         this.parser.on('element', this._onElement.bind(this));
         this.parser.on('start', this.sendHandshake.bind(this));
-        // this.parser.on('end', this.sendHandshake.bind(this));
+        this.parser.on('end', () => {
+            this.emit('close', this);
+        });
 
         this.socket.on('data', (packet: Buffer) => {
             this.parser.write(packet);

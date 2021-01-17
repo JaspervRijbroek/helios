@@ -1,6 +1,7 @@
 import {createSocket, RemoteInfo, Socket} from "dgram";
 import {createConnection, createServer, Server} from "net";
 import Client from "./client";
+import { InfoPacket } from "./lib/packet";
 
 export default class FreeroamServer {
     server: Socket;
@@ -30,7 +31,7 @@ export default class FreeroamServer {
         handler.handle(this, info, packet);
     }
 
-    broadcast(packet) {
+    broadcast(packet: Buffer) {
         this.clients.forEach(client => {
             client.accumilate(packet);
         })
