@@ -2,11 +2,13 @@ import {createServer, Server} from "net";
 import ChatClient from "./client";
 import {sync} from 'glob';
 import { join, parse } from "path";
+import Communicator from "../../lib/communicator";
 
 export default class ChatServer {
     server: Server;
     clients: ChatClient[] = [];
     handlers: Map<string, any> = new Map();
+    communicator: Communicator = Communicator.getInstance();
 
     constructor() {
         this.loadHandlers()

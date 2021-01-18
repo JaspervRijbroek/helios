@@ -7,10 +7,13 @@ import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
 import { join } from "path";
+import { Socket } from "dgram";
+import { IMessage } from "./communicator";
 
 export default class Game {
     static instance: Game;
-    serverInstances: ChildProcess[] = [];
+    serverInstances: any[] = [];
+
 
     static getInstance(): Game {
         if(!this.instance) {
@@ -32,7 +35,11 @@ export default class Game {
 
         this.serverInstances = this.getServerPaths()
             .map((serverPath: string) => {
-                return fork(serverPath);
+                let process = fork(serverPath);
+
+                process.on('message', this.handleMessage.bind(this, process));
+
+                return process;
             });
 
         // new FreeroamServer().start();
@@ -44,6 +51,18 @@ export default class Game {
         return glob.sync(
             join(__dirname, '..', 'servers', '*', 'index.ts')
         );
+    }
+
+    handleMessage(requester: ChildProcess, eventData: IMessage): void {
+        this.serverInstances
+            .filter((server: ChildProcess) => {
+                return server != requester;
+            })
+            .forEach((server: ChildProcess) => {
+                server.send(eventData);
+            });
+
+        return;
     }
 
     showHeader() {

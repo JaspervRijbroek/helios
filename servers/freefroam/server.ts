@@ -1,11 +1,13 @@
 import {createSocket, RemoteInfo, Socket} from "dgram";
 import {createConnection, createServer, Server} from "net";
+import Communicator from "../../lib/communicator";
 import Client from "./client";
 import { InfoPacket } from "./lib/packet";
 
 export default class FreeroamServer {
     server: Socket;
     clients: Client[] = [];
+    communicator: Communicator = Communicator.getInstance();
 
     constructor() {
         this.server = createSocket('udp4', (msg, rinfo) => {

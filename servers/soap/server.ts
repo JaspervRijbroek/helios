@@ -1,14 +1,18 @@
 import Express, { Request, Response, static as staticPath } from 'express';
 import { glob } from 'glob';
 import { join } from 'path';
+import Communicator from '../../lib/communicator';
 import Controller from '../../lib/controller';
 import { IRouteDefinition } from './decorators/routing';
 
 export default class SoapServer {
     server: any;
+    communicator: Communicator = Communicator.getInstance();
 
     constructor() {
         this.server = Express();
+
+        this.communicator.emit('event_data', 'data');
     }
 
     loadControllersRoutes(): void {
