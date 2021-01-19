@@ -2,8 +2,8 @@
     <defaultPersonaIdx>0</defaultPersonaIdx>
     <personas>
         <ProfileData>
-            <Boost>100000</Boost>
-            <Cash>1000000</Cash>
+            <Boost>500</Boost>
+            <Cash>10000</Cash>
             <IconIndex>26</IconIndex>
             <Level>2</Level>
             <Motto>Online first!</Motto>
@@ -13,7 +13,6 @@
             <Rating>1067</Rating>
             <Rep>0</Rep>
             <RepAtCurrentLevel>0</RepAtCurrentLevel>
-            <Score>5400</Score>
         </ProfileData>
     </personas>
     <user>

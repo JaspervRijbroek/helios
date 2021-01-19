@@ -154,7 +154,7 @@ export default class PersonaController extends BaseController {
                                 }]
                             },
                             PerformanceParts: {
-                                PerformancePartTrans: [{
+                                PerformancePartTrans: {} /*[{
                                     PerformancePartAttribHash: -880514079
                                 }, {
                                     PerformancePartAttribHash: -711274200
@@ -166,14 +166,14 @@ export default class PersonaController extends BaseController {
                                     PerformancePartAttribHash: -595069127
                                 }, {
                                     PerformancePartAttribHash: -1432021954
-                                }]
+                                }]*/
                             },
                             PhysicsProfileHash: -1792456729,
                             Rating: 771,
                             ResalePrice: 525000,
                             RideHeightDrop: 0,
                             SkillModParts: {
-                                SkillModPartTrans: [{
+                                SkillModPartTrans: {} /*[{
                                     IsFixed: false,
                                     SkillModPartAttribHash: -297285755,
                                 }, {
@@ -188,12 +188,12 @@ export default class PersonaController extends BaseController {
                                 }, {
                                     IsFixed: false,
                                     SkillModPartAttribHash: 208768909,
-                                }]
+                                }]*/
                             },
                             SkillModSlotCount: 5,
                             Version: 0,
                             Vinyls: {
-                                CustomVinylTrans: [{
+                                CustomVinylTrans: {} /*[{
                                     Hash: -596964502,
                                     Hue1: -799662188,
                                     Hue2: -799662189,
@@ -479,10 +479,10 @@ export default class PersonaController extends BaseController {
                                     Var2: 0,
                                     Var3: 0,
                                     Var4: 0,
-                                }]
+                                }]*/
                             },
                             VisualParts: {
-                                VisualPartTrans: [{
+                                VisualPartTrans: {} /*[{
                                     PartHash: 934109906,
                                     SlotHash: -966088147
                                 }, {
@@ -497,7 +497,7 @@ export default class PersonaController extends BaseController {
                                 }, {
                                     PartHash: -273819714,
                                     SlotHash: -2126743923
-                                }]
+                                }]*/
                             }
                         },
                         Durability: 100,

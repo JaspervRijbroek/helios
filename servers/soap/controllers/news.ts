@@ -7,7 +7,7 @@ export default class NewsController extends BaseController {
     @Route('get', 'NewsArticles')
     getNewsArticles(req: Request) {
         return {
-            NewsArticles: {}
+            ArrayOfNewsArticleTrans: {}
         };
     }
 }
