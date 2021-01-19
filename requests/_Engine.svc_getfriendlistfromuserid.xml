@@ -1,14 +1,3 @@
 <PersonaFriendsList>
-    <FriendPersona>
-        <FriendPersona>
-            <iconIndex>27</iconIndex>
-            <level>2578</level>
-            <name>berkay2578</name>
-            <originalName>Berkay Yigit</originalName>
-            <personaId>2578</personaId>
-            <presence>1</presence>
-            <socialNetwork>berkay2578</socialNetwork>
-            <userId>2578</userId>
-        </FriendPersona>
-    </FriendPersona>
+    <FriendPersona/>
 </PersonaFriendsList>

@@ -1,0 +1,79 @@
+<UserInfo xmlns="http://schemas.datacontract.org/2004/07/Victory.TransferObjects.User"
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <defaultPersonaIdx>0</defaultPersonaIdx>
+    <personas>
+        <ProfileData>
+            <Boost>5000</Boost>
+            <Cash>50000</Cash>
+            <IconIndex>26</IconIndex>
+            <Level>2</Level>
+            <Motto>Offine Server</Motto>
+            <Name>elitepvpers</Name>
+            <PercentToLevel>0</PercentToLevel>
+            <PersonaId>100</PersonaId>
+            <Rating>1067.2999999999995</Rating>
+            <Rep>0</Rep>
+            <RepAtCurrentLevel>0</RepAtCurrentLevel>
+            <ccar i:nil="true" />
+        </ProfileData>
+        <ProfileData>
+            <Boost>5000</Boost>
+            <Cash>50000</Cash>
+            <IconIndex>27</IconIndex>
+            <Level>2</Level>
+            <Motto>Offine Server</Motto>
+            <Name>elitepvpers2</Name>
+            <PercentToLevel>0</PercentToLevel>
+            <PersonaId>200</PersonaId>
+            <Rating>1067.2999999999995</Rating>
+            <Rep>0</Rep>
+            <RepAtCurrentLevel>0</RepAtCurrentLevel>
+            <ccar i:nil="true" />
+        </ProfileData>
+        <ProfileData>
+            <Boost>5000</Boost>
+            <Cash>50000</Cash>
+            <IconIndex>20</IconIndex>
+            <Level>2</Level>
+            <Motto>Offine Server</Motto>
+            <Name>elitepvpers3</Name>
+            <PercentToLevel>0</PercentToLevel>
+            <PersonaId>300</PersonaId>
+            <Rating>1067.2999999999995</Rating>
+            <Rep>0</Rep>
+            <RepAtCurrentLevel>0</RepAtCurrentLevel>
+            <ccar i:nil="true" />
+        </ProfileData>
+    </personas>
+    <user>
+        <address1 i:nil="true" />
+        <address2 i:nil="true" />
+        <country i:nil="true" />
+        <dateCreated i:nil="true" />
+        <dob i:nil="true" />
+        <email i:nil="true" />
+        <emailStatus i:nil="true" />
+        <firstName i:nil="true" />
+        <fullGameAccess>true</fullGameAccess>
+        <gender i:nil="true" />
+        <idDigits i:nil="true" />
+        <isComplete>false</isComplete>
+        <landlinePhone i:nil="true" />
+        <language i:nil="true" />
+        <lastAuthDate i:nil="true" />
+        <lastName i:nil="true" />
+        <mobile i:nil="true" />
+        <nickname i:nil="true" />
+        <postalCode i:nil="true" />
+        <realName i:nil="true" />
+        <reasonCode i:nil="true" />
+        <remoteUserId>1000000000001</remoteUserId>
+        <securityToken>bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb</securityToken>
+        <starterPackEntitlementTag>NFSW_STARTER_PACK_B</starterPackEntitlementTag>
+        <status i:nil="true" />
+        <subscribeMsg>false</subscribeMsg>
+        <tosVersion i:nil="true" />
+        <userId>11111111</userId>
+        <username i:nil="true" />
+    </user>
+</UserInfo>

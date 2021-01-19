@@ -11,7 +11,7 @@ export class Product extends BaseEntity {
     @Column()
     category?: string;
 
-    @Column()
+    @Column('text')
     description?: string;
 
     @Column()
@@ -26,7 +26,7 @@ export class Product extends BaseEntity {
     @Column()
     level?: number;
 
-    @Column()
+    @Column('longtext')
     long_description?: string;
 
     @Column()

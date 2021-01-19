@@ -1,6 +1,3 @@
 <ArrayOfUdpRelayInfo>
-    <UdpRelayInfo>
-        <Host>127.0.0.1</Host>
-        <Port>9999</Port>
-    </UdpRelayInfo>
+    <UdpRelayInfo/>
 </ArrayOfUdpRelayInfo>

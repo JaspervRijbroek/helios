@@ -15,15 +15,17 @@ export default class BaseController {
             response = await funct(req),
             xmlResponse = this.buildXML(response);
 
-        // let uri = parseUri(req.url);
-        // if (uri.pathname) {
-        //     try {
-        //         console.log(process.cwd() + '\\requests\\' + uri.pathname.replace(/\//g, '_') + '.xml');
-        //         writeFileSync(process.cwd() + '\\requests\\' + uri.pathname.replace(/\//g, '_') + '.xml', xmlResponse);
-        //     } catch(e) {
-        //         console.log(e.message);
-        //     }
-        // }
+        let uri = parseUri(req.url);
+        if (uri.pathname) {
+            try {
+                let path = `${process.cwd()}\\requests\\${uri.pathname.replace(/\//g, '_')}${req.query.categoryName ? '_' + req.query.categoryName : ''}.xml`
+
+                console.log(path);
+                writeFileSync(path, xmlResponse);
+            } catch(e) {
+                console.log(e.message);
+            }
+        }
 
         let xmlResponse2 = gzipSync(xmlResponse);
 

@@ -1,7 +1,7 @@
-import {json, Request, Response} from "express";
-import {Controller, Route} from "../decorators/routing";
+import { json, Request, Response } from "express";
+import { Controller, Route } from "../decorators/routing";
 import BaseController from "../../../lib/controller";
-import {Persona} from "../../../database/entities/persona";
+import { Persona } from "../../../database/entities/persona";
 import { User } from "../../../database/entities/user";
 
 @Controller()
@@ -89,7 +89,7 @@ export default class PersonaController extends BaseController {
 
     @Route('get', 'personas/:personaId/carslots')
     getCarSlots(req: Request) {
-        
+
 
         return {
             CarSlotInfoTrans: {
@@ -501,10 +501,9 @@ export default class PersonaController extends BaseController {
                             }
                         },
                         Durability: 100,
-                        ExpirationDate: {},
-                        Heat: 1,
+                        Heat: '1.0',
                         Id: 1,
-                        OwnershipType: 'PresetCar',
+                        OwnershipType: 'CustomizedCar',
                     }
                 }],
                 DefaultOwnedCarIndex: 0,
@@ -537,11 +536,11 @@ export default class PersonaController extends BaseController {
     }
 
     @Route('get', 'DriverPersona/GetPersonaInfo')
-    getPersonaInformation(req: any) {
+    async getPersonaInformation(req: any) {
         let user = req.user as User,
-            currentPersona = user.currentPersona;
+            currentPersona = await user.currentPersona || false;
 
-        if(!currentPersona) {
+        if (!currentPersona) {
             return {};
         }
 
@@ -592,158 +591,160 @@ export default class PersonaController extends BaseController {
     @Route('get', 'personas/inventory/objects')
     getInventoryObjects(req: Request) {
         return {
-            // InventoryTrans: {
-            //     InventoryItems: {
-            //         InventoryItemTrans: [{
-            //             EntitlementTag: 'runflattires',
-            //             ExpirationDate: {},
-            //             Hash: -537557654,
-            //             InventoryId: 1,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0xdff5856a,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'trafficmagnet',
-            //             ExpirationDate: {},
-            //             Hash: 125509666,
-            //             InventoryId: 2,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x77b2022,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'instantcooldown',
-            //             ExpirationDate: {},
-            //             Hash: -1692359144,
-            //             InventoryId: 3,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x9b20a618,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'shield',
-            //             ExpirationDate: {},
-            //             Hash: -364944936,
-            //             InventoryId: 4,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0xea3f61d8,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'slingshot',
-            //             ExpirationDate: {},
-            //             Hash: 2236629,
-            //             InventoryId: 5,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x2220d5,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'ready',
-            //             ExpirationDate: {},
-            //             Hash: 957701799,
-            //             InventoryId: 6,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 49,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x39155ea7,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'juggernaut',
-            //             ExpirationDate: {},
-            //             Hash: 1805681994,
-            //             InventoryId: 7,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x6ba0854a,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'emergencyevade',
-            //             ExpirationDate: {},
-            //             Hash: -611661916,
-            //             InventoryId: 8,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0xdb8ac7a4,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'team_emergencyevade',
-            //             ExpirationDate: {},
-            //             Hash: -1564932069,
-            //             InventoryId: 9,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0xa2b9081b,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'nosshot',
-            //             ExpirationDate: {},
-            //             Hash: -1681514783,
-            //             InventoryId: 10,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 46,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x9bc61ee1,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'onemorelap',
-            //             ExpirationDate: {},
-            //             Hash: 1627606782,
-            //             InventoryId: 11,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x61034efe,
-            //             VirtualItemType: 'powerup',
-            //         }, {
-            //             EntitlementTag: 'team_slingshot',
-            //             ExpirationDate: {},
-            //             Hash: 1113720384,
-            //             InventoryId: 12,
-            //             ProductId: 'DO NOT USE ME',
-            //             RemainingUseCount: 50,
-            //             ResellPrice: 0.00000,
-            //             Status: 'ACTIVE',
-            //             StringHash: 0x42620640,
-            //             VirtualItemType: 'powerup',
-            //         }]
-            //     }
-            // },
-            // PerformancePartsCapacity: 150,
-            // PerformancePartsUsedSlotCount: 0,
-            // SkillModPartsCapacity: 200,
-            // SkillModPartsUsedSlotCount: 1,
-            // VisualPartsCapacity: 300,
-            // VisualPartsUsedSlotCount: 0,
+            InventoryTrans: {
+                InventoryItems: {
+                    InventoryItemTrans: [{
+                        EntitlementTag: 'runflattires',
+                        ExpirationDate: {},
+                        Hash: -537557654,
+                        InventoryId: 1,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0xdff5856a',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'trafficmagnet',
+                        ExpirationDate: {},
+                        Hash: 125509666,
+                        InventoryId: 2,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x77b2022',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'instantcooldown',
+                        ExpirationDate: {},
+                        Hash: -1692359144,
+                        InventoryId: 3,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x9b20a618',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'shield',
+                        ExpirationDate: {},
+                        Hash: -364944936,
+                        InventoryId: 4,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0xea3f61d8',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'slingshot',
+                        ExpirationDate: {},
+                        Hash: 2236629,
+                        InventoryId: 5,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x2220d5',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'ready',
+                        ExpirationDate: {},
+                        Hash: 957701799,
+                        InventoryId: 6,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 49,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x39155ea7',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'juggernaut',
+                        ExpirationDate: {},
+                        Hash: 1805681994,
+                        InventoryId: 7,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x6ba0854a',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'emergencyevade',
+                        ExpirationDate: {},
+                        Hash: -611661916,
+                        InventoryId: 8,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0xdb8ac7a4',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'team_emergencyevade',
+                        ExpirationDate: {},
+                        Hash: -1564932069,
+                        InventoryId: 9,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0xa2b9081b',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'nosshot',
+                        ExpirationDate: {},
+                        Hash: -1681514783,
+                        InventoryId: 10,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 46,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x9bc61ee1',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'onemorelap',
+                        ExpirationDate: {},
+                        Hash: 1627606782,
+                        InventoryId: 11,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x61034efe',
+                        VirtualItemType: 'powerup',
+                    }, {
+                        EntitlementTag: 'team_slingshot',
+                        ExpirationDate: {},
+                        Hash: 1113720384,
+                        InventoryId: 12,
+                        ProductId: 'DO NOT USE ME',
+                        RemainingUseCount: 50,
+                        ResellPrice: 0.00000,
+                        Status: 'ACTIVE',
+                        StringHash: '0x42620640',
+                        VirtualItemType: 'powerup',
+                    }]
+                },
+                PerformancePartsCapacity: 150,
+                PerformancePartsUsedSlotCount: 0,
+                SkillModPartsCapacity: 200,
+                SkillModPartsUsedSlotCount: 0,
+                VisualPartsCapacity: 300,
+                VisualPartsUsedSlotCount: 0,
+            }
         };
     }
 
     @Route('post', 'DriverPersona/GetPersonaBaseFromList')
-    getBaseFromList(req: any) {
+    async getBaseFromList(req: any) {
         let user = req.user as User,
-            persona = user.currentPersona || false;
+            persona = await user.currentPersona || false;
 
-        if(!persona) {
+        console.log(persona)
+
+        if (!persona) {
             return {};
         }
 

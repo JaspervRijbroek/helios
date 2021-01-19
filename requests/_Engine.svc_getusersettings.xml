@@ -5,19 +5,19 @@
     <MinRaceNowLevel>2</MinRaceNowLevel>
     <VoipAvailable>false</VoipAvailable>
     <activatedHolidaySceneryGroups>
-        <a:string>SCENERY_GROUP_NORMAL</a:string>
-        <a:string>PLACEHOLDER</a:string>
+        <string>SCENERY_GROUP_NORMAL</string>
+        <string>PLACEHOLDER</string>
     </activatedHolidaySceneryGroups>
     <activeHolidayIds>
-        <a:long>0</a:long>
-        <a:long>9</a:long>
+        <long>0</long>
+        <long>9</long>
     </activeHolidayIds>
     <disactivatedHolidaySceneryGroups>
-        <a:string>SCENERY_GROUP_NORMAL_DISABLE</a:string>
-        <a:string>PLACEHOLDER</a:string>
+        <string>SCENERY_GROUP_NORMAL_DISABLE</string>
+        <string>PLACEHOLDER</string>
     </disactivatedHolidaySceneryGroups>
     <firstTimeLogin>true</firstTimeLogin>
     <maxLevel>70</maxLevel>
     <starterPackApplied>true</starterPackApplied>
-    <userId>1</userId>
+    <userId>11111111</userId>
 </User_Settings>

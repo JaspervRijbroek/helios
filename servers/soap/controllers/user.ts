@@ -33,7 +33,7 @@ export default class UserController extends BaseController {
                     })
                 },
                 user: {
-                    fullGameAccess: user.full_access ? 'true': 'false',
+                    fullGameAccess: 'false',
                     isComplete: 'false',
                     remoteUserId: 0,
                     securityToken: user.token,
@@ -56,24 +56,24 @@ export default class UserController extends BaseController {
                 MinRaceNowLevel: 2,
                 VoipAvailable: 'false',
                 activatedHolidaySceneryGroups: {
-                    'a:string': [
+                    string: [
                         'SCENERY_GROUP_NORMAL',
                         'PLACEHOLDER'
                     ]
                 },
                 activeHolidayIds: {
-                    'a:long': [
+                    long: [
                         0,
                         9
                     ]
                 },
                 disactivatedHolidaySceneryGroups: {
-                    'a:string': [
+                    string: [
                         'SCENERY_GROUP_NORMAL_DISABLE',
                         'PLACEHOLDER'
                     ]
                 },
-                firstTimeLogin: 'false',
+                firstTimeLogin: 'true',
                 maxLevel: 70,
                 starterPackApplied: 'true',
                 userId: user.id

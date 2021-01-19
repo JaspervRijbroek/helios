@@ -1,11 +1,23 @@
+import { config } from "dotenv";
 import { readFileSync } from "fs";
 import { sync } from "glob";
-import { parse } from "path";
+import { join, parse } from "path";
 import { createConnection } from "typeorm";
 import { toJson } from "xml2json";
-import { Product } from "./app/models/product";
+import { Product } from "./database/entities/product";
 
-createConnection()
+config();
+
+createConnection({
+    type: "mysql",
+    host: (process.env.DB_HOST as string),
+    port: parseInt(process.env.DB_PORT as string),
+    username: (process.env.DB_USER as string),
+    password: (process.env.DB_PASS as string),
+    database: (process.env.DB_NAME as string),
+    entities: [join(__dirname, 'database', 'entities', '**', '*.ts')],
+    synchronize: true
+})
     .then(() => {
         let files = sync('./originalXML/catalog/*.xml'),
             promises = files.map(file => {
@@ -51,7 +63,7 @@ createConnection()
                     product.web_location = '';
 
                     return product.save()
-                        .catch((err) => {
+                        .catch((err: any) => {
                             console.log(err.message);
                             console.log(item);
                             process.exit();

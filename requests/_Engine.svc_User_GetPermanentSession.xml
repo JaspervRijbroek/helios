@@ -2,49 +2,26 @@
     <defaultPersonaIdx>0</defaultPersonaIdx>
     <personas>
         <ProfileData>
-            <Boost>50000</Boost>
+            <Boost>100000</Boost>
             <Cash>1000000</Cash>
             <IconIndex>26</IconIndex>
             <Level>2</Level>
-            <Motto>Online First!</Motto>
+            <Motto>Online first!</Motto>
             <Name>jasper199069</Name>
             <PercentToLevel>0</PercentToLevel>
-            <PersonaId>100</PersonaId>
+            <PersonaId>2</PersonaId>
             <Rating>1067</Rating>
             <Rep>0</Rep>
             <RepAtCurrentLevel>0</RepAtCurrentLevel>
-            <ccar/>
+            <Score>5400</Score>
         </ProfileData>
     </personas>
     <user>
-        <address1/>
-        <address2/>
-        <country/>
-        <dateCreated/>
-        <dob/>
-        <email/>
-        <emailStatus/>
-        <firstName/>
         <fullGameAccess>false</fullGameAccess>
-        <gender/>
-        <idDigits/>
         <isComplete>false</isComplete>
-        <landlinePhone/>
-        <language/>
-        <lastAuthDate/>
-        <lastName/>
-        <mobile/>
-        <nickname/>
-        <postalCode/>
-        <realName/>
-        <reasonCode/>
-        <remoteUserId>1000000000001</remoteUserId>
-        <securityToken>bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb</securityToken>
-        <starterPackEntitlementTag/>
-        <status/>
+        <remoteUserId>0</remoteUserId>
+        <securityToken>d93c6988-50df-4c70-aec8-052cf7bf2fa6</securityToken>
         <subscribeMsg>false</subscribeMsg>
-        <tosVersion/>
         <userId>11111111</userId>
-        <username/>
     </user>
 </UserInfo>

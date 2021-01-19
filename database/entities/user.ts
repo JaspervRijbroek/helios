@@ -21,7 +21,9 @@ export class User extends BaseEntity {
     @Column()
     password?: string;
 
-    @OneToOne(() => Persona)
+    @OneToOne(() => Persona, {
+        eager: true
+    })
     @JoinColumn()
     currentPersona?: Persona;
 
