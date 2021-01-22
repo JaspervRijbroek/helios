@@ -27,7 +27,8 @@ export default class UserController extends BaseController {
                             PersonaId: persona.id,
                             Rating: persona.rating,
                             Rep: persona.rep,
-                            RepAtCurrentLevel: persona.rep_level
+                            RepAtCurrentLevel: persona.rep_level,
+                            ccar: {}
                         }
                     })
                 },

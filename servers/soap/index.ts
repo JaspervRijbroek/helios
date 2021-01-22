@@ -16,16 +16,7 @@ global.debug = require('debug')('nfsw:soap');
 /************************************/
 /** Create the database connection **/
 /************************************/
-createConnection({
-    type: "mysql",
-    host: (process.env.DB_HOST as string),
-    port: parseInt(process.env.DB_PORT as string),
-    username: (process.env.DB_USER as string),
-    password: (process.env.DB_PASS as string),
-    database: (process.env.DB_NAME as string),
-    entities: [join(__dirname, '..', '..', 'database', 'entities', '**', '*.ts')],
-    synchronize: true
-});
+createConnection();
 
 /**************************/
 /** Starting Soap Server **/

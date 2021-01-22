@@ -11,8 +11,10 @@ export default class SoapServer {
 
     constructor() {
         this.server = Express();
+        this.server.disable('etag');
+        this.server.disable('x-powered-by');
 
-        this.communicator.emit('event_data', 'data');
+        // this.communicator.emit('event_data', 'data');
     }
 
     loadControllersRoutes(): void {

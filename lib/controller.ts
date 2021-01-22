@@ -4,6 +4,8 @@ import { gzipSync } from "zlib";
 import { User } from '../database/entities/user';
 import {writeFileSync} from "fs";
 import { parse as parseUri } from 'url';
+import {parse as parsePath} from 'path';
+import { sync } from "mkdirp";
 
 export interface IAuthenticatedRequest extends Request {
     user: User
@@ -18,9 +20,12 @@ export default class BaseController {
         let uri = parseUri(req.url);
         if (uri.pathname) {
             try {
-                let path = `${process.cwd()}\\requests\\${uri.pathname.replace(/\//g, '_')}${req.query.categoryName ? '_' + req.query.categoryName : ''}.xml`
+                let path = `${process.cwd()}\\requests\\${uri.pathname}${req.query.categoryName ? '_' + req.query.categoryName : ''}.xml`,
+                    parts = parsePath(path);
 
-                console.log(path);
+                
+                sync(parts.dir);
+
                 writeFileSync(path, xmlResponse);
             } catch(e) {
                 console.log(e.message);

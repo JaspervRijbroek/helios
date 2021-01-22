@@ -8,7 +8,7 @@ export default class SocialController extends BaseController {
     getFriendsList(req: Request) {
         return {
             PersonaFriendsList: {
-                FriendPersona: {}
+                friendPersona: {}
             }
         };
     }

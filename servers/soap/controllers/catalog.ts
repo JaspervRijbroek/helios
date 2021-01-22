@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';
-import {Product} from "../../../database/entities/product";
+import {Product} from "../../../database/entities/ecommerce/product";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { toJson } from 'xml2json';

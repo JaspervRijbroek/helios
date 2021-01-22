@@ -154,7 +154,7 @@ export default class PersonaController extends BaseController {
                                 }]
                             },
                             PerformanceParts: {
-                                PerformancePartTrans: {} /*[{
+                                PerformancePartTrans: [{
                                     PerformancePartAttribHash: -880514079
                                 }, {
                                     PerformancePartAttribHash: -711274200
@@ -166,14 +166,14 @@ export default class PersonaController extends BaseController {
                                     PerformancePartAttribHash: -595069127
                                 }, {
                                     PerformancePartAttribHash: -1432021954
-                                }]*/
+                                }]
                             },
                             PhysicsProfileHash: -1792456729,
                             Rating: 771,
                             ResalePrice: 525000,
                             RideHeightDrop: 0,
                             SkillModParts: {
-                                SkillModPartTrans: {} /*[{
+                                SkillModPartTrans: [{
                                     IsFixed: false,
                                     SkillModPartAttribHash: -297285755,
                                 }, {
@@ -188,12 +188,12 @@ export default class PersonaController extends BaseController {
                                 }, {
                                     IsFixed: false,
                                     SkillModPartAttribHash: 208768909,
-                                }]*/
+                                }]
                             },
                             SkillModSlotCount: 5,
                             Version: 0,
                             Vinyls: {
-                                CustomVinylTrans: {} /*[{
+                                CustomVinylTrans: [{
                                     Hash: -596964502,
                                     Hue1: -799662188,
                                     Hue2: -799662189,
@@ -479,10 +479,10 @@ export default class PersonaController extends BaseController {
                                     Var2: 0,
                                     Var3: 0,
                                     Var4: 0,
-                                }]*/
+                                }]
                             },
                             VisualParts: {
-                                VisualPartTrans: {} /*[{
+                                VisualPartTrans: [{
                                     PartHash: 934109906,
                                     SlotHash: -966088147
                                 }, {
@@ -497,13 +497,13 @@ export default class PersonaController extends BaseController {
                                 }, {
                                     PartHash: -273819714,
                                     SlotHash: -2126743923
-                                }]*/
+                                }]
                             }
                         },
                         Durability: 100,
-                        Heat: '1.0',
+                        Heat: 1,
                         Id: 1,
-                        OwnershipType: 'CustomizedCar',
+                        OwnershipType: 'PresetCar',
                     }
                 }],
                 DefaultOwnedCarIndex: 0,
@@ -537,10 +537,11 @@ export default class PersonaController extends BaseController {
 
     @Route('get', 'DriverPersona/GetPersonaInfo')
     async getPersonaInformation(req: any) {
-        let user = req.user as User,
-            currentPersona = await user.currentPersona || false;
+        let persona = await Persona.findOne({
+            id: req.query.personaId
+        });
 
-        if (!currentPersona) {
+        if (!persona) {
             return {};
         }
 
@@ -573,17 +574,17 @@ export default class PersonaController extends BaseController {
                         SlotId: 3,
                     }]
                 },
-                Cash: currentPersona.cash,
-                IconIndex: currentPersona.icon,
-                Level: currentPersona.level,
-                Motto: currentPersona.motto,
-                Name: currentPersona.name,
-                PercentToLevel: currentPersona.level_percentage,
-                PersonaId: currentPersona.id,
-                Rating: currentPersona.rating,
-                Rep: currentPersona.rep,
-                RepAtCurrentLevel: currentPersona.rep_level,
-                Score: currentPersona.score,
+                Cash: persona.cash,
+                IconIndex: persona.icon,
+                Level: persona.level,
+                Motto: persona.motto,
+                Name: persona.name,
+                PercentToLevel: persona.level_percentage,
+                PersonaId: persona.id,
+                Rating: persona.rating,
+                Rep: persona.rep,
+                RepAtCurrentLevel: persona.rep_level,
+                Score: persona.score,
             }
         };
     }
@@ -600,7 +601,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 1,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0xdff5856a',
                         VirtualItemType: 'powerup',
@@ -611,7 +612,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 2,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x77b2022',
                         VirtualItemType: 'powerup',
@@ -622,7 +623,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 3,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x9b20a618',
                         VirtualItemType: 'powerup',
@@ -633,7 +634,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 4,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0xea3f61d8',
                         VirtualItemType: 'powerup',
@@ -644,7 +645,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 5,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x2220d5',
                         VirtualItemType: 'powerup',
@@ -655,7 +656,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 6,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 49,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x39155ea7',
                         VirtualItemType: 'powerup',
@@ -666,7 +667,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 7,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x6ba0854a',
                         VirtualItemType: 'powerup',
@@ -677,7 +678,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 8,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0xdb8ac7a4',
                         VirtualItemType: 'powerup',
@@ -688,7 +689,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 9,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0xa2b9081b',
                         VirtualItemType: 'powerup',
@@ -699,7 +700,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 10,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 46,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x9bc61ee1',
                         VirtualItemType: 'powerup',
@@ -710,7 +711,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 11,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x61034efe',
                         VirtualItemType: 'powerup',
@@ -721,7 +722,7 @@ export default class PersonaController extends BaseController {
                         InventoryId: 12,
                         ProductId: 'DO NOT USE ME',
                         RemainingUseCount: 50,
-                        ResellPrice: 0.00000,
+                        ResellPrice: 0,
                         Status: 'ACTIVE',
                         StringHash: '0x42620640',
                         VirtualItemType: 'powerup',
@@ -741,8 +742,6 @@ export default class PersonaController extends BaseController {
     async getBaseFromList(req: any) {
         let user = req.user as User,
             persona = await user.currentPersona || false;
-
-        console.log(persona)
 
         if (!persona) {
             return {};
