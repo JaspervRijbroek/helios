@@ -14,6 +14,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/bluebird@*":
+  version "3.5.33"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.33.tgz#d79c020f283bd50bd76101d7d300313c107325fc"
+  integrity sha512-ndEo1xvnYeHxm7I/5sF6tBvnsA4Tdi3zj1keRKRs12SP+2ye2A27NDJ1B6PqkfMbGAcT+mqQVqbZRIrhfOp5PQ==
+
 "@types/body-parser@*":
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -21,6 +26,16 @@
   dependencies:
     "@types/connect" "*"
     "@types/node" "*"
+
+"@types/bookshelf@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@types/bookshelf/-/bookshelf-1.2.1.tgz#966b9338fbd9cdea9eb5b20027e47f2c990f4d89"
+  integrity sha512-nSM/FLcw2xVrg6NpUYCwJfVgjvYaGs6fYKMVwf22a7trtjuBgKSvoPmNaXEJZyCFRoMHreUcoo0WtXvhhupApQ==
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/create-error" "*"
+    "@types/lodash" "*"
+    knex "^0.21.12"
 
 "@types/buffer-crc32@^0.2.0":
   version "0.2.0"
@@ -35,6 +50,11 @@
   integrity sha512-ePPA/JuI+X0vb+gSWlPKOY0NdNAie/rPUqX2GUPpbZwiKTkSPhjXWuee47E4MtE54QVzGCQMQkAL6JhV2E1+cQ==
   dependencies:
     "@types/node" "*"
+
+"@types/create-error@*":
+  version "0.3.30"
+  resolved "https://registry.yarnpkg.com/@types/create-error/-/create-error-0.3.30.tgz#dc692a2b0a5d70d85dbf01fef2f6d41232255df3"
+  integrity sha1-3GkqKwpdcNhdvwH+8vbUEjIlXfM=
 
 "@types/debug@^4.1.5":
   version "4.1.5"
@@ -72,6 +92,18 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/jsontoxml/-/jsontoxml-1.0.1.tgz#ddec23eb7be0e5d9b6f305c1eb5b38de43d64fc9"
   integrity sha512-Vv8V/nKxSLK/3lErSb3c6pMZWv/KudTKFnUA6/2xZO9jszRUJqMv6SHTb7acQp1wWUAa7RP3KYFic8zSRdDxlA==
+
+"@types/knex@^0.16.1":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.16.1.tgz#619678407265c675463c563ed38323461a49515d"
+  integrity sha512-54gWD1HWwdVx5iLHaJ1qxH3I6KyBsj5fFqzRpXFn7REWiEB2jwspeVCombNsocSrqPd7IRPqKrsIME7/cD+TFQ==
+  dependencies:
+    knex "*"
+
+"@types/lodash@*":
+  version "4.14.168"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+  integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
 
 "@types/ltx@*":
   version "2.8.1"
@@ -1446,7 +1478,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-knex@^0.21.16:
+knex@*, knex@^0.21.12, knex@^0.21.16:
   version "0.21.16"
   resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.16.tgz#5431efe66d7194cdcf34ba3a874c6c66d7229c1a"
   integrity sha512-M3FTFfby49AEngsx/0UXEJEMnKMjPjeKOtvk+AY6d6kboz9NsT7xDudl0wRNj+S0lq0yearCSb1v+YxgbU/kWA==
