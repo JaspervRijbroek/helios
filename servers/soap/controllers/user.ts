@@ -1,15 +1,20 @@
 import { Request, Response } from 'express'
 import { Controller, Route } from '../decorators/routing';
-import BaseController from "../../../lib/controller";
-import { User } from '../../../database/entities/user';
-import { Persona } from '../../../database/entities/persona';
+import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
+import { Persona } from '../../../database/models/persona';
+import { v4 } from 'uuid';
 
 @Controller()
 export default class UserController extends BaseController {
     @Route('post', 'User/GetPermanentSession')
-    async getPermanentSession(req: any) {
-        let user = req.user as User,
-            personas = await user.personas || [];
+    async getPermanentSession(req: IAuthenticatedRequest) {
+        let personas = await req.user.$relatedQuery<Persona>('personas') || [],
+            token = v4();
+
+        console.log(req.user);
+        await req.user.$query().patch({
+            token
+        });
 
         return {
             UserInfo: {
@@ -36,18 +41,16 @@ export default class UserController extends BaseController {
                     fullGameAccess: 'false',
                     isComplete: 'false',
                     remoteUserId: 0,
-                    securityToken: user.token,
+                    securityToken: token,
                     subscribeMsg: 'false',
-                    userId: user.id,
+                    userId: req.user.id,
                 }
             }
         };
     }
 
     @Route('get', 'getusersettings')
-    getUserSettings(req: any) {
-        let user = req.user as User;
-
+    getUserSettings(req: IAuthenticatedRequest) {
         return {
             User_Settings: {
                 CarCacheAgeLimit: 600,
@@ -76,7 +79,7 @@ export default class UserController extends BaseController {
                 firstTimeLogin: 'true',
                 maxLevel: 70,
                 starterPackApplied: 'true',
-                userId: user.id
+                userId: req.user.id
             }
         };
     }
@@ -103,13 +106,13 @@ export default class UserController extends BaseController {
     }
 
     @Route('post', 'User/SecureLoginPersona')
-    async secureLoginPersona(req: any) {
+    async secureLoginPersona(req: IAuthenticatedRequest) {
         // @TODO: This is an XMPP function.
         // But also set the current persona to the user.
-        let user = req.user;
-
-        user.currentPersona = req.query.personaId;
-        await user.save();
+        console.log(req.user);
+        await req.user.$query().patch({
+            current_persona: parseInt(req.query.personaId as string)
+        })
 
         return {};
     }

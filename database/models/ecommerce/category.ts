@@ -1,17 +1,22 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Database } from "../../../lib/database";
 import { Product } from "./product";
 
-@Entity({name: 'ecommerce_category'})
-export class Category extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id?: number;
+export class Category extends Database.getModel() {
+    /******** Model properties ********/
+    id!: number;
+    name!: string;
+    internal_name!: string;
 
-    @Column()
-    name?: string;
-
-    @Column()
-    internalName?: string;
-
-    @OneToMany(() => Product, product => product.category)
-    products?: Product[];
+    /******** Default properties ********/
+    static tableName: string = 'ecommerce_categories';
+    static relationMappings: any = {
+        products: {
+            relation: Database.getModel().HasManyRelation,
+            modelClass: Product,
+            join: {
+                from: `${Category.tableName}.${Category.idColumn}`,
+                to: `${Product.tableName}.category_id`
+            }
+        }
+    }
 }

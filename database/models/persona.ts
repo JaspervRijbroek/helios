@@ -1,44 +1,32 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Database } from "../../lib/database";
 import { User } from "./user";
 
-@Entity()
-export class Persona extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id?: number;
+export class Persona extends Database.getModel() {
+    /******** Model properties ********/
+    id!: number;
+    name!: string;
+    motto!: string;
+    icon!: number;
+    level!: number;
+    level_percentage!: number;
+    boost!: number;
+    cash!: number;
+    rating!: number;
+    rep!: number;
+    rep_level!: number;
+    score!: number;
+    user_id!: number;
 
-    @ManyToOne(() => User, user => user.personas)
-    user?: User;
-
-    @Column()
-    boost?: number;
-
-    @Column()
-    cash?: number;
-
-    @Column()
-    icon?: number;
-
-    @Column()
-    level?: number;
-
-    @Column()
-    motto?: string;
-
-    @Column()
-    name?: string;
-
-    @Column()
-    level_percentage?: number;
-
-    @Column()
-    rating?: number;
-
-    @Column()
-    rep?: number;
-
-    @Column()
-    rep_level?: number;
-
-    @Column()
-    score?: number;
+    /******** Default properties ********/
+    static tableName = 'personas';
+    static relationMappings: any = {
+        user: {
+            relation: Database.getModel().BelongsToOneRelation,
+            modelClass: User,
+            join: {
+                from: 'personas.user_id',
+                to: `users.id`
+            }
+        }
+    }
 }

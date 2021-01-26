@@ -1,8 +1,8 @@
 import { json, Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
-import BaseController from "../../../lib/controller";
-import { Persona } from "../../../database/entities/persona";
-import { User } from "../../../database/entities/user";
+import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
+import { Persona } from "../../../database/models/persona";
+import { User } from "../../../database/models/user";
 
 @Controller()
 export default class PersonaController extends BaseController {
@@ -537,9 +537,7 @@ export default class PersonaController extends BaseController {
 
     @Route('get', 'DriverPersona/GetPersonaInfo')
     async getPersonaInformation(req: any) {
-        let persona = await Persona.findOne({
-            id: req.query.personaId
-        });
+        let persona = await Persona.query().findById(req.query.personaId);
 
         if (!persona) {
             return {};
@@ -739,11 +737,10 @@ export default class PersonaController extends BaseController {
     }
 
     @Route('post', 'DriverPersona/GetPersonaBaseFromList')
-    async getBaseFromList(req: any) {
-        let user = req.user as User,
-            persona = await user.currentPersona || false;
+    async getBaseFromList(req: IAuthenticatedRequest) {
+        let persona = await req.user.$relatedQuery<Persona>('persona') || false;
 
-        if (!persona) {
+        if (!persona || !(persona instanceof Persona)) {
             return {};
         }
 
@@ -784,7 +781,7 @@ export default class PersonaController extends BaseController {
                     PersonaId: persona.id,
                     Presence: 1,
                     Score: persona.score,
-                    UserId: user.id,
+                    UserId: req.user.id,
                 }]
             }
         };
@@ -793,9 +790,7 @@ export default class PersonaController extends BaseController {
     @Route('post', 'DriverPersona/ReserveName')
     async reserveName(req: Request): Promise<any> {
         let name = req.query.name as string,
-            existingPersonas = await Persona.find({
-                name
-            });
+            existingPersonas = await Persona.query().where({name});
 
         if (existingPersonas.length) {
             return {
@@ -811,9 +806,10 @@ export default class PersonaController extends BaseController {
     }
 
     @Route('post', 'DriverPersona/CreatePersona')
-    async createPersona(req: any): Promise<any> {
-        let persona = new Persona();
-        persona.user = req.user;
+    async createPersona(req: IAuthenticatedRequest): Promise<any> {
+        let persona = await Persona.query().insert({
+            user_id: req.user.id
+        });
 
         console.log(req.body);
         console.log(req.headers);

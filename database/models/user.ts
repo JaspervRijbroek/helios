@@ -1,32 +1,32 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Database } from "../../lib/database";
 import { Persona } from "./persona";
 
-@Entity()
-export class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id?: number;
+export class User extends Database.getModel() {
+    /******** Model properties ********/
+    id!: number;
+    username!: string;
+    password!: string;
+    token!: string;
+    current_persona!: number;
 
-    @Column()
-    full_access?: boolean;
-
-    @Column()
-    starter_pack?: string;
-
-    @Column()
-    token?: string;
-
-    @Column()
-    username?: string;
-
-    @Column()
-    password?: string;
-
-    @OneToOne(() => Persona, {
-        eager: true
-    })
-    @JoinColumn()
-    currentPersona?: Persona;
-
-    @OneToMany(() => Persona, persona => persona.user)
-    personas?: Promise<Persona[]>;
+    /******** Default properties ********/
+    static tableName = 'users';
+    static relationMappings: any = {
+        personas: {
+            relation: Database.getModel().HasManyRelation,
+            modelClass: Persona,
+            join: {
+                from: `${User.tableName}.${User.idColumn}`,
+                to: `${Persona.tableName}.user_id`
+            }
+        },
+        persona: {
+            relation: Database.getModel().HasOneRelation,
+            modelClass: Persona,
+            join: {
+                from: `${User.tableName}.current_persona`,
+                to: `${Persona.tableName}.${Persona.idColumn}`
+            }
+        }
+    }
 }

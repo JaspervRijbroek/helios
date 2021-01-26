@@ -1,0 +1,12 @@
+<chatServer>
+    <Rooms>
+        <chatRoom>
+            <channelCount>2</channelCount>
+            <longName>TXT_CHAT_LANG_ENGLISH</longName>
+            <shortName>EN</shortName>
+        </chatRoom>
+    </Rooms>
+    <ip>127.0.0.1</ip>
+    <port>5222</port>
+    <prefix>nfsw</prefix>
+</chatServer>

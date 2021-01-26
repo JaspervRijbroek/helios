@@ -7,8 +7,7 @@
  * And when requested it will be retrieved by the main process and send to the requester.
  */
 
-import { createSocket, Socket } from "dgram";
-import { EventEmitter } from "typeorm/platform/PlatformTools";
+import { EventEmitter } from "events";
 
 export interface IMessage {
     event: string|Symbol;

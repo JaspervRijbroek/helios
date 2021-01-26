@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { parse } from "js2xmlparser";
 import { gzipSync } from "zlib";
-import { User } from '../database/entities/user';
 import {writeFileSync} from "fs";
 import { parse as parseUri } from 'url';
 import {parse as parsePath} from 'path';
 import { sync } from "mkdirp";
+import { User } from "../database/models/user";
 
 export interface IAuthenticatedRequest extends Request {
     user: User
@@ -15,24 +15,8 @@ export default class BaseController {
     async execute(method: string, req: Request, res: Response) {
         let funct = this[method as keyof BaseController] as Function,
             response = await funct(req),
-            xmlResponse = this.buildXML(response);
-
-        let uri = parseUri(req.url);
-        if (uri.pathname) {
-            try {
-                let path = `${process.cwd()}\\requests\\${uri.pathname}${req.query.categoryName ? '_' + req.query.categoryName : ''}.xml`,
-                    parts = parsePath(path);
-
-                
-                sync(parts.dir);
-
-                writeFileSync(path, xmlResponse);
-            } catch(e) {
-                console.log(e.message);
-            }
-        }
-
-        let xmlResponse2 = gzipSync(xmlResponse);
+            xmlResponse = this.buildXML(response),
+            xmlResponse2 = gzipSync(xmlResponse);
 
         return res.status(200)
             .header('Content-Length', xmlResponse2.length.toString())
