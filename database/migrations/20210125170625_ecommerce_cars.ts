@@ -28,6 +28,8 @@ export async function up(knex: Knex): Promise<void> {
 
         table.bigInteger('product_id').unsigned();
         table.foreign('product_id').references('ecommerce_products.id').onDelete('CASCADE');
+
+        table.engine('MyISAM');
     })
 }
 

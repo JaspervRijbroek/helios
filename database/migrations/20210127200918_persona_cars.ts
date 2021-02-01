@@ -29,6 +29,8 @@ export async function up(knex: Knex): Promise<void> {
 
         table.bigInteger('persona_id');
         table.foreign('persona_id').references('personas.id').onDelete('CASCADE');
+
+        table.engine('MyISAM');
     });
 }
 

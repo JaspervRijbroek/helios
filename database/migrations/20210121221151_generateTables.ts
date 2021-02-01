@@ -9,6 +9,8 @@ export async function up(knex: Knex): Promise<void> {
             table.text('password');
             table.text('token').nullable();
             table.integer('current_persona').unsigned().nullable();
+
+            table.engine('MyISAM');
         })
         .createTableIfNotExists('personas', (table: CreateTableBuilder) => {
             table.bigIncrements().primary().unsigned();
@@ -23,11 +25,13 @@ export async function up(knex: Knex): Promise<void> {
             table.integer('rep').unsigned().defaultTo(0);
             table.float('rep_level').unsigned().defaultTo(0);
             table.integer('score').unsigned().defaultTo(0);
-            table.bigInteger('user_id').unsigned();
 
+            table.bigInteger('user_id').unsigned();
             table.foreign('user_id')
                 .references('users.id')
                 .onDelete('CASCADE');
+
+            table.engine('MyISAM');
         })
         .createTableIfNotExists('cars', (table: CreateTableBuilder) => {
             table.bigIncrements().primary().unsigned();
@@ -50,15 +54,19 @@ export async function up(knex: Knex): Promise<void> {
             table.integer('height_drop').defaultTo(0);
             table.integer('version').unsigned().defaultTo(0);
 
-            table.bigInteger('persona_id');
+            table.bigInteger('persona_id').unsigned();
             table.foreign('persona_id')
                 .references('personas.id')
                 .onDelete('CASCADE');
+
+            table.engine('MyISAM');
         })
         .createTableIfNotExists('ecommerce_categories', (table: CreateTableBuilder) => {
             table.bigIncrements().primary().unsigned();
             table.string('name');
             table.string('internal_name');
+
+            table.engine('MyISAM');
         })
         .createTableIfNotExists('ecommerce_products', (table: CreateTableBuilder) => {
             table.bigIncrements().primary().unsigned();
@@ -78,10 +86,12 @@ export async function up(knex: Knex): Promise<void> {
             table.integer('use_count').unsigned().nullable();
             table.text('visual_style');
 
-            table.bigInteger('category_id');
+            table.bigInteger('category_id').unsigned();
             table.foreign('category_id')
                 .references('ecommerce_categories.id')
                 .onDelete('CASCADE');
+
+            table.engine('MyISAM');
         });
 }
 
