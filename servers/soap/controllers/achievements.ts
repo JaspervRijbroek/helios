@@ -9,9 +9,6 @@ import { toJson } from "xml2json";
 export default class AchievementsController extends BaseController {
     @Route('get', 'achievements/loadall')
     getAllAchievements(req: Request) {
-        let achievements = readFileSync(join(process.cwd(), 'originalXML', 'achievements/loadall.xml')),
-            achievementsArray = toJson(achievements);
-
-        return JSON.parse(achievementsArray);
+        return {};
     }
 }

@@ -1,3 +1,4 @@
+import { Model } from "objection";
 import { Database } from "../../../lib/database";
 import { Product } from "./product";
 
@@ -11,7 +12,7 @@ export class Category extends Database.getModel() {
     static tableName: string = 'ecommerce_categories';
     static relationMappings: any = {
         products: {
-            relation: Database.getModel().HasManyRelation,
+            relation: Model.HasManyRelation,
             modelClass: Product,
             join: {
                 from: `${Category.tableName}.${Category.idColumn}`,

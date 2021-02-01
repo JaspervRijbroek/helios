@@ -1,5 +1,7 @@
-import { Database } from "../../../lib/database";
+import { Model } from "objection";
 import { Category } from "./category";
+import { DealerCar } from "./dealer_car";
+import { Database } from "../../../lib/database";
 
 export class Product extends Database.getModel() {
     /******** Model properties ********/
@@ -23,11 +25,19 @@ export class Product extends Database.getModel() {
     static tableName: string = 'ecommerce_products';
     static relationMappings: any = {
         category: {
-            relation: Database.getModel().BelongsToOneRelation,
+            relation: Model.BelongsToOneRelation,
             modelClass: 'Category',
             join: {
                 from: `${Product.tableName}.category_id`,
                 to: `categories.id`
+            }
+        },
+        dealerCar: {
+            relation: Model.HasOneRelation,
+            modelClass: DealerCar,
+            join: {
+                from: `${Product.tableName}.related_car`,
+                to: `${DealerCar.tableName}.${DealerCar.idColumn}`
             }
         }
     }

@@ -18,7 +18,7 @@ export async function up(knex: Knex): Promise<void> {
             table.integer('level').defaultTo(1);
             table.float('level_percentage').defaultTo(0.0);
             table.integer('boost').unsigned().defaultTo(1000); // Boost will be removed, perhaps.
-            table.integer('cash').unsigned().defaultTo(10000);
+            table.integer('cash').unsigned().defaultTo(250000);
             table.float('rating').unsigned().defaultTo(0.0);
             table.integer('rep').unsigned().defaultTo(0);
             table.float('rep_level').unsigned().defaultTo(0);

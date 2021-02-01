@@ -39,6 +39,10 @@ export default class CarsController extends BaseController {
 
     @Route('put', 'personas/:personaId/cars')
     updateCarSpecs(req: Request) {
+        // When saving a car, we know which one, so we get the old data,
+        // Compare it with the new data and then we can check what has changed and handle the current persona its
+        // assets manually.
+
         console.log(req.body.OwnedCarTrans.CustomCar);
 
         return {};

@@ -3,6 +3,7 @@ import ChatClient from "./client";
 import {sync} from 'glob';
 import { join, parse } from "path";
 import Communicator from "../../lib/communicator";
+import { Config } from "../../lib/config";
 
 export default class ChatServer {
     server: Server;
@@ -53,8 +54,10 @@ export default class ChatServer {
     }
 
     start() {
-        this.server.listen(process.env.CHAT_PORT, () => {
-            global.debug(`Chat server listening on port ${process.env.CHAT_PORT}`);
+        let port = Config.get('servers.chat.port');
+
+        this.server.listen(port, () => {
+            global.debug(`Chat server listening on port ${port}`);
         })
     }
 }

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';
+import { Config } from "../../../lib/config";
 
 @Controller()
 export default class ChatController extends BaseController {
@@ -15,8 +16,8 @@ export default class ChatController extends BaseController {
                         shortName: 'EN'
                     }]
                 },
-                ip: '127.0.0.1',
-                port: 5222,
+                ip: Config.get('servers.chat.host'),
+                port: Config.get('servers.chat.port'),
                 prefix: 'nfsw'
             }
         };

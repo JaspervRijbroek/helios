@@ -1,0 +1,29 @@
+{
+    "database": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "zeus",
+        "pass": "zeus",
+        "name": "zeus"
+    },
+    "servers": {
+        "http": {
+            "port": 3000
+        },
+        "chat": {
+            "host": "127.0.0.1",
+            "port": 5222
+        },
+        "freeroam": {
+            "host": "127.0.0.1",
+            "port": 9999
+        },
+        "race": {
+            "host": "127.0.0.1",
+            "port": 9998
+        }
+    },
+    "features": {
+        "register": "new/"
+    }
+}

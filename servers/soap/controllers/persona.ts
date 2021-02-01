@@ -3,6 +3,7 @@ import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
 import { Persona } from "../../../database/models/persona";
 import { User } from "../../../database/models/user";
+import { PersonaCar } from "../../../database/models/persona_car";
 
 @Controller()
 export default class PersonaController extends BaseController {
@@ -88,424 +89,41 @@ export default class PersonaController extends BaseController {
     }
 
     @Route('get', 'personas/:personaId/carslots')
-    getCarSlots(req: Request) {
-
+    async getCarSlots(req: IAuthenticatedRequest) {
+        let persona = await Persona.query().findById(req.params.personaId),
+            ownedCars = await persona.$relatedQuery<PersonaCar>('cars');
 
         return {
             CarSlotInfoTrans: {
-                CarsOwnedByPersona: [{
-                    OwnedCarTrans: {
-                        CustomCar: {
-                            BaseCar: -691868420,
-                            CarClassHash: -2142411446,
-                            Id: 20219847,
-                            IsPreset: 'true',
-                            Level: 0,
-                            Name: 'car1006',
-                            Paints: {
-                                CustomPaintTrans: [{
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 0,
-                                    Var: 254
-                                }, {
-                                    Group: -81736162,
-                                    Hue: 496032592,
-                                    Sat: 179,
-                                    Slot: 1,
-                                    Var: 179
-                                }, {
-                                    Group: -81736162,
-                                    Hue: 496032592,
-                                    Sat: 179,
-                                    Slot: 2,
-                                    Var: 179
-                                }, {
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 3,
-                                    Var: 254
-                                }, {
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 4,
-                                    Var: 254
-                                }, {
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 5,
-                                    Var: 254
-                                }, {
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 6,
-                                    Var: 254
-                                }, {
-                                    Group: 42744494,
-                                    Hue: 496032328,
-                                    Sat: 0,
-                                    Slot: 7,
-                                    Var: 254
-                                }]
+                CarsOwnedByPersona: {
+                    OwnedCarTrans: ownedCars.map((car: PersonaCar) => {
+                        return {
+                            CustomCar: {
+                                BaseCar: car.base_car,
+                                CarClassHash: car.car_class_hash,
+                                Id: car.id,
+                                IsPreset: 'true',
+                                Level: car.level,
+                                Name: car.name,
+                                Paints: JSON.parse(car.paints),
+                                PerformanceParts: JSON.parse(car.performance_parts),
+                                PhysicsProfileHash: car.physics_profile_hash,
+                                Rating: car.rating,
+                                ResalePrice: car.resell_value,
+                                RideHeightDrop: 0,
+                                SkillModParts: JSON.parse(car.skill_mod_parts),
+                                SkillModSlotCount: car.skill_mod_parts_count,
+                                Version: car.version,
+                                Vinyls: JSON.parse(car.vinyls),
+                                VisualParts: JSON.parse(car.visual_parts)
                             },
-                            PerformanceParts: {
-                                PerformancePartTrans: [{
-                                    PerformancePartAttribHash: -880514079
-                                }, {
-                                    PerformancePartAttribHash: -711274200
-                                }, {
-                                    PerformancePartAttribHash: -1481726974
-                                }, {
-                                    PerformancePartAttribHash: -1586660062
-                                }, {
-                                    PerformancePartAttribHash: -595069127
-                                }, {
-                                    PerformancePartAttribHash: -1432021954
-                                }]
-                            },
-                            PhysicsProfileHash: -1792456729,
-                            Rating: 771,
-                            ResalePrice: 525000,
-                            RideHeightDrop: 0,
-                            SkillModParts: {
-                                SkillModPartTrans: [{
-                                    IsFixed: false,
-                                    SkillModPartAttribHash: -297285755,
-                                }, {
-                                    IsFixed: false,
-                                    SkillModPartAttribHash: -297285755,
-                                }, {
-                                    IsFixed: false,
-                                    SkillModPartAttribHash: 201416165,
-                                }, {
-                                    IsFixed: false,
-                                    SkillModPartAttribHash: 201416165,
-                                }, {
-                                    IsFixed: false,
-                                    SkillModPartAttribHash: 208768909,
-                                }]
-                            },
-                            SkillModSlotCount: 5,
-                            Version: 0,
-                            Vinyls: {
-                                CustomVinylTrans: [{
-                                    Hash: -596964502,
-                                    Hue1: -799662188,
-                                    Hue2: -799662189,
-                                    Hue3: -799662186,
-                                    Hue4: -799662452,
-                                    Layer: 0,
-                                    Mir: true,
-                                    Rot: 0,
-                                    Sat1: 216,
-                                    Sat2: 216,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1540,
-                                    ScaleY: 1146,
-                                    Shear: 0,
-                                    TranX: -330,
-                                    TranY: -91,
-                                    Var1: 153,
-                                    Var2: 153,
-                                    Var3: 0,
-                                    Var4: 25
-                                }, {
-                                    Hash: -883491363,
-                                    Hue1: -799662282,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 1,
-                                    Mir: false,
-                                    Rot: 8,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 327,
-                                    ScaleY: 639,
-                                    Shear: 0,
-                                    TranX: -403,
-                                    TranY: -25,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -883491363,
-                                    Hue1: -799662348,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 2,
-                                    Mir: false,
-                                    Rot: 248,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 327,
-                                    ScaleY: 638,
-                                    Shear: 0,
-                                    TranX: 402,
-                                    TranY: -25,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: 249467625,
-                                    Hue1: -799662353,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 3,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1785,
-                                    ScaleY: 1163,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: -207,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: 249467624,
-                                    Hue1: -799662255,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 4,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1523,
-                                    ScaleY: 1146,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: 107,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: 249467623,
-                                    Hue1: -799662252,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 5,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1556,
-                                    ScaleY: 1081,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: 317,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: 248129937,
-                                    Hue1: -799662318,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 6,
-                                    Mir: true,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1638,
-                                    ScaleY: 1245,
-                                    Shear: 0,
-                                    TranX: -405,
-                                    TranY: 27,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -596965030,
-                                    Hue1: -799662188,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 7,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 179,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 654,
-                                    ScaleY: 2785,
-                                    Shear: 0,
-                                    TranX: -74,
-                                    TranY: 47,
-                                    Var1: 179,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -596964880,
-                                    Hue1: -799662353,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 8,
-                                    Mir: false,
-                                    Rot: 128,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 491,
-                                    ScaleY: 327,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: 340,
-                                    Var1: 16,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: 1681102295,
-                                    Hue1: -799662353,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 9,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 245,
-                                    ScaleY: 163,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: -330,
-                                    Var1: 26,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -883491363,
-                                    Hue1: -799662382,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 10,
-                                    Mir: false,
-                                    Rot: 0,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 1196,
-                                    ScaleY: 98,
-                                    Shear: 0,
-                                    TranX: 0,
-                                    TranY: -378,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -1696765903,
-                                    Hue1: 0,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 11,
-                                    Mir: false,
-                                    Rot: 198,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 475,
-                                    ScaleY: 475,
-                                    Shear: 0,
-                                    TranX: -354,
-                                    TranY: -28,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }, {
-                                    Hash: -1696765903,
-                                    Hue1: 0,
-                                    Hue2: 0,
-                                    Hue3: 0,
-                                    Hue4: 0,
-                                    Layer: 12,
-                                    Mir: false,
-                                    Rot: 57,
-                                    Sat1: 0,
-                                    Sat2: 0,
-                                    Sat3: 0,
-                                    Sat4: 0,
-                                    ScaleX: 475,
-                                    ScaleY: 475,
-                                    Shear: 0,
-                                    TranX: 353,
-                                    TranY: -37,
-                                    Var1: 0,
-                                    Var2: 0,
-                                    Var3: 0,
-                                    Var4: 0,
-                                }]
-                            },
-                            VisualParts: {
-                                VisualPartTrans: [{
-                                    PartHash: 934109906,
-                                    SlotHash: -966088147
-                                }, {
-                                    PartHash: 157183852,
-                                    SlotHash: -1505530948
-                                }, {
-                                    PartHash: -1095823416,
-                                    SlotHash: 2106784967
-                                }, {
-                                    PartHash: -48607787,
-                                    SlotHash: 453545749
-                                }, {
-                                    PartHash: -273819714,
-                                    SlotHash: -2126743923
-                                }]
-                            }
-                        },
-                        Durability: 100,
-                        Heat: 1,
-                        Id: 1,
-                        OwnershipType: 'PresetCar',
-                    }
-                }],
+                            Durability: car.durability,
+                            Heat: car.heat,
+                            Id: car.id,
+                            OwnershipType: car.ownership_type,
+                        }
+                    })
+                },
                 DefaultOwnedCarIndex: 0,
                 ObtainableSlots: {
                     ProductTrans: [{
@@ -807,13 +425,26 @@ export default class PersonaController extends BaseController {
 
     @Route('post', 'DriverPersona/CreatePersona')
     async createPersona(req: IAuthenticatedRequest): Promise<any> {
-        let persona = await Persona.query().insert({
-            user_id: req.user.id
+        let persona = await Persona.query().insertAndFetch({
+            user_id: req.user.id,
+            name: req.query.name as string,
+            icon: parseInt(req.query.iconIndex as string)
         });
 
-        console.log(req.body);
-        console.log(req.headers);
-
-        return {};
+        return {
+            ProfileData: {
+                Boost: persona.boost,
+                Cash: persona.cash,
+                IconIndex: persona.icon,
+                Level: persona.level,
+                Name: persona.name,
+                PercentToLevel: persona.level_percentage,
+                PersonaId: persona.id,
+                Rating: persona.rating,
+                Rep: persona.rep,
+                RepAtCurrentLevel: persona.rep_level,
+                Score: persona.score
+            }
+        };
     }
 }

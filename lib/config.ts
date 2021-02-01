@@ -3,7 +3,9 @@ export class Config {
 
     static getConfig(): any {
         if(!this.config) {
-            this.config = require(`${process.cwd()}/config.json`);
+            try {
+                this.config = require(`${process.cwd()}/config.json`);
+            } catch(err) { /* NOOP */ }
         }
 
         return this.config;

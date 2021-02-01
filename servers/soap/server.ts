@@ -2,6 +2,7 @@ import Express, { Request, Response, static as staticPath } from 'express';
 import { glob } from 'glob';
 import { join } from 'path';
 import Communicator from '../../lib/communicator';
+import { Config } from '../../lib/config';
 import Controller from '../../lib/controller';
 import { IRouteDefinition } from './decorators/routing';
 
@@ -46,7 +47,7 @@ export default class SoapServer {
     }
 
     async start() {
-        let port = process.env.SOAP_PORT || 3000,
+        let port = Config.get('servers.http.port'),
             abstractController = new Controller();
 
         this.loadMiddleware();

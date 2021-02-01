@@ -1,4 +1,6 @@
+import { Model } from "objection";
 import { Database } from "../../lib/database";
+import { PersonaCar } from "./persona_car";
 import { User } from "./user";
 
 export class Persona extends Database.getModel() {
@@ -26,6 +28,14 @@ export class Persona extends Database.getModel() {
             join: {
                 from: 'personas.user_id',
                 to: `users.id`
+            }
+        },
+        cars: {
+            relation: Model.HasManyRelation,
+            modelClass: PersonaCar,
+            join: {
+                from: `${Persona.tableName}.${Persona.idColumn}`,
+                to: `${PersonaCar.tableName}.persona_id`
             }
         }
     }

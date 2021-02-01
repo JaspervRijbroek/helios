@@ -9,6 +9,8 @@ import { ChildProcess, fork } from "child_process";
 import { join } from "path";
 import { Socket } from "dgram";
 import { IMessage } from "./communicator";
+import { Config } from "./config";
+import { Setup } from "./setup";
 
 export default class Game {
     static instance: Game;
@@ -28,9 +30,13 @@ export default class Game {
         config();
     }
 
-    start() {
-        if(process.env.SHOWHEADER !== 'false') {
+    async start() {
+        if(Config.get('showHeader') !== 'false') {
             this.showHeader();
+        }
+
+        if(!Setup.check()) {
+            await Setup.execute();
         }
 
         this.serverInstances = this.getServerPaths()

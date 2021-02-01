@@ -2,12 +2,10 @@ import Knex from "knex";
 
 export async function seed(knex: Knex): Promise<void> {
     // Empty existing tables.
-    await knex.schema.raw('SET GLOBAL max_allowed_packet=1073741824;')
-
     await Promise.all([
-        knex("ecommerce_categories").del(),
-        knex("ecommerce_products").del(),
-        knex("ecommerce_car_dealer").del()
+        knex("ecommerce_categories").truncate(),
+        knex("ecommerce_products").truncate(),
+        knex("ecommerce_car_dealer").truncate()
     ]);
 
     let categories = [
@@ -47,27 +45,12 @@ export async function seed(knex: Knex): Promise<void> {
         { id: 34, name: 'Vanity window tints', internal_name: 'STORE_VANITY_WINDOW' },
         { id: 35, name: 'Vinyls', internal_name: 'STORE_VINYLCATEGORIES' },
     ],
-        products = require('./productData.json').map((product: any, index: number) => {
-            product.category_id = categories.find((category: any) => category.internal_name == product.category);
-            delete product.category;
-
-            if (product.category_id) {
-                product.category_id = product.category_id.id;
-            }
-
-            product.id = index + 1;
-
-            return product;
-        }),
-        cars = require('./carDealerData.json').map((car: any) => {
-            // Find the related product.
-            let product = products.find((product: any) => {
-                return product.originalID === car.fileID;
-            });
-
+        cars = require('./carDealerData.json').map((car: any, index: number) => {
             return {
+                id: index + 1,
+                fileID: car.fileID,
                 car_id: car.Id,
-                custom_car_id: car.CustomCar.Id,
+                custom_car_id: typeof car.CustomCar.Id !== 'object' ? car.CustomCar.Id : 0,
                 base_car: car.CustomCar.BaseCar,
                 car_class_hash: car.CustomCar.CarClassHash,
                 physics_profile_hash: car.CustomCar.PhysicsProfileHash,
@@ -85,17 +68,48 @@ export async function seed(knex: Knex): Promise<void> {
                 skill_mod_parts: JSON.stringify(car.CustomCar.SkillModParts),
                 vinyls: JSON.stringify(car.CustomCar.Vinyls),
                 visual_parts: JSON.stringify(car.CustomCar.VisualParts),
-                product_id: product ? product.id : 0
+                resell_value: car.CustomCar.ResalePrice
             };
-        });
-
-    await Promise.all([
-        knex('ecommerce_categories').insert(categories),
-        knex('ecommerce_products').insert(products.map((product: any) => {
+        }),
+        products = await Promise.all(require('./productData.json').map(async (product: any, index: number) => {
+            product.category_id = categories.find((category: any) => category.internal_name == product.category);
+            product.related_car = cars.find((car: any) => {
+                return car.fileID == product.originalID;
+            });
+            delete product.category;
             delete product.originalID;
+
+            if (product.category_id) {
+                product.category_id = product.category_id.id;
+            }
+
+            if(product.related_car) {
+                product.related_car = product.related_car.id
+            }
 
             return product;
         })),
-        knex('ecommerce_car_dealer').insert(cars)
+        carChunks = chunkArray(cars, 50).map(async (chunk: any, index: number) => {
+            return await knex('ecommerce_car_dealer').insert(chunk.map((car: any) => {
+                delete car.fileID;
+
+                return car;
+            }));
+        });
+
+    let results = await Promise.all([
+        knex('ecommerce_categories').insert(categories),
+        knex('ecommerce_products').insert(products),
+        carChunks
     ]);
 };
+
+function chunkArray(myArray: any[], chunk_size: number) {
+    var results = [];
+
+    while (myArray.length) {
+        results.push(myArray.splice(0, chunk_size));
+    }
+
+    return results;
+}

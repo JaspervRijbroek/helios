@@ -20,7 +20,7 @@ import 'reflect-metadata';
 import './lib/game';
 import Game from './lib/game';
 
-global.debug = require('debug')('nfsw:http');
+global.debug = require('debug')('nfsw:bootstrap');
 
 Game.getInstance()
     .start()

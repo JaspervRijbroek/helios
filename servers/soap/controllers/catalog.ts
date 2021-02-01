@@ -7,6 +7,7 @@ import { join } from "path";
 import { toJson } from 'xml2json';
 import { Category } from "../../../database/models/ecommerce/category";
 import { Persona } from "../../../database/models/persona";
+import { Config } from "../../../lib/config";
 
 
 @Controller()
@@ -17,8 +18,17 @@ export default class CatalogController extends BaseController {
             category = await Category.query().where({
                 internal_name: req.query.categoryName
             }).first(),
-            // Only find leveled products.
-            products = !category ? [] : await category.$relatedQuery<Product>('products').where('level', '>=', persona ? persona.level : 0);
+            products: any[] = [];
+
+        if(category) {
+            let queryBuilder = category.$relatedQuery<Product>('products');
+
+            if(persona && Config.get('features.leveled_category')) {
+                queryBuilder.where('level', '<=', persona.level);
+            }
+
+            products = await queryBuilder;
+        }
 
         return {
             ArrayOfProductTrans: {

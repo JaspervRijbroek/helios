@@ -1,6 +1,7 @@
 import {createSocket, RemoteInfo, Socket} from "dgram";
 import {createConnection, createServer, Server} from "net";
 import Communicator from "../../lib/communicator";
+import { Config } from "../../lib/config";
 import Client from "./client";
 import { InfoPacket } from "./lib/packet";
 
@@ -52,8 +53,10 @@ export default class FreeroamServer {
     }
 
     async start() {
-        this.server.bind(parseInt(process.env.FREEROAM_PORT as string), () => {
-            global.debug(`Freefoam Server listening on port: ${process.env.FREEROAM_PORT}`);
+        let port = Config.get('servers.freeroam.port');
+
+        this.server.bind(port, () => {
+            global.debug(`Freefoam Server listening on port: ${port}`);
         })
     }
 }

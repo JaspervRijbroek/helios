@@ -14,7 +14,7 @@ export interface IAuthenticatedRequest extends Request {
 export default class BaseController {
     async execute(method: string, req: Request, res: Response) {
         let funct = this[method as keyof BaseController] as Function,
-            response = await funct(req),
+            response = await funct.call(this, req),
             xmlResponse = this.buildXML(response),
             xmlResponse2 = gzipSync(xmlResponse);
 
