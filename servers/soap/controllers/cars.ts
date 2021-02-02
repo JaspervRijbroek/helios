@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';
+import { Persona } from "../../../database/models/persona";
+import { PersonaCar } from "../../../database/models/persona_car";
 
 @Controller()
 export default class CarsController extends BaseController {
@@ -38,13 +40,33 @@ export default class CarsController extends BaseController {
     }
 
     @Route('put', 'personas/:personaId/cars')
-    updateCarSpecs(req: Request) {
+    async updateCarSpecs(req: Request) {
         // When saving a car, we know which one, so we get the old data,
         // Compare it with the new data and then we can check what has changed and handle the current persona its
         // assets manually.
 
-        console.log(req.body.OwnedCarTrans.CustomCar);
+        // For now we will just save the car in the DB, but in the future we will be less trusty.
 
-        return {};
+        let persona = await Persona.query().findById(req.params.personaId),
+            car = await persona.$relatedQuery<PersonaCar>('cars')
+                .findById(req.body.OwnedCarTrans.Id);
+
+        // Update the car just like that, no problems here (yet).
+        // Without losing any money.
+        await car.$query().patch({
+            car_class_hash: req.body.OwnedCarTrans.CustomCar.CarClassHash,
+            paints: JSON.stringify(req.body.OwnedCarTrans.CustomCar.Paints),
+            performance_parts: JSON.stringify(req.body.OwnedCarTrans.CustomCar.PerformanceParts),
+            physics_profile_hash: req.body.OwnedCarTrans.CustomCar.PhysicsProfileHash
+        });
+
+        delete req.body.OwnedCarTrans.ExpirationDate;
+
+        return {
+            OwnedCarTrans: {
+                ...req.body.OwnedCarTrans,
+                Durability: 100
+            }
+        };
     }
 }
