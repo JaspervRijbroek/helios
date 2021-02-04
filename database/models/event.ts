@@ -1,6 +1,8 @@
-import { Database } from "../../../lib/database";
+import { Model } from "objection";
+import { Database } from "../../lib/database";
+import { EventReward } from "./events/reward";
 
-export class RaceEvent extends Database.getModel() {
+export class Event extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     car_class_hash!: string;
@@ -28,5 +30,15 @@ export class RaceEvent extends Database.getModel() {
     track_localization!: string;
 
     /******** Default properties */
-    static tableName: string = 'race_events';
+    static tableName: string = 'events';
+    static relationMappings = {
+        rewards: {
+            relation: Model.HasOneRelation,
+            modelClass: EventReward,
+            join: {
+                from: `${Event.tableName}.id`,
+                to: `${EventReward.tableName}.event_id`
+            }
+        }
+    }
 }
