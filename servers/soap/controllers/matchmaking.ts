@@ -1,11 +1,17 @@
+import { EventSession } from "../../../database/models/events/session";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
 import { Controller, Route } from "../decorators/routing";
 
 @Controller()
 export default class AchievementsController extends BaseController {
     @Route('get', 'matchmaking/launchevent/:eventId')
-    lauchEvent(req: IAuthenticatedRequest) {
-        // <SessionInfo><Challenge><ChallengeId>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</ChallengeId><LeftSize>14</LeftSize><Pattern>FFFFFFFFFFFFFFFF</Pattern><RightSize>50</RightSize></Challenge><EventId>48</EventId><SessionId>9970915</SessionId></SessionInfo>
+    async lauchEvent(req: IAuthenticatedRequest) {
+        // I can do this without thinking, a hacker has nothing with the response.
+        // And you can only trigger a request with the client and with the correct data.
+        // Thus the client has all the data it requires.
+        let session = await EventSession.query().insert({
+            event_id: parseInt(req.params.eventId)
+        });
 
         return {
             SessionInfo: {
@@ -15,8 +21,8 @@ export default class AchievementsController extends BaseController {
                     Pattern: 'FFFFFFFFFFFFFFFF',
                     RightSize: 50,
                 },
-                EventId: req.params.eventId,
-                SessionId: 9970915
+                EventId: session.event_id,
+                SessionId: session.id
             }
         }
     }
