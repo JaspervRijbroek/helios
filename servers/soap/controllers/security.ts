@@ -1,7 +1,5 @@
-import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
-import { User } from "../../../database/models/user";
 
 @Controller()
 export default class SecurityController extends BaseController {

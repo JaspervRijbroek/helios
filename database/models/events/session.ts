@@ -20,4 +20,18 @@ export class EventSession extends Database.getModel() {
             }
         }
     }
+
+    /******** Instance methods ********/
+    toResponse(): any {
+        return {
+            Challenge: {
+                ChallengeId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                LeftSize: 14,
+                Pattern: 'FFFFFFFFFFFFFFFF',
+                RightSize: 50,
+            },
+            EventId: this.event_id,
+            SessionId: this.id
+        }
+    }
 }

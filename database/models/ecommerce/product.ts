@@ -41,4 +41,29 @@ export class Product extends Database.getModel() {
             }
         }
     }
+
+    /******** Instance methods ********/
+    toResponse(): any {
+        return {
+            BundleItems: {},
+            CategoryId: {},
+            Currency: this.currency,
+            Description: this.description,
+            DurationMinute: this.duration,
+            Hash: this.hash,
+            Icon: this.icon,
+            Level: this.level,
+            LongDescription: this.long_description,
+            Price: this.price && this.price.toFixed(4),
+            Priority: this.priority,
+            ProductId: this.id,
+            ProductTitle: this.title,
+            ProductType: this.type,
+            SecondaryIcon: this.secondary_icon,
+            UseCount: this.use_count,
+            VisualStyle: this.visual_style,
+            WebIcon: '',
+            WebLocation: ''
+        }
+    }
 }

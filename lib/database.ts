@@ -4,7 +4,7 @@ import { Model } from "objection";
 export class Database {
     knex: Knex;
 
-    static instance: Database|null = null;
+    static instance: Database | null = null;
 
     constructor() {
         this.knex = Knex(
@@ -23,7 +23,7 @@ export class Database {
     }
 
     static getInstance() {
-        if(!this.instance) {
+        if (!this.instance) {
             this.instance = new Database();
         }
 

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from '../../../lib/controller';
 import { Event } from "../../../database/models/event";
@@ -16,43 +16,7 @@ export default class EventsController extends BaseController {
         return {
             EventsPacket: {
                 Events: {
-                    EventDefinition: events.map((event: Event) => {
-                        let rewardModes = JSON.parse(event.reward_modes),
-                            engagePoint = JSON.parse(event.engage_point);
-
-                        return {
-                            CarClassHash: event.car_class_hash,
-                            Coins: event.coins,
-                            EventId: event.id,
-                            EventLocalization: event.localization,
-                            EventModeDescriptionLocalization: event.mode_description_localization,
-                            EventModeIcon: event.mode_icon,
-                            EventModeId: event.mode_id,
-                            EventModeLocalization: event.mode_localization,
-                            IsEnabled: event.enabled ? 'true' : 'false',
-                            IsLocked: event.locked ? 'true' : 'false',
-                            Laps: event.laps,
-                            Length: event.length,
-                            MaxClassRating: event.max_class_rating,
-                            MaxEntrants: event.max_entrants,
-                            MaxLevel: event.max_level,
-                            MinClassRating: event.min_class_rating,
-                            MinEntrants: event.min_entrants,
-                            MinLevel: event.min_level,
-                            RegionLocalization: event.region_localization,
-                            TimeLimit: event.time_limit,
-                            TrackLayoutMap: event.track_layout_map,
-                            TrackLocalization: event.track_localization,
-                            EngagePoint: {
-                                X: engagePoint.x,
-                                Y: engagePoint.y,
-                                Z: engagePoint.z
-                            },
-                            RewardModes: {
-                                int: rewardModes
-                            }
-                        }
-                    })
+                    EventDefinition: events.map((event: Event) => event.toResponse())
                 }
             }
         }

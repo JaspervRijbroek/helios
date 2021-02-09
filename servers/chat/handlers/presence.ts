@@ -1,6 +1,6 @@
 import ChatClient from "../client";
 import PresenceResponse from "../packages/presence/response";
-import {Element} from '@xmpp/xml';
+import { Element } from '@xmpp/xml';
 
 export default class PresenceHandler {
     execute(client: ChatClient, packet: Element) {

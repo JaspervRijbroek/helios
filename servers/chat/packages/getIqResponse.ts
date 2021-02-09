@@ -2,7 +2,7 @@ import xml from "@xmpp/xml";
 import ChatClient from "../client";
 
 export default class GetIqResponse {
-    constructor(public username: string) {}
+    constructor(public username: string) { }
 
     send(client: ChatClient) {
         client.send(xml(

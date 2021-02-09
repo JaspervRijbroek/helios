@@ -41,4 +41,43 @@ export class Event extends Database.getModel() {
             }
         }
     }
+
+    /******** Instance methods ********/
+    toResponse(): any {
+        let rewardModes = JSON.parse(this.reward_modes),
+            engagePoint = JSON.parse(this.engage_point);
+
+        return {
+            CarClassHash: this.car_class_hash,
+            Coins: this.coins,
+            EventId: this.id,
+            EventLocalization: this.localization,
+            EventModeDescriptionLocalization: this.mode_description_localization,
+            EventModeIcon: this.mode_icon,
+            EventModeId: this.mode_id,
+            EventModeLocalization: this.mode_localization,
+            IsEnabled: this.enabled ? 'true' : 'false',
+            IsLocked: this.locked ? 'true' : 'false',
+            Laps: this.laps,
+            Length: this.length,
+            MaxClassRating: this.max_class_rating,
+            MaxEntrants: this.max_entrants,
+            MaxLevel: this.max_level,
+            MinClassRating: this.min_class_rating,
+            MinEntrants: this.min_entrants,
+            MinLevel: this.min_level,
+            RegionLocalization: this.region_localization,
+            TimeLimit: this.time_limit,
+            TrackLayoutMap: this.track_layout_map,
+            TrackLocalization: this.track_localization,
+            EngagePoint: {
+                X: engagePoint.x,
+                Y: engagePoint.y,
+                Z: engagePoint.z
+            },
+            RewardModes: {
+                int: rewardModes
+            }
+        }
+    }
 }

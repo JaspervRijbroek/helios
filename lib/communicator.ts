@@ -10,12 +10,12 @@
 import { EventEmitter } from "events";
 
 export interface IMessage {
-    event: string|Symbol;
+    event: string | Symbol;
     data: any[];
 }
 
 export default class Communicator extends EventEmitter {
-    static instance: Communicator|null = null;
+    static instance: Communicator | null = null;
 
     constructor() {
         super();
@@ -39,7 +39,7 @@ export default class Communicator extends EventEmitter {
      * @param server 
      * @param message 
      */
-    emit(event: string|Symbol, ...data: any[]): boolean {
+    emit(event: string | Symbol, ...data: any[]): boolean {
         // Trigger the parent
         super.emit(event as string, ...data);
 

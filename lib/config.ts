@@ -2,10 +2,10 @@ export class Config {
     static config: any = null;
 
     static getConfig(): any {
-        if(!this.config) {
+        if (!this.config) {
             try {
                 this.config = require(`${process.cwd()}/config.json`);
-            } catch(err) { /* NOOP */ }
+            } catch (err) { /* NOOP */ }
         }
 
         return this.config;
@@ -13,7 +13,7 @@ export class Config {
 
     static get(key: string): any {
         return key.split('.').reduce((carry: any, key: string) => {
-            if(!carry || !carry[key]) {
+            if (!carry || !carry[key]) {
                 return false;
             }
 

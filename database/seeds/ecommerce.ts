@@ -83,7 +83,7 @@ export async function seed(knex: Knex): Promise<void> {
                 product.category_id = product.category_id.id;
             }
 
-            if(product.related_car) {
+            if (product.related_car) {
                 product.related_car = product.related_car.id
             }
 

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { parse } from "url";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';

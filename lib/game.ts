@@ -7,7 +7,6 @@ import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
 import { join } from "path";
-import { Socket } from "dgram";
 import { IMessage } from "./communicator";
 import { Config } from "./config";
 import { Setup } from "./setup";
@@ -18,7 +17,7 @@ export default class Game {
 
 
     static getInstance(): Game {
-        if(!this.instance) {
+        if (!this.instance) {
             this.instance = new Game();
         }
 
@@ -31,11 +30,11 @@ export default class Game {
     }
 
     async start() {
-        if(Config.get('showHeader') !== 'false') {
+        if (Config.get('showHeader') !== 'false') {
             this.showHeader();
         }
 
-        if(!Setup.check()) {
+        if (!Setup.check()) {
             await Setup.execute();
         }
 

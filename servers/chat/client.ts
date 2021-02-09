@@ -1,11 +1,11 @@
 import { EventEmitter } from "events";
 import { Socket } from "net";
-import {Element, Parser} from "@xmpp/xml";
+import { Element, Parser } from "@xmpp/xml";
 
 export default class ChatClient extends EventEmitter {
     parser: Parser = new Parser();
     isShakingHands: boolean = true;
-    personaId: number|string = 0;
+    personaId: number | string = 0;
 
     constructor(public socket: Socket) {
         super();

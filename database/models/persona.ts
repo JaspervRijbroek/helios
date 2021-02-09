@@ -39,4 +39,21 @@ export class Persona extends Database.getModel() {
             }
         }
     }
+
+    /******** Instance methods ********/
+    toResponse(): any {
+        return {
+            Boost: this.boost,
+            Cash: this.cash,
+            IconIndex: this.icon,
+            Level: this.level,
+            Motto: this.motto,
+            Name: this.name,
+            PercentToLevel: this.level_percentage,
+            PersonaId: this.id,
+            Rating: this.rating,
+            Rep: this.rep,
+            RepAtCurrentLevel: this.rep_level
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request } from 'express'
 import { Controller, Route } from '../decorators/routing';
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
 import { Persona } from '../../../database/models/persona';
@@ -11,8 +11,7 @@ export default class UserController extends BaseController {
         let personas = await req.user.$relatedQuery<Persona>('personas') || [],
             token = v4();
 
-        console.log(req.user);
-        await req.user.$query().patch({
+        req.user = await req.user.$query().patchAndFetch({
             token
         });
 
@@ -20,31 +19,9 @@ export default class UserController extends BaseController {
             UserInfo: {
                 defaultPersonaIdx: 0,
                 personas: {
-                    ProfileData: personas.map((persona: Persona) => {
-                        return {
-                            Boost: persona.boost,
-                            Cash: persona.cash,
-                            IconIndex: persona.icon,
-                            Level: persona.level,
-                            Motto: persona.motto,
-                            Name: persona.name,
-                            PercentToLevel: persona.level_percentage,
-                            PersonaId: persona.id,
-                            Rating: persona.rating,
-                            Rep: persona.rep,
-                            RepAtCurrentLevel: persona.rep_level,
-                            ccar: {}
-                        }
-                    })
+                    ProfileData: personas.map((persona: Persona) => persona.toResponse())
                 },
-                user: {
-                    fullGameAccess: 'false',
-                    isComplete: 'false',
-                    remoteUserId: 0,
-                    securityToken: token,
-                    subscribeMsg: 'false',
-                    userId: req.user.id,
-                }
+                user: req.user.toResponse()
             }
         };
     }
@@ -109,7 +86,6 @@ export default class UserController extends BaseController {
     async secureLoginPersona(req: IAuthenticatedRequest) {
         // @TODO: This is an XMPP function.
         // But also set the current persona to the user.
-        console.log(req.user);
         await req.user.$query().patch({
             current_persona: parseInt(req.query.personaId as string)
         })

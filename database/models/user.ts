@@ -33,6 +33,18 @@ export class User extends Database.getModel() {
         }
     }
 
+    /******** Instance methods ********/
+    toResponse(): any {
+        return {
+            fullGameAccess: 'false',
+            isComplete: 'false',
+            remoteUserId: 0,
+            securityToken: this.token,
+            subscribeMsg: 'false',
+            userId: this.id,
+        }
+    }
+
     /******** Static methods ********/
     static async login(username: any, password: any) {
         let canRegister = Config.get('features.register');

@@ -1,9 +1,5 @@
-import { Request, Response, Send } from "express";
+import { Request, Response } from "express";
 import { toJson } from 'xml2json';
-import { parse } from 'js2xmlparser';
-import { gzipSync } from 'zlib';
-import { writeFileSync } from 'fs';
-import { parse as parseUri } from 'url'
 
 export default (req: Request, res: Response, next: Function) => {
     let requestData = '';

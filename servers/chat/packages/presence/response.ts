@@ -1,12 +1,11 @@
 import xml from "@xmpp/xml";
 import ChatClient from "../../client";
 
-export default class PresenceResponse
-{
-    constructor(public data: any) {}
+export default class PresenceResponse {
+    constructor(public data: any) { }
 
     send(client: ChatClient) {
-        if(this.data.subscribeTo) {
+        if (this.data.subscribeTo) {
             return this.subscribeResponse(client);
         }
 

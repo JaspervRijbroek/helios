@@ -1,4 +1,3 @@
-import crc32 from "buffer-crc32";
 import { RemoteInfo, Socket } from "dgram";
 import { InfoPacket } from "./lib/packet";
 

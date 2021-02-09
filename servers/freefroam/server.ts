@@ -1,9 +1,7 @@
-import {createSocket, RemoteInfo, Socket} from "dgram";
-import {createConnection, createServer, Server} from "net";
+import { createSocket, RemoteInfo, Socket } from "dgram";
 import Communicator from "../../lib/communicator";
 import { Config } from "../../lib/config";
 import Client from "./client";
-import { InfoPacket } from "./lib/packet";
 
 export default class FreeroamServer {
     server: Socket;
@@ -40,7 +38,7 @@ export default class FreeroamServer {
         })
     }
 
-    getClient(info: RemoteInfo): Client|undefined {
+    getClient(info: RemoteInfo): Client | undefined {
         let identifier = `${info.port}-${info.address}`;
 
         return this.clients.find(client => {

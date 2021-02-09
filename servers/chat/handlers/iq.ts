@@ -6,7 +6,7 @@ export default class IqHandler {
     execute(client: ChatClient, packet: any) {
         console.log(packet.attrs.type === 'get' ? 'Executing get' : 'Executing set');
 
-        if(packet.attrs.type === 'get') {
+        if (packet.attrs.type === 'get') {
             this.getIqRequest(client, packet);
         } else {
             this.setIqRequest(client, packet);

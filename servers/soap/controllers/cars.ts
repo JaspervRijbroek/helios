@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from '../../../lib/controller';
 import { Persona } from "../../../database/models/persona";
@@ -53,7 +53,7 @@ export default class CarsController extends BaseController {
 
         // Update the car just like that, no problems here (yet).
         // Without losing any money.
-        await car.$query().patch({
+        car = await car.$query().patchAndFetch({
             car_class_hash: req.body.OwnedCarTrans.CustomCar.CarClassHash,
             paints: JSON.stringify(req.body.OwnedCarTrans.CustomCar.Paints),
             performance_parts: JSON.stringify(req.body.OwnedCarTrans.CustomCar.PerformanceParts),
@@ -63,10 +63,7 @@ export default class CarsController extends BaseController {
         delete req.body.OwnedCarTrans.ExpirationDate;
 
         return {
-            OwnedCarTrans: {
-                ...req.body.OwnedCarTrans,
-                Durability: 100
-            }
+            OwnedCarTrans: car.toResponse()
         };
     }
 }

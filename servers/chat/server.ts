@@ -1,6 +1,6 @@
-import {createServer, Server} from "net";
+import { createServer, Server } from "net";
 import ChatClient from "./client";
-import {sync} from 'glob';
+import { sync } from 'glob';
 import { join, parse } from "path";
 import Communicator from "../../lib/communicator";
 import { Config } from "../../lib/config";
@@ -34,7 +34,7 @@ export default class ChatServer {
 
     handlePacket(client: ChatClient, packet: any) {
         // Get the handler of the current packet.
-        if(this.handlers.has(packet.name)) {
+        if (this.handlers.has(packet.name)) {
             this.handlers.get(packet.name).execute(client, packet);
         }
 

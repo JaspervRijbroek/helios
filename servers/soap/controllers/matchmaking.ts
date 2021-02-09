@@ -9,21 +9,12 @@ export default class AchievementsController extends BaseController {
         // I can do this without thinking, a hacker has nothing with the response.
         // And you can only trigger a request with the client and with the correct data.
         // Thus the client has all the data it requires.
-        let session = await EventSession.query().insert({
+        let session = await EventSession.query().insertAndFetch({
             event_id: parseInt(req.params.eventId)
         });
 
         return {
-            SessionInfo: {
-                Challenge: {
-                    ChallengeId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-                    LeftSize: 14,
-                    Pattern: 'FFFFFFFFFFFFFFFF',
-                    RightSize: 50,
-                },
-                EventId: session.event_id,
-                SessionId: session.id
-            }
+            SessionInfo: session.toResponse()
         }
     }
 }
