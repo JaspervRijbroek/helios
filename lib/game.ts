@@ -2,14 +2,19 @@
  * This is the main index file for helios.
  */
 
-import { green, yellow } from "chalk";
+import { green, red, yellow } from "chalk";
 import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
 import { join } from "path";
 import { IMessage } from "./communicator";
 import { Config } from "./config";
-import { Setup } from "./setup";
+import { enabled } from 'debug'
+import { WriteStream } from "tty";
+import { Gauge } from 'clui';
+import { EOL, freemem, totalmem } from "os";
+import MemoryUsageGauge from "./guages/memory_usage";
+import LoadGauge from "./guages/load";
 
 export default class Game {
     static instance: Game;
@@ -34,8 +39,9 @@ export default class Game {
             this.showHeader();
         }
 
-        if (!Setup.check()) {
-            await Setup.execute();
+        if (!Config.check()) {
+            console.log(red('Config is not yet complete, please run the command "yarn cli" to continue the setup.'));
+            process.exit();
         }
 
         this.serverInstances = this.getServerPaths()
@@ -47,9 +53,9 @@ export default class Game {
                 return process;
             });
 
-        // new FreeroamServer().start();
-        // new SoapServer().start();
-        // new ChatServer().start();
+        if(!enabled('*')) {
+            this.showProgress();
+        }
     }
 
     getServerPaths(): string[] {
@@ -78,5 +84,25 @@ export default class Game {
         console.log(green('\\/ /_/ \\___|_|_|\\___/|___/'));
         console.log(yellow('                   A NFS: World Server'));
         console.log();
+    }
+
+    showProgress() {
+        // I don't want to rely on anything system wise (it works perfect as it is).
+        // So we create our own terminal.
+        let terminal = new WriteStream(2),
+            memoryUsage = new MemoryUsageGauge(),
+            systemLoad = new LoadGauge();
+
+        function writeGauges() {
+            terminal.cursorTo(0, 0);
+            terminal.clearScreenDown();
+
+            terminal.write(memoryUsage.render());
+            terminal.write(EOL);
+            terminal.write(systemLoad.render());
+        }
+
+        writeGauges();
+        setInterval(writeGauges, 5000);
     }
 }

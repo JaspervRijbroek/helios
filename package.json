@@ -15,6 +15,7 @@
         "bcrypt": "^5.0.0",
         "buffer-crc32": "^0.2.13",
         "chalk": "^4.1.0",
+        "clui": "^0.3.6",
         "debug": "^4.3.1",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
@@ -45,7 +46,8 @@
     "scripts": {
         "start": "ts-node index.ts",
         "dev": "nodemon",
-        "knex": "node --require ts-node/register ./node_modules/knex/bin/cli.js"
+        "knex": "node --require ts-node/register ./node_modules/knex/bin/cli.js",
+        "cli": "ts-node ./bin/cli.ts"
     },
     "nodemonConfig": {
         "restartable": "rs",
