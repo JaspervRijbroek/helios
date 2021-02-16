@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
         table.bigIncrements();
         table.string('car_class_hash');
         table.integer('coins').nullable().unsigned();
-        table.json('engage_point');
+        table.text('engage_point');
         table.string('localization');
         table.string('mode_description_localization');
         table.string('mode_icon');
