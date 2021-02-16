@@ -2,7 +2,7 @@
  * This is the main index file for helios.
  */
 
-import { green, yellow } from "chalk";
+import { green, red, yellow } from "chalk";
 import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
@@ -35,8 +35,9 @@ export default class Game {
             this.showHeader();
         }
 
-        if(!Setup.check()) {
-            await Setup.execute();
+        if(!Config.check()) {
+            console.log(red('Config file is missing, please run "yarn cli" to create a config file.'));
+            process.exit();
         }
 
         this.serverInstances = this.getServerPaths()
