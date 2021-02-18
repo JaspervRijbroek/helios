@@ -1,8 +1,8 @@
 import { Model } from "objection";
 import { Database } from "../../lib/database";
-import { EventReward } from "./events/reward";
+import EventReward from "./events/reward";
 
-export class Event extends Database.getModel() {
+export default class Event extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     car_class_hash!: string;

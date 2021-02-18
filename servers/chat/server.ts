@@ -24,7 +24,7 @@ export default class ChatServer {
         this.server = createServer((socket) => {
             let client = new ChatClient(socket)
 
-            global.debug('Client connected');
+            debug('Client connected');
             this.clients.push(client)
 
             client.on('stanza', this.handlePacket.bind(this));
@@ -57,7 +57,7 @@ export default class ChatServer {
         let port = Config.get('servers.chat.port');
 
         this.server.listen(port, () => {
-            global.debug(`Chat server listening on port ${port}`);
+            debug(`Chat server listening on port ${port}`);
         })
     }
 }

@@ -1,10 +1,11 @@
 import { Database } from "../../lib/database";
-import { Persona } from "./persona";
+import Persona from "./persona";
 import { Config } from '../../lib/config';
 import { compare, hash } from "bcrypt";
 import { validate } from "uuid";
+import { BaseProperty } from "admin-bro";
 
-export class User extends Database.getModel() {
+export default class User extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     username!: string;
@@ -32,6 +33,11 @@ export class User extends Database.getModel() {
             }
         }
     }
+    static BroProperties = [
+        new BaseProperty({path: 'id', type: 'number', isId: true}),
+        new BaseProperty({path: 'username', type: 'string'}),
+        new BaseProperty({path: 'password', type: 'password'})
+    ]
 
     /******** Static methods ********/
     static async login(username: any, password: any) {

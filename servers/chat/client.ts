@@ -42,7 +42,7 @@ export default class ChatClient extends EventEmitter {
     }
 
     send(xml: Element) {
-        global.debug('Sending XMPP response to client: ' + xml.toString());
+        debug('Sending XMPP response to client: ' + xml.toString());
         this.socket.write(xml.toString())
     }
 }

@@ -1,7 +1,7 @@
 import { ContextMethod, QueryContext } from "objection";
 import { Database } from "../../lib/database";
 
-export class PersonaCar extends Database.getModel() {
+export default class PersonaCar extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     car_id?: string;

@@ -12,8 +12,8 @@ export class Setup {
     }
 
     static async execute(): Promise<any> {
-        global.debug('Running first time setup.');
-        global.debug('Please fill in this questionare.');
+        debug('Running first time setup.');
+        debug('Please fill in this questionare.');
 
         let answers: any = await prompt([
             {

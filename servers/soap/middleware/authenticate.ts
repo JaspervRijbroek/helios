@@ -1,7 +1,5 @@
-import { compare } from "bcrypt";
-import { NextFunction, Request, Response } from "express";
-import { validate } from "uuid";
-import { User } from "../../../database/models/user";
+import { NextFunction, Response } from "express";
+import User from "../../../database/models/user";
 
 export default async (req: any, res: Response, next: NextFunction) => {
     if (!req.headers['userid'] || !req.headers['securitytoken']) {

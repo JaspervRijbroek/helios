@@ -1,12 +1,8 @@
-import { Request, Response } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from '../../../lib/controller';
-import {Product} from "../../../database/models/ecommerce/product";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { toJson } from 'xml2json';
-import { Category } from "../../../database/models/ecommerce/category";
-import { Persona } from "../../../database/models/persona";
+import Product from "../../../database/models/ecommerce/product";
+import Category from "../../../database/models/ecommerce/category";
+import Persona from "../../../database/models/persona";
 import { Config } from "../../../lib/config";
 
 

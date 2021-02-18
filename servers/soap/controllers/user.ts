@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import { Request } from 'express'
 import { Controller, Route } from '../decorators/routing';
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
-import { Persona } from '../../../database/models/persona';
+import Persona from '../../../database/models/persona';
 import { v4 } from 'uuid';
 
 @Controller()

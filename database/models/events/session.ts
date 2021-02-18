@@ -1,8 +1,8 @@
 import { Model } from "objection";
 import { Database } from "../../../lib/database";
-import { Event } from "../event";
+import Event from "../event";
 
-export class EventSession extends Database.getModel() {
+export default class EventSession extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     lobby_id!: number;

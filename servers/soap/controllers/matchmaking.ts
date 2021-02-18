@@ -1,4 +1,4 @@
-import { EventSession } from "../../../database/models/events/session";
+import EventSession from "../../../database/models/events/session";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
 import { Controller, Route } from "../decorators/routing";
 

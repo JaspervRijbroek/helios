@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from '../../../lib/controller';
-import { Event } from "../../../database/models/event";
-import { EventSession } from "../../../database/models/events/session";
-import { EventReward } from "../../../database/models/events/reward";
+import Event from "../../../database/models/event";
+import EventSession from "../../../database/models/events/session";
+import EventReward from "../../../database/models/events/reward";
 
 @Controller()
 export default class EventsController extends BaseController {

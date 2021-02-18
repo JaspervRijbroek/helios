@@ -1,9 +1,8 @@
-import { json, Request, Response } from "express";
+import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
-import { Persona } from "../../../database/models/persona";
-import { User } from "../../../database/models/user";
-import { PersonaCar } from "../../../database/models/persona_car";
+import Persona from "../../../database/models/persona";
+import PersonaCar from "../../../database/models/persona_car";
 
 @Controller()
 export default class PersonaController extends BaseController {

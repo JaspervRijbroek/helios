@@ -4,7 +4,7 @@ import { InfoPacket } from "./lib/packet";
 
 export default class Client {
     sequence: number = 0;
-    lastPacket: InfoPacket = null;
+    lastPacket: InfoPacket|null = null;
     startTime: number = (new Date()).getTime();
     clientTime: Buffer;
     identifier: string;

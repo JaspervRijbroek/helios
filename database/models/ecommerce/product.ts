@@ -1,9 +1,8 @@
 import { Model } from "objection";
-import { Category } from "./category";
-import { DealerCar } from "./dealer_car";
+import DealerCar from "./dealer_car";
 import { Database } from "../../../lib/database";
 
-export class Product extends Database.getModel() {
+export default class Product extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     currency!: string;

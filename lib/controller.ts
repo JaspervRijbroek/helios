@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { parse } from "js2xmlparser";
 import { gzipSync } from "zlib";
-import {writeFileSync} from "fs";
-import { parse as parseUri } from 'url';
-import {parse as parsePath} from 'path';
-import { sync } from "mkdirp";
-import { User } from "../database/models/user";
+import User from "../database/models/user";
 
 export interface IAuthenticatedRequest extends Request {
     user: User
