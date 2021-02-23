@@ -37,7 +37,7 @@ export default class AdminServer {
             }),
             router = !debug.enabled ? AdminBroExpress.buildAuthenticatedRouter(bro, {
                 authenticate: async (email, password) => {
-                    const user = await User.query().findOne({ username: email })
+                    const user = await User.query().findOne({ username: email, is_admin: true })
                     
                     return user && await compare(password, user.password) ? user : false;
                 },

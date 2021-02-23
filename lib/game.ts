@@ -2,7 +2,7 @@
  * This is the main index file for helios.
  */
 
-import { green, red, yellow } from "chalk";
+import { blue, green, red, yellow } from "chalk";
 import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
@@ -11,6 +11,8 @@ import { Socket } from "dgram";
 import { IMessage } from "./communicator";
 import { Config } from "./config";
 import { Setup } from "./setup";
+import User from "../database/models/user";
+import { prompt } from "inquirer";
 
 export default class Game {
     static instance: Game;
@@ -39,6 +41,8 @@ export default class Game {
             console.log(red('Config file is missing, please run "yarn cli" to create a config file.'));
             process.exit();
         }
+
+        await this.createAdminUser();
 
         this.serverInstances = this.getServerPaths()
             .map((serverPath: string) => {
@@ -80,5 +84,46 @@ export default class Game {
         console.log(green('\\/ /_/ \\___|_|_|\\___/|___/'));
         console.log(yellow('                   A NFS: World Server'));
         console.log();
+    }
+
+    async createAdminUser(): Promise<void> {
+        let totalAdminUsers = await User.query().where({
+            is_admin: true
+        });
+
+        if(totalAdminUsers.length) {
+            return;
+        }
+
+        // Create the first admin.
+        console.log(blue('It seems you don\'t have an admin user yet, we will now create it.'));
+        
+        let answers = await prompt([{
+            type: 'input',
+            message: 'Your desired username',
+            name: 'username'
+        }, {
+            type: 'password',
+            message: 'Your desired password',
+            name: 'password'
+        }, {
+            type: 'confirm',
+            message: 'Are these credentials correct?',
+            name: 'confirm'
+        }]);
+
+        if(!answers.confirm) {
+            console.log(red('An admin user is required for all other functions, please create one!'));
+            process.exit();
+        }
+
+        let adminUser = await User.register(answers.username, answers.password);
+        if(adminUser) {
+            await adminUser.$query().patch({
+                is_admin: true
+            });
+        }
+
+        return;
     }
 }
