@@ -2,19 +2,17 @@
  * This is the main index file for helios.
  */
 
-import { green, red, yellow } from "chalk";
+import { blue, green, red, yellow } from "chalk";
 import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
 import { join } from "path";
+import { Socket } from "dgram";
 import { IMessage } from "./communicator";
 import { Config } from "./config";
-import { enabled } from 'debug'
-import { WriteStream } from "tty";
-import { Gauge } from 'clui';
-import { EOL, freemem, totalmem } from "os";
-import MemoryUsageGauge from "./guages/memory_usage";
-import LoadGauge from "./guages/load";
+import { Setup } from "./setup";
+import User from "../database/models/user";
+import { prompt } from "inquirer";
 
 export default class Game {
     static instance: Game;
@@ -22,7 +20,7 @@ export default class Game {
 
 
     static getInstance(): Game {
-        if (!this.instance) {
+        if(!this.instance) {
             this.instance = new Game();
         }
 
@@ -35,14 +33,16 @@ export default class Game {
     }
 
     async start() {
-        if (Config.get('showHeader') !== 'false') {
+        if(Config.get('showHeader') !== 'false') {
             this.showHeader();
         }
 
-        if (!Config.check()) {
-            console.log(red('Config is not yet complete, please run the command "yarn cli" to continue the setup.'));
+        if(!Config.check()) {
+            console.log(red('Config file is missing, please run "yarn cli" to create a config file.'));
             process.exit();
         }
+
+        await this.createAdminUser();
 
         this.serverInstances = this.getServerPaths()
             .map((serverPath: string) => {
@@ -53,9 +53,9 @@ export default class Game {
                 return process;
             });
 
-        if(!enabled('*')) {
-            this.showProgress();
-        }
+        // new FreeroamServer().start();
+        // new SoapServer().start();
+        // new ChatServer().start();
     }
 
     getServerPaths(): string[] {
@@ -86,23 +86,44 @@ export default class Game {
         console.log();
     }
 
-    showProgress() {
-        // I don't want to rely on anything system wise (it works perfect as it is).
-        // So we create our own terminal.
-        let terminal = new WriteStream(2),
-            memoryUsage = new MemoryUsageGauge(),
-            systemLoad = new LoadGauge();
+    async createAdminUser(): Promise<void> {
+        let totalAdminUsers = await User.query().where({
+            is_admin: true
+        });
 
-        function writeGauges() {
-            terminal.cursorTo(0, 0);
-            terminal.clearScreenDown();
-
-            terminal.write(memoryUsage.render());
-            terminal.write(EOL);
-            terminal.write(systemLoad.render());
+        if(totalAdminUsers.length) {
+            return;
         }
 
-        writeGauges();
-        setInterval(writeGauges, 5000);
+        // Create the first admin.
+        console.log(blue('It seems you don\'t have an admin user yet, we will now create it.'));
+        
+        let answers = await prompt([{
+            type: 'input',
+            message: 'Your desired username',
+            name: 'username'
+        }, {
+            type: 'password',
+            message: 'Your desired password',
+            name: 'password'
+        }, {
+            type: 'confirm',
+            message: 'Are these credentials correct?',
+            name: 'confirm'
+        }]);
+
+        if(!answers.confirm) {
+            console.log(red('An admin user is required for all other functions, please create one!'));
+            process.exit();
+        }
+
+        let adminUser = await User.register(answers.username, answers.password);
+        if(adminUser) {
+            await adminUser.$query().patch({
+                is_admin: true
+            });
+        }
+
+        return;
     }
 }

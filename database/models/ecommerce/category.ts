@@ -1,8 +1,9 @@
+import { BaseProperty } from "admin-bro";
 import { Model } from "objection";
 import { Database } from "../../../lib/database";
-import { Product } from "./product";
+import Product from "./product";
 
-export class Category extends Database.getModel() {
+export default class Category extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     name!: string;
@@ -20,4 +21,9 @@ export class Category extends Database.getModel() {
             }
         }
     }
+    static BroProperties: BaseProperty[] = [
+        new BaseProperty({path: 'id', type: 'number', isId: true, position: 0}),
+        new BaseProperty({path: 'name', type: 'string', position: 10}),
+        new BaseProperty({path: 'internal_name', type: 'string', position: 20})
+    ]
 }

@@ -1,9 +1,9 @@
 import { Model } from "objection";
 import { Database } from "../../lib/database";
-import { PersonaCar } from "./persona_car";
-import { User } from "./user";
+import PersonaCar from "./persona_car";
+import User from "./user";
 
-export class Persona extends Database.getModel() {
+export default class Persona extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     name!: string;

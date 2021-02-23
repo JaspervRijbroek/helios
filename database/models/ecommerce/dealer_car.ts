@@ -1,6 +1,6 @@
 import { Database } from "../../../lib/database";
 
-export class DealerCar extends Database.getModel() {
+export default class DealerCar extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     car_id?: string;

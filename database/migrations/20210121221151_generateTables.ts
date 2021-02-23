@@ -42,11 +42,11 @@ export async function up(knex: Knex): Promise<void> {
             table.integer('level').unsigned().defaultTo(1);
             table.integer('is_default').unsigned().defaultTo(0);
             table.integer('is_preset').unsigned().defaultTo(1);
-            table.json('paints').nullable();
-            table.json('performance_parts').nullable();
-            table.json('skill_parts').nullable();
-            table.json('vinyls');
-            table.json('visual_parts');
+            table.text('paints').nullable();
+            table.text('performance_parts').nullable();
+            table.text('skill_parts').nullable();
+            table.text('vinyls');
+            table.text('visual_parts');
 
             table.integer('rating').unsigned().defaultTo(0);
             table.integer('resale_price').unsigned().defaultTo(0);

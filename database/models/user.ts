@@ -1,16 +1,18 @@
 import { Database } from "../../lib/database";
-import { Persona } from "./persona";
+import Persona from "./persona";
 import { Config } from '../../lib/config';
 import { compare, hash } from "bcrypt";
 import { validate } from "uuid";
+import { BaseProperty } from "admin-bro";
 
-export class User extends Database.getModel() {
+export default class User extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     username!: string;
     password!: string;
     token!: string;
     current_persona!: number;
+    is_admin!: boolean;
 
     /******** Default properties ********/
     static tableName = 'users';
@@ -32,6 +34,12 @@ export class User extends Database.getModel() {
             }
         }
     }
+    static BroProperties = [
+        new BaseProperty({path: 'id', type: 'number', isId: true}),
+        new BaseProperty({path: 'username', type: 'string'}),
+        new BaseProperty({path: 'password', type: 'password'}),
+        new BaseProperty({path: 'is_admin', type: 'boolean'})
+    ]
 
     /******** Instance methods ********/
     toResponse(): any {
@@ -75,7 +83,15 @@ export class User extends Database.getModel() {
         return false;
     }
 
-    static async register(username: any, password: any) {
+    static async register(username: any, password: any): Promise<User|false> {
+        // Check if a user already exists.
+        // If so return a false.
+        let users = await this.query().where({username});
+        if(users.length) {
+            console.log(users.length);
+            return false;
+        }
+
         return User.query().insert({
             username,
             password: await hash(password, 10)

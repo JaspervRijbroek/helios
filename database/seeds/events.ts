@@ -2,10 +2,10 @@ import Knex from "knex";
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
-    await knex("race_events").truncate();
+    await knex("events").truncate();
 
     // Inserts seed entries
-    await knex('race_events').insert(
+    await knex('events').insert(
         require('./eventData.json').map((event: any) => {
             return {
                 id: event.eventId,

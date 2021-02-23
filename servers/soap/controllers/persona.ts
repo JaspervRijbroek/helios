@@ -1,8 +1,8 @@
 import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
-import { Persona } from "../../../database/models/persona";
-import { PersonaCar } from "../../../database/models/persona_car";
+import Persona from "../../../database/models/persona";
+import PersonaCar from "../../../database/models/persona_car";
 
 @Controller()
 export default class PersonaController extends BaseController {
@@ -95,7 +95,33 @@ export default class PersonaController extends BaseController {
         return {
             CarSlotInfoTrans: {
                 CarsOwnedByPersona: {
-                    OwnedCarTrans: ownedCars.map((car: PersonaCar) => car.toResponse())
+                    OwnedCarTrans: ownedCars.map((car: PersonaCar) => {
+                        return {
+                            CustomCar: {
+                                BaseCar: car.base_car,
+                                CarClassHash: car.car_class_hash,
+                                Id: car.id,
+                                IsPreset: 'true',
+                                Level: car.level,
+                                Name: car.name,
+                                Paints: JSON.parse(car.paints),
+                                PerformanceParts: JSON.parse(car.performance_parts),
+                                PhysicsProfileHash: car.physics_profile_hash,
+                                Rating: car.rating,
+                                ResalePrice: car.resell_value,
+                                RideHeightDrop: 0,
+                                SkillModParts: JSON.parse(car.skill_mod_parts),
+                                SkillModSlotCount: car.skill_mod_parts_count,
+                                Version: car.version,
+                                Vinyls: JSON.parse(car.vinyls),
+                                VisualParts: JSON.parse(car.visual_parts)
+                            },
+                            Durability: car.durability,
+                            Heat: car.heat,
+                            Id: car.id,
+                            OwnershipType: car.ownership_type,
+                        }
+                    })
                 },
                 DefaultOwnedCarIndex: 0,
                 ObtainableSlots: {
@@ -381,7 +407,7 @@ export default class PersonaController extends BaseController {
     @Route('post', 'DriverPersona/ReserveName')
     async reserveName(req: Request): Promise<any> {
         let name = req.query.name as string,
-            existingPersonas = await Persona.query().where({ name });
+            existingPersonas = await Persona.query().where({name});
 
         if (existingPersonas.length) {
             return {

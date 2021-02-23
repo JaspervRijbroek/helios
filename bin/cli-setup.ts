@@ -1,105 +1,128 @@
 import { prompt } from "inquirer";
-import Prompt from "inquirer/lib/prompts/base";
-import { Config } from '../lib/config';
+import { Config } from "../lib/config";
 
 export default class CliSetup {
+    message: string = 'Create a new configuration file';
     priority: number = 10;
-    message: string = 'Create a new config';
 
     async execute(): Promise<void> {
+        console.log('First a few questions about your database');
+        let database: any = await prompt([
+            {
+                type: 'input',
+                name: 'host',
+                message: 'Database server host',
+                default: Config.get('database.host') || 'localhost'
+            },
+            {
+                type: 'number',
+                name: 'port',
+                message: 'Database server port',
+                default: Config.get('database.port') || 3306
+            },
+            {
+                type: 'input',
+                name: 'user',
+                message: 'Database username',
+                default: Config.get('database.user') || null
+            },
+            {
+                type: 'password',
+                name: 'pass',
+                message: 'Database password',
+                default: Config.get('database.pass') || null
+            },
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Database name',
+                default: Config.get('database.name') || null
+            },
+            {
+                type: 'confirm',
+                name: 'confirm',
+                message: 'Are these settings correct?'
+            }
+        ]);
 
-
-        // request all the database and server configuration.
-        console.log();
-        console.log('Please tell us your database credentials')
-
-        let dbCreds = await prompt([{
-            name: 'host',
-            type: 'input',
-            message: 'Database host',
-            default: Config.get('database.host') || 'localhost'
-        }, {
-            name: 'port',
-            type: 'number',
-            message: 'Database port',
-            default: Config.get('database.port') || 3306
-        }, {
-            name: 'user',
-            type: 'input',
-            message: 'Database username',
-            default: Config.get('database.user') || null
-        }, {
-            name: 'pass',
-            type: 'password',
-            message: 'Database password',
-            default: Config.get('database.pass') || null
-        }, {
-            name: 'name',
-            type: 'input',
-            message: 'Database name',
-            default: Config.get('database.name') || null
-        }, {
-            name: 'confirm',
-            message: 'Are your settings correct?',
-            type: 'confirm'
-        }]);
-
-        if(!dbCreds.confirm) {
-            console.log('Not saving settings, aborting!');
-            return;
+        if (!database.confirm) {
+            console.log('Aborting!');
+            process.exit();
         }
 
-        console.log();
-        console.log('Thanks, now for the server settings');
-        let servers = await prompt([{
-            name: 'http_port',
-            message: 'HTTP server port',
+        console.log()
+        console.log('Now for the servers');
+
+        let answers: any = await prompt([{
             type: 'number',
+            name: 'web_port',
+            message: 'Desired web server port',
             default: Config.get('servers.http.port') || 3000
-        }, {
+        },
+        {
+            type: 'input',
             name: 'chat_host',
-            message: 'Chat server host',
-            type: 'input',
+            message: 'Desired chat server host',
             default: Config.get('servers.chat.host') || '127.0.0.1'
-        }, {
-            name: 'chat_port',
-            message: 'Chat server port',
-            type: 'input',
-            default: Config.get('servers.chat.port') || 5222
-        }, {
-            name: 'freeroam_host',
-            message: 'Freeroam communication server host',
-            type: 'input',
-            default: Config.get('servers.freeroam.host') || '127.0.0.1'
-        }, {
-            name: 'freeroam_port',
-            message: 'Freeroam communication server port',
+        },
+        {
             type: 'number',
-            default: Config.get('servers.freeroam.port') || 9999
+            name: 'chat_port',
+            message: 'Desired chat server port',
+            default: Config.get('servers.chat.port') || 5222
+        },
+        {
+            type: 'input',
+            name: 'freeroam_host',
+            message: 'Desired freeroam server host',
+            default: Config.get('servers.freeroam.host') || '127.0.0.1'
+        },
+        {
+            type: 'number',
+            name: 'freeroam_port',
+            message: 'Desired freeroam server port',
+            default: Config.get('servers.freeroam.port') || '127.0.0.1'
+        },
+        {
+            type: 'input',
+            name: 'race_host',
+            message: 'Desired race server host',
+            default: Config.get('servers.race.host') || '127.0.0.1'
+        },
+        {
+            type: 'number',
+            name: 'race_port',
+            message: 'Desired race server port',
+            default: Config.get('servers.race.port') || 9998
         }, {
+            type: 'confirm',
             name: 'confirm',
-            message: 'Are your server settings correct?',
-            type: 'confirm'
+            message: 'Are these settings correct?'
         }]);
 
-        if(!servers.confirm) {
-            console.log('Not saving settings, aborting!');
-            return;
+        if(!answers.confirm) {
+            console.log('Aborting!');
+            process.exit();
         }
 
-        let {host, port, user, pass, name} = dbCreds;
+        let {host, port, user, pass, name} = database;
         Config.set('database', {host, port, user, pass, name});
+
         Config.set('servers', {
             chat: {
-                host: servers.chat_host,
-                port: servers.chat_port
+                host: answers.chat_host,
+                port: answers.chat_port
             },
             freeroam: {
-                host: servers.freeroam_host,
-                port: servers.freeroam_port
+                host: answers.freeroam_host,
+                port: answers.freeroam_port
             },
             http: {
-                port: servers.http_port,
+                port: answers.web_port
+            },
+            race: {
+                host: answers.race_host,
+                port: answers.race_port
             }
         });
 

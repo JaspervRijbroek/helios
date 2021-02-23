@@ -1,6 +1,6 @@
 import { Database } from "../../../lib/database";
 
-export class EventReward extends Database.getModel() {
+export default class EventReward extends Database.getModel() {
     /******** Model properties ********/
     id!: number;
     reputation!: number;

@@ -1,8 +1,8 @@
 import { Transaction } from "objection";
-import { DealerCar } from "../../../database/models/ecommerce/dealer_car";
-import { Product } from "../../../database/models/ecommerce/product";
-import { Persona } from "../../../database/models/persona";
-import { PersonaCar } from "../../../database/models/persona_car";
+import DealerCar from "../../../database/models/ecommerce/dealer_car";
+import Product from "../../../database/models/ecommerce/product";
+import Persona from "../../../database/models/persona";
+import PersonaCar from "../../../database/models/persona_car";
 import BaseController, { IAuthenticatedRequest } from "../../../lib/controller";
 import { Controller, Route } from "../decorators/routing";
 

@@ -54,7 +54,7 @@ export default class FreeroamServer {
         let port = Config.get('servers.freeroam.port');
 
         this.server.bind(port, () => {
-            global.debug(`Freefoam Server listening on port: ${port}`);
+            debug(`Freefoam Server listening on port: ${port}`);
         })
     }
 }

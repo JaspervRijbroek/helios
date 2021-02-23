@@ -20,11 +20,11 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('heat');
         table.string('ownership_type').nullable().defaultTo('PresetCar');
 
-        table.json('paints').nullable();
-        table.json('performance_parts').nullable();
-        table.json('skill_mod_parts').nullable();
-        table.json('vinyls').nullable();
-        table.json('visual_parts').nullable();
+        table.text('paints').nullable();
+        table.text('performance_parts').nullable();
+        table.text('skill_mod_parts').nullable();
+        table.text('vinyls').nullable();
+        table.text('visual_parts').nullable();
 
         table.bigInteger('product_id').unsigned();
         table.foreign('product_id').references('ecommerce_products.id').onDelete('CASCADE');

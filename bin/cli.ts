@@ -1,5 +1,5 @@
-import { green, yellow } from "chalk";
-import { existsSync } from "fs";
+import { blue, green, yellow } from "chalk";
+import { existsSync, fstat } from "fs";
 import { sync } from "glob";
 import { prompt } from "inquirer";
 import { parse } from "path";
@@ -12,61 +12,57 @@ console.log(green('\\/ /_/ \\___|_|_|\\___/|___/ \\____/\\____/\\____/  '));
 console.log();
 
 (async () => {
-    let commandRegistry: any = sync(`${__dirname}/cli-*.ts`)
-        .reduce((carry: any, filePath) => {
-            let parts = parse(filePath),
-                Module = require(filePath).default;
+    let configPath = `${process.cwd()}/config.json`,
+        items = sync(`${__dirname}/cli-*.ts`).map((pathName: string) => {
+            let parts = parse(pathName),
+                fileName = parts.name.replace('cli-', ''),
+                Module = require(pathName).default,
+                module = new Module();
 
-
-            carry[parts.name.replace('cli-', '')] = new Module();
-
-            return carry;
-        }, {}),
-        choices = Object.keys(commandRegistry).map((key: string) => {
             return {
-                name: commandRegistry[key].message,
-                value: key
+                name: module.message,
+                value: fileName,
+                module
             }
-        });
+        }),
+        commands = items
+            .reduce((carry: any, item: any) => {
+                carry[item.value] = item.module;
 
-    choices = choices.sort((a: any, b: any): number => {
-        let aCommand = commandRegistry[a.value],
-            bCommand = commandRegistry[b.value];
+                return carry;
+            }, {});
 
-        if(aCommand.priority == bCommand.priority) {
+    items.sort((a: any, b: any) => {
+        if(a.module.priority == b.module.priority) {
             return 0;
         }
 
-        return aCommand.priority < bCommand.priority ? -1 : 1;
+        return a.module.priority < b.module.priority ? -1 : 1;
     });
 
-    choices.push({
+    items.push({
         name: 'Abort',
-        value: ''
+        value: '',
+        module: false
     });
 
-    if (!existsSync(`${process.cwd()}/config.json`)) {
-        // Run the setup.
-        console.log(green('Welcome to Helio CLI!'));
-        console.log(yellow('Running first time setup!'));
+    if (!existsSync(configPath)) {
+        // Calling setup.
+        console.log(blue('Config file is missing, running first-time-setup!'));
+        await commands['setup'].execute();
+    } else {
+        let answers = await prompt([{
+            type: 'list',
+            name: 'action',
+            message: 'What would you like to do?',
+            choices: items
+        }]);
 
-        if (commandRegistry['setup']) {
-            return commandRegistry['setup'].execute();
+        if(!answers.action) {
+            console.log(green('Aborting!'));
+            return;
         }
     }
 
-    let answers = await prompt([{
-        name: 'action',
-        message: 'What would you like to do?',
-        type: 'list',
-        choices: choices
-    }]);
-
-    if(answers.action) {
-        await commandRegistry[answers.action].execute();
-    }
-
-    console.log('All Done!');
-    process.exit();
-
+    console.log(green('All Done!'));
 })();

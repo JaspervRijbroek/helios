@@ -19,7 +19,7 @@ export default class SoapServer {
     }
 
     loadControllersRoutes(): void {
-        global.debug('Bind routes');
+        debug('Bind routes');
         glob
             .sync(join(__dirname, 'controllers', '**', '*'))
             .map((controllerPath: string) => {
@@ -28,7 +28,7 @@ export default class SoapServer {
 
                 Reflect.getMetadata('routes', Controller)
                     .forEach((route: IRouteDefinition) => {
-                        global.debug(`Bind route [${route.method}] on ${route.path}`);
+                        debug(`Bind route [${route.method}] on ${route.path}`);
 
                         this.server[route.method](route.path, instance.execute.bind(instance, route.methodName));
                     })
@@ -36,7 +36,7 @@ export default class SoapServer {
     }
 
     loadMiddleware(): void {
-        global.debug('Bind middleware');
+        debug('Bind middleware');
         glob
             .sync(join(__dirname, 'middleware', '**', '*'))
             .map((middlewarePath: string) => {
@@ -58,12 +58,12 @@ export default class SoapServer {
                 join(__dirname, '..', 'public')
             ))
             .use((req: Request, res: Response) => {
-                global.debug(`Missing route hanlder for ${req.method} on ${req.url}`);
+                debug(`Missing route hanlder for ${req.method} on ${req.url}`);
 
                 abstractController.execute('missing', req, res);
             })
             .listen(port, () => {
-                global.debug(`Soap server listening on port: ${port}`);
+                debug(`Soap server listening on port: ${port}`);
             })
     }
 }
