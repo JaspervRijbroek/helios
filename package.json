@@ -34,7 +34,16 @@
         "objection": "^2.2.8",
         "reflect-metadata": "^0.1.13",
         "uuid": "^8.3.2",
-        "xml2json": "^0.12.0"
+        "xml2json": "^0.12.0",
+        "strapi": "3.5.0",
+        "strapi-admin": "3.5.0",
+        "strapi-utils": "3.5.0",
+        "strapi-plugin-content-type-builder": "3.5.0",
+        "strapi-plugin-content-manager": "3.5.0",
+        "strapi-plugin-users-permissions": "3.5.0",
+        "strapi-plugin-email": "3.5.0",
+        "strapi-plugin-upload": "3.5.0",
+        "strapi-connector-bookshelf": "3.5.0"
     },
     "devDependencies": {
         "@types/debug": "^4.1.5",

@@ -34,12 +34,6 @@ export default class User extends Database.getModel() {
             }
         }
     }
-    static BroProperties = [
-        new BaseProperty({path: 'id', type: 'number', isId: true}),
-        new BaseProperty({path: 'username', type: 'string'}),
-        new BaseProperty({path: 'password', type: 'password'}),
-        new BaseProperty({path: 'is_admin', type: 'boolean'})
-    ]
 
     /******** Instance methods ********/
     toResponse(): any {

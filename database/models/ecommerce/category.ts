@@ -21,9 +21,4 @@ export default class Category extends Database.getModel() {
             }
         }
     }
-    static BroProperties: BaseProperty[] = [
-        new BaseProperty({path: 'id', type: 'number', isId: true, position: 0}),
-        new BaseProperty({path: 'name', type: 'string', position: 10}),
-        new BaseProperty({path: 'internal_name', type: 'string', position: 20})
-    ]
 }
