@@ -7,20 +7,18 @@ import { config } from "dotenv";
 import { glob } from "glob";
 import { ChildProcess, fork } from "child_process";
 import { join } from "path";
-import { Socket } from "dgram";
 import { IMessage } from "./communicator";
 import { Config } from "./config";
-import { Setup } from "./setup";
 import User from "../database/models/user";
 import { prompt } from "inquirer";
+import { Database } from './database';
 
 export default class Game {
     static instance: Game;
     serverInstances: any[] = [];
 
-
     static getInstance(): Game {
-        if(!this.instance) {
+        if (!this.instance) {
             this.instance = new Game();
         }
 
@@ -33,15 +31,16 @@ export default class Game {
     }
 
     async start() {
-        if(Config.get('showHeader') !== 'false') {
+        if (Config.get('showHeader') !== 'false') {
             this.showHeader();
         }
 
-        if(!Config.check()) {
+        if (!Config.check()) {
             console.log(red('Config file is missing, please run "yarn cli" to create a config file.'));
             process.exit();
         }
 
+        await this.runMigrations();
         await this.createAdminUser();
 
         this.serverInstances = this.getServerPaths()
@@ -86,18 +85,27 @@ export default class Game {
         console.log();
     }
 
+    async runMigrations(): Promise<void> {
+        console.log(blue('Running migrations & seeds'));
+
+        await Database.getInstance().getKnex().migrate.latest();
+        await Database.getInstance().getKnex().seed.run();
+
+        return;
+    }
+
     async createAdminUser(): Promise<void> {
         let totalAdminUsers = await User.query().where({
             is_admin: true
         });
 
-        if(totalAdminUsers.length) {
+        if (totalAdminUsers.length) {
             return;
         }
 
         // Create the first admin.
         console.log(blue('It seems you don\'t have an admin user yet, we will now create it.'));
-        
+
         let answers = await prompt([{
             type: 'input',
             message: 'Your desired username',
@@ -112,13 +120,13 @@ export default class Game {
             name: 'confirm'
         }]);
 
-        if(!answers.confirm) {
+        if (!answers.confirm) {
             console.log(red('An admin user is required for all other functions, please create one!'));
             process.exit();
         }
 
         let adminUser = await User.register(answers.username, answers.password);
-        if(adminUser) {
+        if (adminUser) {
             await adminUser.$query().patch({
                 is_admin: true
             });
