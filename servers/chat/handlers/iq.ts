@@ -1,8 +1,11 @@
 import ChatClient from "../client";
 import GetIqResponse from "../packages/getIqResponse";
 import SetIqResponse from "../packages/setIqResponse";
+import ChatServer from "../server";
 
 export default class IqHandler {
+    constructor(public server: ChatServer) {}
+
     execute(client: ChatClient, packet: any) {
         console.log(packet.attrs.type === 'get' ? 'Executing get' : 'Executing set');
 

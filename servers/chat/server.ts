@@ -16,7 +16,7 @@ export default class ChatServer {
             .forEach((handlerPath: string) => {
                 let Handler = require(handlerPath).default,
                     parts = parse(handlerPath),
-                    handler = new Handler();
+                    handler = new Handler(this);
 
                 this.handlers.set(parts.name, handler);
             });

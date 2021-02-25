@@ -4,7 +4,7 @@ import ChatClient from "../client";
 export default class GetIqResponse {
     constructor(public username: string) { }
 
-    send(client: ChatClient) {
+    send(client: ChatClient): void {
         client.send(xml(
             'iq',
             {
