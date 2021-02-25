@@ -1,7 +1,6 @@
 import { Model } from "objection";
 import DealerCar from "./dealer_car";
 import { Database } from "../../../lib/database";
-import { BaseProperty } from "admin-bro";
 
 export default class Product extends Database.getModel() {
     /******** Model properties ********/

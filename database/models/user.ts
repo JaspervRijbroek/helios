@@ -3,7 +3,6 @@ import Persona from "./persona";
 import { Config } from '../../lib/config';
 import { compare, hash } from "bcrypt";
 import { validate } from "uuid";
-import { BaseProperty } from "admin-bro";
 
 export default class User extends Database.getModel() {
     /******** Model properties ********/

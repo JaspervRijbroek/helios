@@ -1,4 +1,3 @@
-import { BaseProperty } from "admin-bro";
 import { Model } from "objection";
 import { Database } from "../../../lib/database";
 import Product from "./product";
