@@ -9,6 +9,8 @@ export default class Client {
     identifier: string;
     accumilator: Buffer = Buffer.alloc(0);
     timers: any[] = [];
+    personaId?: number;
+    channel?: string;
 
     /**
      * There seems to be an accumilator of what happens on the server.

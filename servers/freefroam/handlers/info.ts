@@ -13,7 +13,15 @@ export function handle(server: FreeroamServer, info: RemoteInfo, packet: Buffer)
     let parsed = new InfoPacket(packet),
         client = server.getClient(info);
 
-    // We have the client and the parsed data.
-    console.log(parsed.getName(), parsed.getPersonaId(), parsed.getChannelName(), parsed.sequence);
+    if(!client) {
+        return;
+    }
 
+    if(!client.personaId) {
+        client.personaId = parsed.getPersonaId();
+        client.channel = parsed.getChannelName();
+
+        // We have the client and the parsed data.
+        console.log(parsed.getName(), client.personaId || parsed.getPersonaId(), client.channel || parsed.getChannelName(), parsed.sequence);
+    }
 }

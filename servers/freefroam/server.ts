@@ -10,6 +10,7 @@ export default class FreeroamServer {
 
     constructor() {
         this.server = createSocket('udp4', (msg, rinfo) => {
+            console.log(msg);
             let packet = Buffer.from(msg);
 
             console.log(packet.toString('hex'));
