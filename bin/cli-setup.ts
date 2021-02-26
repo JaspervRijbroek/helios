@@ -81,7 +81,7 @@ export default class CliSetup {
             type: 'number',
             name: 'freeroam_port',
             message: 'Desired freeroam server port',
-            default: Config.get('servers.freeroam.port') || '127.0.0.1'
+            default: Config.get('servers.freeroam.port') || 9999
         },
         {
             type: 'input',
