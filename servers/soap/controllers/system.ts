@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { Controller, Route } from "../decorators/routing";
 import BaseController from "../../../lib/controller";
+import { Config } from "../../../lib/config";
 
 @Controller()
 export default class SystemController extends BaseController {
@@ -38,8 +39,8 @@ export default class SystemController extends BaseController {
         return {
             ArrayOfUdpRelayInfo: {
                 UdpRelayInfo: {
-                    // Host: '127.0.0.1',
-                    // Port: process.env.FREEROAM_PORT
+                    Host: Config.get('servers.freeroam.host'),
+                    Port: Config.get('servers.freeroam.port')
                 }
             }
         };
