@@ -1,0 +1,246 @@
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.76053">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.87953">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.142996">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.37112">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.956">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.141210">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.143092">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.142191">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.85368">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.142598">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.142910">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.142319">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.143040">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.143240">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.141012">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.139798">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.1680">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+    </x>
+</presence>
+<presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.133583">
+    <x xmlns="http://jabber.org/protocol/muc#user">
+        <item affiliation="none" role="participant"/>
+        <status code="110"/>
+    </x>
+</presence>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.74891">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="69759" Time="-7381663521510227131" Cs="-7381639109260548290"&gt;&lt;From&gt;ISAACP7&lt;/From&gt;&lt;Msg&gt;yo&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="83b1c6e3-eabf-4afb-853c-9eb93d357e0e" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T02:44:32.743Z" from="channel.en__2@conference.51.161.118.213/sbrw.74891"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="4749381400837379621" Cs="7752246445172068497"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;where are u from&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="492e7a68-69e6-4771-aff8-9346f07367c6" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T02:48:49.847Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.74891">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="69759" Time="-1566317751520804939" Cs="-1566030592231711735"&gt;&lt;From&gt;ISAACP7&lt;/From&gt;&lt;Msg&gt;usa&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="bcd23688-d4a0-45d0-8f2a-7e9c72d3b724" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T02:53:47.388Z" from="channel.en__2@conference.51.161.118.213/sbrw.74891"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.74891">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="69759" Time="-1566317750603218123" Cs="-1177252840502497822"&gt;&lt;From&gt;ISAACP7&lt;/From&gt;&lt;Msg&gt;sorry i was doing a race and didnt see the chat&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="9ec191b0-f4c5-490a-9958-1d9c3de5fdb7" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T02:54:00.404Z" from="channel.en__2@conference.51.161.118.213/sbrw.74891"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="-7882016904962218075" Cs="6549802916108681762"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;yeah i know&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="dc81b6aa-554c-4dc2-b6ad-61932616eba1" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:04:34.549Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="-7882016905235805547" Cs="-368161427392543309"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;im from **** nam&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="395edeef-6ed6-4fcc-bff1-1231b004479e" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:04:45.274Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="-7882016904675694683" Cs="-5243266313033544607"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;viett&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="6945cd11-2aff-47e4-9d96-41d8e4a337e9" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:04:50.939Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="-2066671139199104907" Cs="-8854946676422023552"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;yo please tell me you saw that&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="70bf2c71-acc2-44cb-b178-2134f9b81ed7" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:19:52.540Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="-2066671137087772219" Cs="6734182186690165686"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;that was a fire drift&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="60f6573e-2a21-496d-a506-49ecf9bac016" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:20:00.629Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="-2066671138413073307" Cs="3116270164686241829"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;where are u&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="e23005f6-16de-4a80-91cc-aec37d012784" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:20:16.433Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="-8382370290461619083" Cs="1592980314767750459"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;stadium&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="118c4d6d-519d-47d2-964d-e733050afec6" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:22:08.542Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="-8382370292764777371" Cs="1354365257195812519"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;come drift with me&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="2d489b0e-aef9-474d-b64c-ae414242f5ac" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:22:11.857Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="3748674628833302661" Cs="3196199420535486246"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;i drift so bad&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="58b96cc9-62b1-465d-8fa9-48108b917b7c" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:28:54.457Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143136">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129268" Time="3748674629105951045" Cs="6288444499529310883"&gt;&lt;From&gt;DOMINC&lt;/From&gt;&lt;Msg&gt;aceitar&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="49b3ea86-88a8-47d7-a4bf-a54c65a4222c" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:30:19.503Z" from="channel.en__2@conference.51.161.118.213/sbrw.143136"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143136">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129268" Time="3748674628703062101" Cs="3333295030952397612"&gt;&lt;From&gt;DOMINC&lt;/From&gt;&lt;Msg&gt;aadada&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="7c7048bd-5078-491b-add3-c46fc165508e" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:30:26.220Z" from="channel.en__2@conference.51.161.118.213/sbrw.143136"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="3748674627060075205" Cs="3748599255774904339"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;??&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="fced3e6c-4d62-41b7-944c-0fd83f52ff5d" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:33:15.449Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="3748674627929027333" Cs="3748599256644385054"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;:)&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="ff635f34-559b-40d4-8f8a-d16015177c3b" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:33:18.019Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="3748674626571694149" Cs="3748672343076021220"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;)&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="2b4e191b-dd93-40a5-9426-065e7efd5694" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:33:25.128Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="3748674628292946677" Cs="-5825851798085146658"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;i see the giant  ice cream&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="a6578411-f99d-4b27-8cae-cc2c268f7e3e" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:34:14.071Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143225">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129386" Time="-2567024525550728315" Cs="-3525523603395157578"&gt;&lt;From&gt;TUNA2K7&lt;/From&gt;&lt;Msg&gt;hey guy&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="c96eb344-b1c3-45fd-99b9-78f1a0f7e393" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:38:33.400Z" from="channel.en__2@conference.51.161.118.213/sbrw.143225"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.143079">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129143" Time="-3067377912960225595" Cs="-7314493812692650985"&gt;&lt;From&gt;V4NOM&lt;/From&gt;&lt;Msg&gt;5k for high stakes wtfff&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="c6f379f7-9867-4d1a-a7c8-37ff91e9a775" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T03:57:13.971Z" from="channel.en__2@conference.51.161.118.213/sbrw.143079"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142191">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="128522" Time="-4568438070175426379" Cs="-6900641902348958749"&gt;&lt;From&gt;NARUTOREBORN&lt;/From&gt;&lt;Msg&gt;hi&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="6105d632-61ba-4d50-9945-e009cd3b2f57" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T05:01:51.112Z" from="channel.en__2@conference.51.161.118.213/sbrw.142191"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="-5068791455386056091" Cs="2601031704360164917"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;what up&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="60997920-ee8d-469e-99ac-aa72e6e5fadd" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T05:24:47.827Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142951">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="129165" Time="746554309475090469" Cs="-573656522822748293"&gt;&lt;From&gt;YOUNGSIMBA&lt;/From&gt;&lt;Msg&gt;anyone trynna have a free race?&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="e0b196c3-0c96-425d-9de4-b8a46b42d309" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T05:39:23.783Z" from="channel.en__2@conference.51.161.118.213/sbrw.142951"/>
+</message>
+<message to="sbrw.133583@51.161.118.213/EA-Chat" type="groupchat" from="channel.en__2@conference.51.161.118.213/sbrw.142191">
+    <channel>Chat_All</channel>
+    <body>&lt;ChatMsg Type="0" Uid="128522" Time="5561193302559389621" Cs="3282852411522641123"&gt;&lt;From&gt;NARUTOREBORN&lt;/From&gt;&lt;Msg&gt;hi&lt;/Msg&gt;&lt;/ChatMsg&gt;</body>
+    <stanza-id xmlns="urn:xmpp:sid:0" id="f2f60213-9cea-44fd-abc7-eeff20f71975" by="channel.en__2@conference.51.161.118.213"/>
+    <delay xmlns="urn:xmpp:delay" stamp="2021-02-24T06:40:37.504Z" from="channel.en__2@conference.51.161.118.213/sbrw.142191"/>
+</message>

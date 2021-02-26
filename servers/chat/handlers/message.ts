@@ -10,6 +10,8 @@ export default class ChatHandler {
         // We can get a couple of message types.
         let type = packet.attrs.type;
 
+        console.log(packet);
+
         switch(type) {
             case 'groupchat':
                 this.handleGroupChat(client, packet);

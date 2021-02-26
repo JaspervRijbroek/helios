@@ -1,4 +1,5 @@
 import xml from "@xmpp/xml";
+import { Config } from "../../../lib/config";
 import ChatClient from "../client";
 
 export default class SetIqResponse {
@@ -8,7 +9,7 @@ export default class SetIqResponse {
             {
                 type: 'result',
                 id: 'EA-Chat-2',
-                to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                to: `nfsw.${client.personaId}@${Config.get('servers.chat.host')}/EA-Chat`
             }
         ));
     }

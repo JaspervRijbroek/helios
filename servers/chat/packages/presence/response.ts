@@ -1,11 +1,12 @@
 import xml from "@xmpp/xml";
+import { Config } from "../../../../lib/config";
 import ChatClient from "../../client";
 
 export default class PresenceResponse {
-    constructor(public data: any) { }
+    constructor(public presenceClient: ChatClient, public subscribeTo?: any) { }
 
     send(client: ChatClient) {
-        if (this.data.subscribeTo) {
+        if (this.subscribeTo) {
             return this.subscribeResponse(client);
         }
 
@@ -13,8 +14,8 @@ export default class PresenceResponse {
             xml(
                 'presence',
                 {
-                    from: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`,
-                    to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                    from: `nfsw.${this.presenceClient.personaId}@${Config.get('servers.chat.host')}/EA-Chat`,
+                    to: `nfsw.${this.presenceClient.personaId}@${Config.get('servers.chat.host')}/EA-Chat`
                 },
                 xml(
                     'show',
@@ -40,8 +41,8 @@ export default class PresenceResponse {
             xml(
                 'presence',
                 {
-                    from: this.data.subscribeTo,
-                    to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                    from: this.subscribeTo,
+                    to: `nfsw.${this.presenceClient.personaId}@${Config.get('servers.chat.host')}/EA-Chat`
                 },
                 xml(
                     'x',
@@ -56,8 +57,5 @@ export default class PresenceResponse {
                 )
             )
         );
-
-        // <presence to="sbrw.133583@51.161.118.213/EA-Chat" from="channel.en__2@conference.51.161.118.213/sbrw.134372"><x xmlns="http://jabber.org/protocol/muc#user"><item affiliation="none" role="participant"/></x></presence>
-        // <presence to="nfsw.2@127.0.0.1/EA-Chat"           from="channel.EN__1@conference.127.0.0.1/nfsw.2">          <x xmlns="http://jabber.org/protocol/muc#user"><item affiliation="none" role="participant"/></x></presence>
     }
 }

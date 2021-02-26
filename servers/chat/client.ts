@@ -6,6 +6,8 @@ export default class ChatClient extends EventEmitter {
     parser: Parser = new Parser();
     isShakingHands: boolean = true;
     personaId: number | string = 0;
+    status: ClientStates = ClientStates.Connecting;
+    channel?: string;
 
     constructor(public socket: Socket) {
         super();
@@ -28,7 +30,6 @@ export default class ChatClient extends EventEmitter {
     _onElement(element: any) {
         let isStanza = ['iq', 'presence', 'message'].includes(element.name);
 
-        console.log(element.toString());
         this.emit(isStanza ? 'stanza' : 'nonstanza', this, element);
     }
 
@@ -45,4 +46,10 @@ export default class ChatClient extends EventEmitter {
         debug('Sending XMPP response to client: ' + xml.toString());
         this.socket.write(xml.toString())
     }
+}
+
+export enum ClientStates {
+    Connecting = 0,
+    Connected = 1,
+
 }
