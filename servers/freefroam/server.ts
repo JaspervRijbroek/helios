@@ -10,10 +10,8 @@ export default class FreeroamServer {
 
     constructor() {
         this.server = createSocket('udp4', (msg, rinfo) => {
-            console.log(msg);
             let packet = Buffer.from(msg);
 
-            console.log(packet.toString('hex'));
             this.executePipeline(rinfo, packet)
         });
 
@@ -28,9 +26,11 @@ export default class FreeroamServer {
             require('./handlers/hello'),
             require('./handlers/info'),
             require('./handlers/end')
-        ].find(handler => handler.canHandle(packet))
+        ].find(handler => handler.canHandle(packet)),
+            client = this.getClient(info, packet);
 
-        handler.handle(this, info, packet);
+        client.setPacket(packet);
+        handler.handle(this, client);
     }
 
     broadcast(packet: Buffer) {
@@ -39,16 +39,24 @@ export default class FreeroamServer {
         })
     }
 
-    getClient(info: RemoteInfo): Client | undefined {
-        let identifier = `${info.port}-${info.address}`;
+    getClient(info: RemoteInfo, packet: Buffer): Client {
+        let identifier = `${info.port}-${info.address}`,
+            client = this.clients.find(client => {
+                return client.identifier = identifier;
+            });
 
-        return this.clients.find(client => {
-            return client.identifier = identifier;
-        });
+        if (!client) {
+            console.log(info);
+
+            client = new Client(info, this.server, packet);
+            this.clients.push(client);
+        }
+
+        return client;
     }
 
     clientsCleanup() {
-
+        
     }
 
     async start() {

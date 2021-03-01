@@ -27,14 +27,13 @@ export class InfoPacket {
             case 1:
                 this.playerInfo = this.remainingPacket.slice(0, length);
                 break;
-            case 12:
+            case 18:
                 this.carState = this.remainingPacket.slice(0, length);
                 break;
         }
 
         this.remainingPacket = this.remainingPacket.slice(length, this.remainingPacket.length);
 
-        // console.log(this.remainingPacket)
         if (this.remainingPacket.length > 4) {
             return this.parseRemaining();
         }
@@ -55,6 +54,33 @@ export class InfoPacket {
     }
 
     getChannelName(): string {
-        return this.channelInfo.slice(3, 15).toString();
+        return this.channelInfo.slice(4, 18).toString();
+    }
+
+    getPosX(): number {
+        if(!this.carState) {
+            return 0;
+        }
+
+        let hex = this.carState.slice(9, 11).toString('hex');
+        return parseInt(hex, 16);
+    }
+
+    getPosY(): number {
+        if(!this.carState) {
+            return 0;
+        }
+
+        let hex = this.carState.slice(5, 7).toString('hex');
+        return parseInt(hex, 16);
+    }
+
+    getPosZ(): number {
+        if(!this.carState) {
+            return 0;
+        }
+
+        let hex = this.carState.slice(7, 9).toString('hex');
+        return parseInt(hex, 16);
     }
 }

@@ -6,10 +6,7 @@ export function canHandle(packet: Buffer) {
     return packet[2] == 6;
 }
 
-export function handle(server: FreeroamServer, info: RemoteInfo, packet: Buffer) {
-    let client = new Client(info, server.server, packet);
-    server.clients.push(client);
-
+export function handle(server: FreeroamServer, client: Client) {
     let sequence = client.getSequence(),
         timeDiff = client.getClientTimeDiff(),
         clientTime = client.clientTime;
