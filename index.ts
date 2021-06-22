@@ -1,7 +1,5 @@
-import 'reflect-metadata';
-import Game from './lib/game';
+import Game from "./src/game";
 
-global.debug = require('debug')('nfsw:bootstrap');
-
-Game.getInstance()
-    .start()
+new Game()
+    .loadConfig()
+    .startServers()
