@@ -42,8 +42,6 @@ export default async function ecommerceSeeder(client: PrismaClient) {
             return newProduct;
         }));
 
-    console.log(categories, products);
-
     return carDealer.map(async (car: any) => {
         let product = products.find((product: any) => car.fileID == product.originalID) as any;
 
