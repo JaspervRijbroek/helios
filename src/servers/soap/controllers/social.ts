@@ -3,7 +3,9 @@ import {Controller, Route} from "../decorators/routing";
 @Controller()
 export default class SocialController {
     @Route('get', 'getfriendlistfromuserid')
-    getFriendsList() {
+    async getFriendsList() {
+        console.log('Called');
+
         return {
             PersonaFriendsList: {
                 friendPersona: {}
@@ -12,7 +14,7 @@ export default class SocialController {
     }
 
     @Route('get', 'getsocialsettings')
-    getSocialSettings() {
+    async getSocialSettings() {
         return {
             SocialSettings: {
                 AppearOffline: 'false',

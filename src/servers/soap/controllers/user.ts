@@ -57,7 +57,7 @@ export default class UserController {
     }
 
     @Route('get', 'getusersettings')
-    getUserSettings(req: Request) {
+    async getUserSettings(req: Request) {
         return {
             User_Settings: {
                 CarCacheAgeLimit: 600,
@@ -92,21 +92,21 @@ export default class UserController {
     }
 
     @Route('post', 'User/SecureLogout')
-    secureLogout(req: Request) {
+    async secureLogout(req: Request) {
         console.log(req.body);
 
         return {};
     }
 
     @Route('get', 'getblockeduserlist')
-    getBlockedUserList() {
+    async getBlockedUserList() {
         return {
             ArrayOflong: {}
         };
     }
 
     @Route('get', 'getblockersbyusers')
-    getBlockersByUsers() {
+    async getBlockersByUsers() {
         return {
             ArrayOflong: {}
         };

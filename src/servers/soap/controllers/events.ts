@@ -115,7 +115,7 @@ export default class EventsController {
     }
 
     @Route('get', 'events/gettreasurehunteventsession')
-    getTreasureHuntEvents() {
+    async getTreasureHuntEvents() {
         return {
             TreasureHuntEventSession: {
                 CoinsCollected: 0,

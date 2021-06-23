@@ -1,14 +1,25 @@
-import {PrismaClient} from '@prisma/client';
-import ecommerceSeeder from "./seeds/ecommerce";
-import eventsSeeder from "./seeds/events";
+// import {PrismaClient} from '@prisma/client';
+// import ecommerceSeeder from "./seeds/ecommerce";
+// import eventsSeeder from "./seeds/events";
 
-;(async () => {
-    let client = new PrismaClient();
+export default async function seed() {
+    console.log('Called2');
+    return 'Hello World';
+}
 
-    await Promise.all([
-        ecommerceSeeder(client),
-        eventsSeeder(client)
-    ]);
+// ;(async () => {
+//     let client = new PrismaClient();
 
-    await client.$disconnect();
-})();
+//     console.log('Called');
+
+//     try {
+//         await Promise.all([
+//             ecommerceSeeder(client),
+//             eventsSeeder(client)
+//         ]);
+//     } catch(err) {
+//         console.log(err);
+//     }
+
+//     await client.$disconnect();
+// })();

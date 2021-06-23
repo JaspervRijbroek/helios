@@ -3,7 +3,7 @@ import { Controller, Route } from "../decorators/routing";
 @Controller()
 export default class AnnouncementsController {
     @Route('get', 'LoginAnnouncements')
-    getLoginAnnouncements() {
+    async getLoginAnnouncements() {
         return {
             LoginAnnouncementsDefinition: {
                 Announcements: {

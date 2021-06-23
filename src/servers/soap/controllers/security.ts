@@ -4,7 +4,7 @@ import {Request} from "express";
 @Controller()
 export default class SecurityController {
     @Route('get', 'security/fraudConfig')
-    getConfig(req: Request) {
+    async getConfig(req: Request) {
         return {
             FraudConfig: {
                 enabledBitField: 12,

@@ -1,10 +1,14 @@
-import Express, {NextFunction, Request, Response, static as staticPath, Router} from 'express';
+import Express, {NextFunction, Request, Response, static as staticPath, Router, raw} from 'express';
 import { glob } from 'glob';
 import { join } from 'path';
 import { IRouteDefinition } from './decorators/routing';
 import {validate} from "uuid";
 import Game from "../../game";
-import {compare} from "bcrypt";
+import {compare, hashSync} from "bcrypt";
+import NewsController from './controllers/news';
+import { toJson } from 'xml2json';
+import { parse } from 'js2xmlparser';
+import { gzipSync } from 'zlib';
 
 const log = require('debug')('nfsw:soap');
 
@@ -46,7 +50,7 @@ export default class SoapServer {
                         log(`Bind route [${route.method}] on ${route.path}`);
 
                         router[route.method](route.path, async (req: Request, res: Response, next: NextFunction) => {
-                            res.result = await instance[route.methodName].bind(instance);
+                            res.result = await instance[route.methodName].call(instance, req, res);
 
                             next();
                         });
@@ -54,6 +58,7 @@ export default class SoapServer {
             })
 
         router.use((req: Request, res: Response, next: NextFunction) => {
+            console.log(res.result);
             res.result = res.result || {};
 
             next();
@@ -67,6 +72,12 @@ export default class SoapServer {
             .use(staticPath(
                 join(__dirname, '..', 'public')
             ))
+            .use(raw({type: '*/*'}))
+            .use((req: Request, res: Response, next: NextFunction) => {
+                console.log(`[${req.method}] ${req.url}`);
+
+                next();
+            })
             .use(this.authenticate.bind(this))
             .use(this.parse.bind(this))
             .use(this.controllerRoutes())
@@ -117,10 +128,38 @@ export default class SoapServer {
     }
 
     parse(req: Request, res: Response, next: Function) {
-        console.log(req.body);
+        if(req.body && typeof req.body === 'string') {
+            req.body = toJson(req.body);
+        }
+
+        next();
     }
 
     build(req: Request, res: Response, next: Function) {
-        console.log()
+        let keys = Object.keys(res.result),
+            xmlBody: string|Buffer = '';
+
+        if (keys.length) {
+            xmlBody = parse(keys[0], res.result[keys[0]], {
+                declaration: {
+                    include: false
+                },
+                format: {
+                    doubleQuotes: true
+                },
+                useSelfClosingTagIfEmpty: true
+            });
+        }
+
+        xmlBody = gzipSync(xmlBody);
+
+        res.status(200)
+            .header('Content-Length', xmlBody.length.toString())
+            .header('Content-Type', 'application/xml;charset=utf-8')
+            .header("Content-Encoding", "gzip")
+            .header('Connection', 'close')
+            .send(xmlBody);
+
+        next();
     }
 }

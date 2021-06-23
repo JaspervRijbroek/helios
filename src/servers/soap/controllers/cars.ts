@@ -5,7 +5,7 @@ import Game from "../../../game";
 @Controller()
 export default class CarsController {
     @Route('get', 'carclasses')
-    getCarClasses() {
+    async getCarClasses() {
         return {
             ArrayOfCarClass: {
                 CarClass: [{

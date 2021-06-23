@@ -3,14 +3,14 @@ import {Controller, Route} from "../decorators/routing";
 @Controller()
 export default class ReportingController {
     @Route('post', 'Reporting/SendHardwareInfo')
-    getClientHardwareInfo() {
+    async getClientHardwareInfo() {
         // console.log(req.body);
 
         return {};
     }
 
     @Route('post', 'Reporting/SendUserSettings')
-    getClientUserSettings() {
+    async getClientUserSettings() {
         // console.log(req.body);
 
         return {};

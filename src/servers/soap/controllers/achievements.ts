@@ -4,7 +4,7 @@ import { Controller, Route } from "../decorators/routing";
 @Controller()
 export default class AchievementsController {
     @Route('get', 'achievements/loadall')
-    getAllAchievements() {
+    async getAllAchievements() {
         return {};
     }
 }

@@ -3,7 +3,7 @@ import { Controller, Route } from "../decorators/routing";
 @Controller()
 export default class CryptoController {
     @Route('get', 'crypto/cryptoticket')
-    getCryptoTicket() {
+    async getCryptoTicket() {
         return {
             ClientServerCryptoTicket: {
                 CryptoTicket: 'CgsMDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',

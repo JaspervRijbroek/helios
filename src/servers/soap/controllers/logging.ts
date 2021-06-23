@@ -4,7 +4,7 @@ import {Controller, Route} from "../decorators/routing";
 @Controller()
 export default class LoggingController {
     @Route('get', 'logging/client')
-    getLoggingClient() {
+    async getLoggingClient() {
         return {
             ClientConfigTrans: {
                 clientConfigs: {}
@@ -13,14 +13,14 @@ export default class LoggingController {
     }
 
     @Route('post', '//logging/client/Server', false)
-    receiveServerLog(req: Request) {
+    async receiveServerLog(req: Request) {
         console.log(req.body);
 
         return {};
     }
 
     @Route('post', '//logging/client/Multiplayer', false)
-    receiveMultiplayerLog() {
+    async receiveMultiplayerLog() {
         return {};
     }
 }

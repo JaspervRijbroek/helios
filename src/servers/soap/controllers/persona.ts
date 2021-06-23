@@ -5,7 +5,7 @@ import Game from "../../../game";
 @Controller()
 export default class PersonaController {
     @Route('get', 'DriverPersona/GetExpLevelPointsMap')
-    getLevelMap() {
+    async getLevelMap() {
         return {
             ArrayOfint: {
                 int: [
@@ -217,7 +217,7 @@ export default class PersonaController {
     }
 
     @Route('get', 'personas/inventory/objects')
-    getInventoryObjects() {
+    async getInventoryObjects() {
         return {
             InventoryTrans: {
                 InventoryItems: {

@@ -3,7 +3,7 @@ import { Controller, Route } from "../decorators/routing";
 @Controller()
 export default class ChatController {
     @Route('get', 'Session/GetChatInfo')
-    getChatInfo(): any {
+    async getChatInfo() {
         return {
             chatServer: {
                 Rooms: {

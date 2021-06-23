@@ -3,7 +3,7 @@ import {Controller, Route} from "../decorators/routing";
 @Controller()
 export default class SystemController {
     @Route('get', 'systeminfo')
-    getSystemInfo() {
+    async getSystemInfo() {
         let date = new Date();
 
         return {
@@ -32,7 +32,7 @@ export default class SystemController {
     }
 
     @Route('get', 'getrebroadcasters')
-    getRebroadcasters() {
+    async getRebroadcasters() {
         return {
             ArrayOfUdpRelayInfo: {
                 UdpRelayInfo: {
@@ -44,7 +44,7 @@ export default class SystemController {
     }
 
     @Route('get', 'getregioninfo')
-    getRegionInfo() {
+    async getRegionInfo() {
         return {
             RegionInfo: {
                 CountdownProposalInMilliseconds: 3000,
@@ -59,7 +59,7 @@ export default class SystemController {
     }
 
     @Route('post', 'heartbeat')
-    getHeartbeat() {
+    async getHeartbeat() {
         return {
             HeartBeat: {
                 MetagameFlags: 2,
