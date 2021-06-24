@@ -11,7 +11,11 @@ export default class AchievementsController {
         // Thus the client has all the data it requires.
         let session = await Game.db.eventSession.create({
             data: {
-                eventId: parseInt(req.params.eventId)
+                event: {
+                    connect: {
+                        id: parseInt(req.params.eventId)
+                    }
+                }
             }
         });
 

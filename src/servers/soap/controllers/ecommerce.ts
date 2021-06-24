@@ -146,7 +146,11 @@ export default class EcommerceController {
                     skillModParts: car.skillModParts,
                     vinyls: car.vinyls,
                     visualParts: car.visualParts,
-                    personaId: persona.id
+                    persona: {
+                        connect: {
+                            id: persona.id
+                        }
+                    }
                 }
             });
 

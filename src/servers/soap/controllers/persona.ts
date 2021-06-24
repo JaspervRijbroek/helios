@@ -443,11 +443,15 @@ export default class PersonaController {
     async createPersona(req: Request): Promise<any> {
         let persona = await Game.db.persona.create({
             data: {
-                userId: req.user.id,
+                user: {
+                    connect: {
+                        id: req.user.id
+                    }
+                },
                 name: req.query.name as string,
                 icon: parseInt(req.query.iconIndex as string)
             }
-        })
+        });
 
         return {
             ProfileData: {
