@@ -70,7 +70,7 @@ export default class EventsController {
                         include: {
                             rewards: {
                                 where: {
-                                    rank: body.Rank
+                                    rank: parseInt(body.Rank)
                                 }
                             }
                         }
@@ -85,8 +85,6 @@ export default class EventsController {
         let event = session.event,
             reward = session.event.rewards[0];
 
-
-        //
         return {
             RouteEventResult: {
                 Accolades: {

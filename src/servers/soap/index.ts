@@ -94,10 +94,26 @@ export default class SoapServer {
 
         let user: any = false;
 
-        // We have them both now.
-        // If the securitytoken isn't a uuidv4 we will treat it as a password, else we will use it as a token.
-        // Registration is done elsewhere.
-        if(req.headers['securitytoken'] && validate(req.headers['securitytoken'] as string)) {
+        if(process.env.REGISTRATION_PREFIX && req.headers['userid'] && req.headers['userid'].includes(process.env.REGISTRATION_PREFIX)) {
+            // Check if the user is already present.
+            let foundUsers = await Game.db.user.count({
+                where: {
+                    username: (req.headers['userid'] as string).replace(process.env.REGISTRATION_PREFIX, '')
+                }
+            });
+
+            if(foundUsers) {
+                return res.status(400).end();
+            }
+
+            // Register the user.
+            user = await Game.db.user.create({
+                data: {
+                    username: (req.headers['userid'] as string).replace(process.env.REGISTRATION_PREFIX, ''),
+                    password: hashSync(req.headers['securitytoken'] as string, 10)
+                }
+            });
+        } else if(req.headers['securitytoken'] && validate(req.headers['securitytoken'] as string)) {
             user = await Game.db.user.findFirst({
                 where: {
                     id: parseInt(req.headers['userid'] as string),

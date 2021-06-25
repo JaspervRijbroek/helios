@@ -12,7 +12,7 @@ const log = debug('nfsw:game')
 export default class Game {
     static db: PrismaClient = new PrismaClient();
 
-    loadConfig(path: string = `${__dirname}/../.env`): Game {
+    loadConfig(path: string = `${process.cwd()}/.env`): Game {
         log(`Loading configuration: ${path}`);
         require('dotenv').config(path);
 
