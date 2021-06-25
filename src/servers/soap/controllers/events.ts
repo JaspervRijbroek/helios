@@ -12,6 +12,12 @@ export default class EventsController {
             }
         });
 
+        events = events.map(event => {
+            event.rewardModes = Array.isArray(event.rewardModes) ? event.rewardModes : [event.rewardModes];
+
+            return event;
+        });
+
         return {
             EventsPacket: {
                 Events: {
@@ -39,7 +45,7 @@ export default class EventsController {
                         TrackLayoutMap: event.trackLayoutMap,
                         TrackLocalization: event.trackLocalization,
                         EngagePoint: event.engagePoint,
-                        RewardModes: (event.rewardModes as [] || []).map(mode => ({int: mode}))
+                        RewardModes: (event.rewardModes as any[]).map(mode => ({int: mode}))
                     }))
                 }
             }

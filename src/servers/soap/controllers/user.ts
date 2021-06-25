@@ -114,9 +114,14 @@ export default class UserController {
 
     @Route('post', 'User/SecureLoginPersona')
     async secureLoginPersona(req: Request) {
-        await req.user.$query().patch({
-            current_persona: parseInt(req.query.personaId as string)
-        })
+        await Game.db.user.update({
+            where: {
+                id: req.user.id
+            },
+            data: {
+                currentPersonaId: parseInt(req.query.personaId as string)
+            }
+        });
 
         return {};
     }

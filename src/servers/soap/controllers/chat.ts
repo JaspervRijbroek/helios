@@ -13,7 +13,7 @@ export default class ChatController {
                         shortName: 'EN'
                     }]
                 },
-                ip: process.env.CHAT_HOST,
+                ip: process.env.SERVER_IP,
                 port: process.env.CHAT_PORT,
                 prefix: 'nfsw'
             }

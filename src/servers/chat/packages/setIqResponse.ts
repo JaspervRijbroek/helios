@@ -8,7 +8,7 @@ export default class SetIqResponse {
             {
                 type: 'result',
                 id: 'EA-Chat-2',
-                to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
             }
         ));
     }

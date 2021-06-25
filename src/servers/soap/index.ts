@@ -58,7 +58,6 @@ export default class SoapServer {
             })
 
         router.use((req: Request, res: Response, next: NextFunction) => {
-            console.log(res.result);
             res.result = res.result || {};
 
             next();
@@ -99,7 +98,7 @@ export default class SoapServer {
         // If the securitytoken isn't a uuidv4 we will treat it as a password, else we will use it as a token.
         // Registration is done elsewhere.
         if(req.headers['securitytoken'] && validate(req.headers['securitytoken'] as string)) {
-            user = Game.db.user.findFirst({
+            user = await Game.db.user.findFirst({
                 where: {
                     id: parseInt(req.headers['userid'] as string),
                     token: req.headers['securitytoken'] as string
@@ -121,15 +120,15 @@ export default class SoapServer {
             return res.status(401).end();
         }
 
-
         req.user = user;
 
         return next();
     }
 
     parse(req: Request, res: Response, next: Function) {
-        if(req.body && typeof req.body === 'string') {
+        if(req.body && (typeof req.body === 'string' || req.body instanceof Buffer)) {
             req.body = toJson(req.body);
+            req.body = JSON.parse(req.body);
         }
 
         next();

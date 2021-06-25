@@ -14,8 +14,8 @@ export default class PresenceResponse
             xml(
                 'presence',
                 {
-                    from: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`,
-                    to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                    from: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`,
+                    to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
                 },
                 xml(
                     'show',
@@ -42,7 +42,7 @@ export default class PresenceResponse
                 'presence',
                 {
                     from: this.data.subscribeTo,
-                    to: `nfsw.${client.personaId}@${process.env.FREEROAM_IP}/EA-Chat`
+                    to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
                 },
                 xml(
                     'x',

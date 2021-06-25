@@ -1,9 +1,9 @@
 import {PrismaClient} from "@prisma/client";
 
 export default async function ecommerceSeeder(client: PrismaClient) {
-    await client.ecommerceCategory.deleteMany({});
-    await client.ecommerceProduct.deleteMany({});
     await client.dealerCar.deleteMany({});
+    await client.ecommerceProduct.deleteMany({});
+    await client.ecommerceCategory.deleteMany({});
 
     let
         carDealer = require('./ecommerceCarDealer.json'),
@@ -68,7 +68,11 @@ export default async function ecommerceSeeder(client: PrismaClient) {
                 skillModParts: car.CustomCar.SkillModParts,
                 vinyls: car.CustomCar.Vinyls,
                 visualParts: car.CustomCar.VisualParts,
-                ecommerceProductId: product.id
+                related_car: {
+                    connect: {
+                        id: product.id
+                    }
+                }
             }
         })
     });

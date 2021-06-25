@@ -89,7 +89,7 @@ export default class PersonaController {
     async getCarSlots(req: Request) {
         let persona = await Game.db.persona.findUnique({
             where: {
-                id: parseInt(req.query.personaId as string)
+                id: parseInt(req.params.personaId as string)
             },
             include: {
                 cars: true
@@ -368,7 +368,9 @@ export default class PersonaController {
     @Route('post', 'DriverPersona/GetPersonaBaseFromList')
     async getBaseFromList(req: Request) {
         let currentPersona = await Game.db.persona.findUnique({
-            where: req.user.currentPersonaId
+            where: {
+                id: req.user.currentPersonaId
+            }
         });
 
         if (!currentPersona) {
@@ -441,6 +443,8 @@ export default class PersonaController {
 
     @Route('post', 'DriverPersona/CreatePersona')
     async createPersona(req: Request): Promise<any> {
+        console.log(req.user.id);
+
         let persona = await Game.db.persona.create({
             data: {
                 user: {

@@ -3474,24 +3474,6 @@
         "title": "ORBIT"
     },
     {
-        "originalID": "SRV-CAR40",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "-1876343443",
-        "icon": "Red_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 100000,
-        "priority": 0,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "RED"
-    },
-    {
         "originalID": "SRV-CAR41",
         "currency": "CASH",
         "description": "",
@@ -5292,24 +5274,6 @@
         "title": "THUMPER PACKAGE"
     },
     {
-        "originalID": "SRV-CAR141",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "-1102268022",
-        "icon": "Red_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 100000,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "RED"
-    },
-    {
         "originalID": "SRV-CAR142",
         "currency": "CASH",
         "description": "",
@@ -5472,24 +5436,6 @@
         "title": "EMERALD GREEN"
     },
     {
-        "originalID": "SRV-CAR151",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "1133182666",
-        "icon": "Black_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 100000,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "BLACK"
-    },
-    {
         "originalID": "SRV-CAR152",
         "currency": "CASH",
         "description": "",
@@ -5524,24 +5470,6 @@
         "use_count": 1,
         "visual_style": "",
         "title": "YELLOW"
-    },
-    {
-        "originalID": "SRV-CAR154",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "1342182250",
-        "icon": "Black_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 75000,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "BLACK"
     },
     {
         "originalID": "SRV-CAR155",
@@ -5614,24 +5542,6 @@
         "use_count": 1,
         "visual_style": "",
         "title": "RED"
-    },
-    {
-        "originalID": "SRV-CAR159",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "-1188734455",
-        "icon": "White_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 87500,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "WHITE"
     },
     {
         "originalID": "SRV-CAR160",
@@ -5722,24 +5632,6 @@
         "use_count": 1,
         "visual_style": "",
         "title": "WHITE"
-    },
-    {
-        "originalID": "SRV-CAR165",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "1016727685",
-        "icon": "Green_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 62500,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "GREEN"
     },
     {
         "originalID": "SRV-CAR166",
@@ -5868,24 +5760,6 @@
         "title": "YELLOW"
     },
     {
-        "originalID": "SRV-CAR173",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "805750582",
-        "icon": "Red_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 87500,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "RED"
-    },
-    {
         "originalID": "SRV-CAR174",
         "currency": "CASH",
         "description": "",
@@ -6010,24 +5884,6 @@
         "use_count": 1,
         "visual_style": "",
         "title": "RED"
-    },
-    {
-        "originalID": "SRV-CAR181",
-        "currency": "CASH",
-        "description": "",
-        "duration": "0",
-        "category": "NFSW_NA_EP_PRESET_RIDES_ALL_Category",
-        "hash": "-2136324513",
-        "icon": "White_64x64",
-        "level": "1",
-        "long_description": "",
-        "price": 87500,
-        "priority": 1,
-        "type": "PRESETCAR",
-        "secondary_icon": "",
-        "use_count": 1,
-        "visual_style": "",
-        "title": "WHITE"
     },
     {
         "originalID": "SRV-CAR182",

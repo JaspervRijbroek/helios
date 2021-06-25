@@ -8,9 +8,11 @@ export default class EcommerceController {
     async postBasket(req: Request) {
         // You can only buy a single item at the time.
         // So we will only allow a single item at the time.
+        console.log(req.body);
+
         let basketItem = req.body.BasketTrans.Items.BasketItemTrans,
             persona = await Game.db.persona.findUnique({where: {id: parseInt(req.params.personaId as string)}}),
-            product = await Game.db.ecommerceProduct.findUnique({where: {id: basketItem.ProductId}});
+            product = await Game.db.ecommerceProduct.findUnique({where: {id: parseInt(basketItem.ProductId)}});
 
         if (!persona || !product || persona.cash < product.price) {
             return {};
@@ -37,7 +39,8 @@ export default class EcommerceController {
             }
         };
 
-        switch (product.productType) {
+        console.log(product.productType.toLowerCase());
+        switch (product.productType.toLowerCase()) {
             case 'presetcar':
                 await this.buyPresetcar(product.id, basketItem.Quantity, persona.id, ecommerceResult)
                 break;
@@ -118,6 +121,7 @@ export default class EcommerceController {
             }),
             persona = await Game.db.persona.findUnique({where: {id: personaId}});
 
+        console.log(product, persona, product?.dealerCar);
         if(!product || !persona || !product.dealerCar) {
             return {}
         }
