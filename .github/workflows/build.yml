@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
-        run: npm publish
+        run: yarn
 
   deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -47,9 +47,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
-        run: npm publish
+        run: yarn
 
       - name: Publish package
-        run: npm publish
+        run: npm publish --registry=https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
