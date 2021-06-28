@@ -1,30 +1,55 @@
-import ChatClient from "../client";
-import GetIqResponse from "../packages/getIqResponse";
-import SetIqResponse from "../packages/setIqResponse";
+import xml, { Element } from "@xmpp/xml";
+import ChatClient from "../lib/client";
+import { Handler, HandleType } from "../decorators/handler";
 
+@Handler('iq')
 export default class IqHandler {
-    execute(client: ChatClient, packet: any) {
-        console.log(packet.attrs.type === 'get' ? 'Executing get' : 'Executing set');
-
-        if(packet.attrs.type === 'get') {
-            this.getIqRequest(client, packet);
-        } else {
-            this.setIqRequest(client, packet);
-        }
-    }
-
+    @HandleType('get')
     getIqRequest(client: ChatClient, packet: Element) {
         let child = packet.children[0],
-            usernameElement = child.children[0],
-            username = usernameElement.children[0].toString().replace('nfsw.', '');
+            usernameElement = child.children[0];
 
-        client.personaId = username;
-
-        // Send an accept packet.
-        new GetIqResponse(username).send(client);
+            client.send(xml(
+                'iq',
+                {
+                    type: 'result',
+                    id: 'EA-Chat-1'
+                },
+                xml(
+                    'query',
+                    {
+                        'xmlns': 'jabber:iq:auth'
+                    },
+                    xml(
+                        'username',
+                        {},
+                        usernameElement.children[0].toString()
+                    ),
+                    xml(
+                        'password'
+                    ),
+                    xml(
+                        'digest'
+                    ),
+                    xml(
+                        'resource'
+                    ),
+                    xml(
+                        'query'
+                    )
+                )
+            ));
     }
 
+    @HandleType('set')
     setIqRequest(client: ChatClient, packet: any) {
-        new SetIqResponse().send(client);
+        client.send(xml(
+            'iq',
+            {
+                type: 'result',
+                id: 'EA-Chat-2',
+                to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
+            }
+        ));
     }
 }

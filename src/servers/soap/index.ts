@@ -28,6 +28,7 @@ export default class SoapServer {
     server: any;
 
     constructor() {
+        log('Starting soap server');
         this.server = Express();
         this.server.disable('etag');
         this.server.disable('x-powered-by');
@@ -73,7 +74,7 @@ export default class SoapServer {
             ))
             .use(raw({type: '*/*'}))
             .use((req: Request, res: Response, next: NextFunction) => {
-                console.log(`[${req.method}] ${req.url}`);
+                log(`[${req.method}] ${req.url}`);
 
                 next();
             })

@@ -8,10 +8,11 @@ export default class FreeroamServer {
     clients: Client[] = [];
 
     constructor() {
+        log('Starting freeroam server');
+
         this.server = createSocket('udp4', (msg, rinfo) => {
             let packet = Buffer.from(msg);
 
-            console.log(packet.toString('hex'));
             this.executePipeline(rinfo, packet)
         });
 

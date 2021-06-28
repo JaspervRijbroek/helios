@@ -1,7 +1,8 @@
 import {createServer, Server} from "net";
-import ChatClient from "./client";
+import ChatClient from "./lib/client";
 import {sync} from 'glob';
 import { join, parse } from "path";
+import { Element } from "@xmpp/xml";
 
 const log = require('debug')('nfsw:chat');
 
@@ -9,16 +10,11 @@ export default class ChatServer {
     server: Server;
     clients: ChatClient[] = [];
     handlers: Map<string, any> = new Map();
+    channels: any = {};
 
     constructor() {
-        this.loadHandlers()
-            .forEach((handlerPath: string) => {
-                let Handler = require(handlerPath).default,
-                    parts = parse(handlerPath),
-                    handler = new Handler();
-
-                this.handlers.set(parts.name, handler);
-            });
+        log('Starting chat server');
+        this.loadHandlers();
 
         this.server = createServer((socket) => {
             let client = new ChatClient(socket)
@@ -31,20 +27,42 @@ export default class ChatServer {
         });
     }
 
-    handlePacket(client: ChatClient, packet: any) {
-        // Get the handler of the current packet.
-        if(this.handlers.has(packet.name)) {
-            this.handlers.get(packet.name).execute(client, packet);
+    handlePacket(client: ChatClient, packet: Element) {
+        let event = `${packet.name}`;
+
+        if(packet.attrs && packet.attrs.type) {
+            event += `:${packet.attrs.type}`;
         }
 
+        console.log(event);
+        // Get the handler of the current packet.
+        if(this.handlers.has(event)) {
+            this.handlers.get(event)(client, packet);
+        }
     }
 
-    loadHandlers(): string[] {
-        return sync(join(__dirname, 'handlers', '*.ts'));
+    loadHandlers(): void {
+        log('Loading handlers');
+        sync(join(__dirname, 'handlers', '*.ts'))
+            .map((handlerPath: string) => {
+                let Handler = require(handlerPath).default,
+                    typeHandler = Reflect.getMetadata('handler', Handler),
+                    typeHandlers = Reflect.getMetadata('typeHandlers', Handler);
+
+                if(!typeHandlers) {
+                    return;
+                }
+
+                let handler = new Handler(this);
+
+                typeHandlers.forEach((element: any) => {
+                    this.handlers.set(`${typeHandler}${element.type ? ':' + element.type : '' }`, handler[element.handler].bind(handler));
+                });
+            });
     }
 
     closeSocket(client: ChatClient) {
-        console.log('Closing the chat client');
+        log('Closing the chat client');
         this.clients = this.clients.filter(tmpClient => {
             return tmpClient != client;
         });

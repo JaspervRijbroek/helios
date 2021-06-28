@@ -1,15 +1,43 @@
-import ChatClient from "../client";
-import PresenceResponse from "../packages/presence/response";
-import {Element} from '@xmpp/xml';
+import ChatClient from "../lib/client";
+import xml, {Element} from '@xmpp/xml';
+import { Handler, HandleType } from "../decorators/handler";
+import AbstractHandler from "./abstract";
 
-export default class PresenceHandler {
-    execute(client: ChatClient, packet: Element) {
+@Handler('presence')
+export default class PresenceHandler extends AbstractHandler {
+    @HandleType()
+    addPresence(client: ChatClient, packet: Element) {
         let channel = packet.attrs.to || false;
 
+        if(channel) {
+            return this.getChannel(channel).addClient(client);
+        }
+
         // Currently we will just respond with a response.
-        new PresenceResponse({
-            subscribeTo: channel
-        }).send(client);
+        return client.send(
+            xml(
+                'presence',
+                {
+                    from: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`,
+                    to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
+                },
+                xml(
+                    'show',
+                    {},
+                    'chat'
+                ),
+                xml(
+                    'status',
+                    {},
+                    'Online'
+                ),
+                xml(
+                    'priority',
+                    {},
+                    0
+                )
+            )
+        );
     }
 }
 

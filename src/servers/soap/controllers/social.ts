@@ -4,8 +4,6 @@ import {Controller, Route} from "../decorators/routing";
 export default class SocialController {
     @Route('get', 'getfriendlistfromuserid')
     async getFriendsList() {
-        console.log('Called');
-
         return {
             PersonaFriendsList: {
                 friendPersona: {}
