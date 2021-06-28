@@ -1,5 +1,5 @@
 {
-    "name": "helios",
+    "name": "@jaspervrijbroek/helios",
     "description": "A need for speed world server emulator",
     "version": "0.0.1",
     "dependencies": {
