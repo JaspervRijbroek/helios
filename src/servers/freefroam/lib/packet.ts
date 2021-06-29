@@ -7,7 +7,7 @@ export class InfoPacket {
     remainingPacket: Buffer;
     sequence: number = 0;
 
-    constructor(packet: Buffer) {
+    constructor(public packet: Buffer) {
         this.currentIndex = 0;
         this.header = packet.slice(0, this.currentIndex += 16);
         this.remainingPacket = packet.slice(this.currentIndex, packet.length - 4) // We ignore the crc, in the future this must be fixed.
@@ -57,4 +57,26 @@ export class InfoPacket {
     getChannelName(): string {
         return this.channelInfo.slice(3, 15).toString();
     }
+
+    get type(): PacketType {
+        if(this.packet[2] == 6) {
+            return PacketType.HELLO;
+        } else if(this.packet[2] == 7) {
+            return PacketType.INFO;
+        }
+
+        return PacketType.END;
+    }
+}
+
+export function HandlePacket(): MethodDecorator {
+    return function(target, propertyKey, descriptor) {
+
+    }
+}
+
+export enum PacketType {
+    HELLO,
+    INFO,
+    END
 }

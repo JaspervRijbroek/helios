@@ -26,9 +26,10 @@ declare global {
 
 export default class SoapServer {
     server: any;
+    listener: any = null;
 
     constructor() {
-        log('Starting soap server');
+        log('Starting server');
         this.server = Express();
         this.server.disable('etag');
         this.server.disable('x-powered-by');
@@ -67,8 +68,8 @@ export default class SoapServer {
         return router;
     }
 
-    async start() {
-        this.server
+    start() {
+        this.listener = this.server
             .use(staticPath(
                 join(__dirname, '..', 'public')
             ))
@@ -83,8 +84,14 @@ export default class SoapServer {
             .use(this.controllerRoutes())
             .use(this.build)
             .listen(process.env.SOAP_PORT, () => {
-                log(`Soap server listening on port: ${process.env.SOAP_PORT}`);
+                log(`Server listening on port: ${process.env.SOAP_PORT}`);
             });
+    }
+
+    stop() {
+        this.listener.close(() => {
+            log('Server stopped');
+        })
     }
 
     async authenticate(req: Request, res: Response, next: NextFunction) {

@@ -6,30 +6,24 @@ const log = require('debug')('nfsw:freeroam');
 export default class FreeroamServer {
     server: Socket;
     clients: Client[] = [];
+    timers: any[] = [];
+    handlers: any[] = [
+        require('./handlers/hello'),
+        require('./handlers/info'),
+        require('./handlers/end')
+    ];
 
     constructor() {
-        log('Starting freeroam server');
+        log('Starting server');
 
-        this.server = createSocket('udp4', (msg, rinfo) => {
-            let packet = Buffer.from(msg);
-
-            this.executePipeline(rinfo, packet)
+        this.server = createSocket('udp4', (packet, rinfo) => {
+            this.handlers.find(handler => handler.canHandle(packet))?.handle(this, rinfo, packet);
         });
 
         // Cleanup clients every second.
         // When a client disconnects there is no way of knowing
         // So we cleanup clients that didn't have a packet in a long time.
-        setInterval(this.clientsCleanup.bind(this), 1000);
-    }
-
-    executePipeline(info: any, packet: Buffer) {
-        let handler = [
-            require('./handlers/hello'),
-            require('./handlers/info'),
-            require('./handlers/end')
-        ].find(handler => handler.canHandle(packet))
-
-        handler.handle(this, info, packet);
+        this.timers.push(setInterval(this.clientsCleanup.bind(this), 1000));
     }
 
     broadcast(packet: Buffer) {
@@ -50,9 +44,20 @@ export default class FreeroamServer {
 
     }
 
-    async start() {
+    start() {
         this.server.bind((process.env.FREEROAM_PORT || 9999) as number, () => {
-            log(`Freefoam Server listening on port: ${process.env.FREEROAM_PORT}`);
+            log(`Server listening on port: ${process.env.FREEROAM_PORT}`);
+        })
+    }
+
+    stop() {
+        this.server.close(() => {
+            log('Server stopped');
+        });
+
+        this.timers.forEach((timer: any) => {
+            clearTimeout(timer);
+            clearInterval(timer);
         })
     }
 }

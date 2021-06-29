@@ -1,6 +1,6 @@
 import { RemoteInfo } from "dgram";
 import { InfoPacket } from "../lib/packet";
-import FreeroamServer from "../server";
+import FreeroamServer from "../index";
 
 export function canHandle(packet: Buffer) {
     return packet[2] == 7;

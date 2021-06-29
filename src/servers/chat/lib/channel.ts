@@ -63,6 +63,11 @@ export default class Channel {
     }
 
     broadcastMessage() {
-        
+        this.clients.forEach((client: ChatClient) => {
+            client.send(xml('message', {
+                from: this.name,
+                to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
+            }));
+        })
     }
 }

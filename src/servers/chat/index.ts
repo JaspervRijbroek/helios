@@ -13,7 +13,7 @@ export default class ChatServer {
     channels: any = {};
 
     constructor() {
-        log('Starting chat server');
+        log('Starting server');
         this.loadHandlers();
 
         this.server = createServer((socket) => {
@@ -72,7 +72,13 @@ export default class ChatServer {
 
     start() {
         this.server.listen(process.env.CHAT_PORT, () => {
-            log(`Chat server listening on port ${process.env.CHAT_PORT}`);
+            log(`Server listening on port ${process.env.CHAT_PORT}`);
         })
+    }
+
+    stop() {
+        this.server.close(() => {
+            log('Server stopped');
+        });
     }
 }

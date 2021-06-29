@@ -6,11 +6,15 @@ import 'reflect-metadata';
 import debug from "debug";
 import {sync} from "glob";
 import {PrismaClient} from "@prisma/client";
+import SoapServer from "./servers/soap";
+import FreeroamServer from "./servers/freefroam";
+import ChatServer from "./servers/chat";
 
 const log = debug('nfsw:game')
 
 export default class Game {
     static db: PrismaClient = new PrismaClient();
+    servers: any = {};
 
     loadConfig(path: string = `${process.cwd()}/.env`): Game {
         log(`Loading configuration: ${path}`);
@@ -19,14 +23,34 @@ export default class Game {
         return this;
     }
 
-    startServers() {
+    startServers(): Game {
         // All servers will be started in the same process.
         log('Starting all servers');
 
-        sync(`${__dirname}/servers/*/index.ts`).forEach((path) => {
-            let Server = require(path).default;
+        this.servers['soap'] = new SoapServer();
+        this.servers['freeroam'] = new FreeroamServer();
+        this.servers['chat'] = new ChatServer();
 
-            new Server().start();
-        });
+        for(let server in this.servers) {
+            if(this.servers.hasOwnProperty(server)) {
+                this.servers[server].start();
+            }
+        }
+
+        return this;
+    }
+
+    stopServers(): Game {
+        for (let server in this.servers) {
+            if (this.servers.hasOwnProperty(server)) {
+                this.servers[server].stop();
+            }
+        }
+
+        return this;
+    }
+
+    getServer(server: 'soap'|'freeroam'|'chat'): any {
+        return this.servers[server];
     }
 }
