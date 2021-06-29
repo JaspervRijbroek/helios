@@ -3,3 +3,4 @@ node_modules
 *.js
 config.json
 .env
+yarn-error.log
