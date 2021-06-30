@@ -1,9 +1,21 @@
 # Helios
 ## Need for Speed: World server emulator
 
-Helios (the sun god, racing across the sky) is a need for speed world server emulator.  
-This started out as a drive to create a customisable server which is written in nodejs.
+![Deploy](https://github.com/JaspervRijbroek/helios/actions/workflows/build.yml/badge.svg)
 
-In this package there are a couple of servers, please refer to their own readme for more information.
+Helios is a Need for Speed: World server emulator written in node.  
+As the game itself has been abandoned by the developer/ maintainer it is more accepted
+to host your own server.
 
 ## Installation
+
+System requirements:
+- Raspberry PI
+- MySQL 5.7 or later
+- NodeJS 14 or later
+
+Installation steps:
+1. Clone this repo
+1. Run `yarn` or `npm i` to install the dependencies
+2. Create a .env file with the configuration (see the wiki).
+3. Run `yarn start` to start the server.
