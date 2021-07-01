@@ -3,6 +3,11 @@ import xml, {Element} from '@xmpp/xml';
 import { Handler, HandleType } from "../decorators/handler";
 import AbstractHandler from "./abstract";
 
+/**
+ * While reading up on the information presented in the XMPP MUC documentation it becomes clear
+ * as to how the information should be send. Not things start to fall into place.
+ */
+
 @Handler('presence')
 export default class PresenceHandler extends AbstractHandler {
     @HandleType()
@@ -10,7 +15,7 @@ export default class PresenceHandler extends AbstractHandler {
         let channel = packet.attrs.to || false;
 
         if(channel) {
-            return this.getChannel(channel).addClient(client);
+            return this.getRoom(channel).addClient(client);
         }
 
         // Currently we will just respond with a response.
@@ -18,8 +23,8 @@ export default class PresenceHandler extends AbstractHandler {
             xml(
                 'presence',
                 {
-                    from: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`,
-                    to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
+                    from: client.jid,
+                    to: client.jid
                 },
                 xml(
                     'show',

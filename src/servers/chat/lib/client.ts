@@ -1,18 +1,24 @@
 import { EventEmitter } from "events";
 import { Socket } from "net";
 import {Element, Parser} from "@xmpp/xml";
+import jid from "@xmpp/jid";
 
 const log = require('debug')('nfsw:chat:client');
 
 export default class ChatClient extends EventEmitter {
     parser: Parser = new Parser();
     personaId: number|string = 0;
+    jid: string = '';
 
     constructor(public socket: Socket) {
         super();
 
         this.bindEvents();
     };
+
+    setJID(jid: string) {
+        this.jid = jid;
+    }
 
     bindEvents() {
         this.parser.on('element', this._onElement.bind(this));
@@ -45,5 +51,9 @@ export default class ChatClient extends EventEmitter {
     send(xml: Element) {
         log('Sending XMPP response to client: ' + xml.toString());
         this.socket.write(xml.toString())
+    }
+
+    getUsername(): string {
+        return jid(this.jid).getResource();
     }
 }

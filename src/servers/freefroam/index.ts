@@ -17,6 +17,7 @@ export default class FreeroamServer {
         log('Starting server');
 
         this.server = createSocket('udp4', (packet, rinfo) => {
+            console.log(packet);
             this.handlers.find(handler => handler.canHandle(packet))?.handle(this, rinfo, packet);
         });
 

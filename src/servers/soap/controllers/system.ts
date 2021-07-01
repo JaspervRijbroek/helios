@@ -36,8 +36,8 @@ export default class SystemController {
         return {
             ArrayOfUdpRelayInfo: {
                 UdpRelayInfo: {
-                    // Host: '127.0.0.1',
-                    // Port: process.env.FREEROAM_PORT
+                    Host: process.env.SERVER_IP,
+                    Port: process.env.FREEROAM_PORT
                 }
             }
         };

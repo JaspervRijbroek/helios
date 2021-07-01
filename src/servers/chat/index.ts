@@ -10,7 +10,7 @@ export default class ChatServer {
     server: Server;
     clients: ChatClient[] = [];
     handlers: Map<string, any> = new Map();
-    channels: any = {};
+    rooms: any = {};
 
     constructor() {
         log('Starting server');

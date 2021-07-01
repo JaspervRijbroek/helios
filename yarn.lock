@@ -177,6 +177,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/xmpp__jid@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@types/xmpp__jid/-/xmpp__jid-1.3.1.tgz#1d1ef1d51d6e8396531d5dfaf8f5bd210655aec4"
+  integrity sha512-5Tj9j0tfTdBeiuXN/6RzTGgtl0XnlmkTmvzP3A2vTa3tHT2ydgQGtoIN6f03fgP/lcXlkH4XgSiEm2rAC2lG6g==
+
 "@types/xmpp__xml@^0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@types/xmpp__xml/-/xmpp__xml-0.6.1.tgz#985a4344a6d9a4cec3890b2484b7b3699aed4958"
@@ -184,6 +189,11 @@
   dependencies:
     "@types/ltx" "*"
     "@types/node" "*"
+
+"@xmpp/jid@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@xmpp/jid/-/jid-0.12.0.tgz#af351869861048c29ab38d99a3fc6232f44b3640"
+  integrity sha512-Wdtc7Q7pS9EQzXBTBYcT6g9ZYpWXmnFx19/STqnX15nNd7LATR2Q5Dx5H+u0bRyB/IioUY2o3JXwyS98yemNPQ==
 
 "@xmpp/xml@^0.12.0":
   version "0.12.0"

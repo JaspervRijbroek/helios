@@ -6,39 +6,42 @@ import { Handler, HandleType } from "../decorators/handler";
 export default class IqHandler {
     @HandleType('get')
     getIqRequest(client: ChatClient, packet: Element) {
-        let child = packet.children[0],
-            usernameElement = child.children[0];
+        let username = packet.getChild('query')?.getChildText('username');
 
-            client.send(xml(
-                'iq',
+        if(!client.jid && username) {
+            client.jid = `${username}@${process.env.SERVER_IP}/EA-Chat`;
+        }
+
+        client.send(xml(
+            'iq',
+            {
+                type: 'result',
+                id: 'EA-Chat-1'
+            },
+            xml(
+                'query',
                 {
-                    type: 'result',
-                    id: 'EA-Chat-1'
+                    'xmlns': 'jabber:iq:auth'
                 },
                 xml(
-                    'query',
-                    {
-                        'xmlns': 'jabber:iq:auth'
-                    },
-                    xml(
-                        'username',
-                        {},
-                        usernameElement.children[0].toString()
-                    ),
-                    xml(
-                        'password'
-                    ),
-                    xml(
-                        'digest'
-                    ),
-                    xml(
-                        'resource'
-                    ),
-                    xml(
-                        'query'
-                    )
+                    'username',
+                    {},
+                    client.getUsername()
+                ),
+                xml(
+                    'password'
+                ),
+                xml(
+                    'digest'
+                ),
+                xml(
+                    'resource'
+                ),
+                xml(
+                    'query'
                 )
-            ));
+            )
+        ));
     }
 
     @HandleType('set')
@@ -48,7 +51,7 @@ export default class IqHandler {
             {
                 type: 'result',
                 id: 'EA-Chat-2',
-                to: `nfsw.${client.personaId}@${process.env.SERVER_IP}/EA-Chat`
+                to: client.jid
             }
         ));
     }
