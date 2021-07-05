@@ -61,7 +61,7 @@ export default class EcommerceController {
                 include: {
                     cars: {
                         where: {
-                            id: req.body.CommerceSessionTrans.UpdatedCar.Id
+                            id: parseInt(req.body.CommerceSessionTrans.UpdatedCar.Id)
                         }
                     }
                 }
@@ -84,7 +84,7 @@ export default class EcommerceController {
                 paints: req.body.CommerceSessionTrans.UpdatedCar.CustomCar.Paints,
                 performanceParts: req.body.CommerceSessionTrans.UpdatedCar.CustomCar.PerformanceParts,
                 physicsProfileHash: req.body.CommerceSessionTrans.UpdatedCar.CustomCar.PhysicsProfileHash,
-                rating: req.body.CommerceSessionTrans.UpdatedCar.CustomCar.Rating
+                // rating: req.body.CommerceSessionTrans.UpdatedCar.CustomCar.Rating
             }
         });
 

@@ -11,6 +11,7 @@ export default class ChatServer {
     clients: ChatClient[] = [];
     handlers: Map<string, any> = new Map();
     rooms: any = {};
+    jid: string = `nfsw.engine.engine@${process.env.SERVER_IP}/EA_Chat`;
 
     constructor() {
         log('Starting server');
@@ -80,5 +81,9 @@ export default class ChatServer {
         this.server.close(() => {
             log('Server stopped');
         });
+    }
+
+    broadcastMessage(message: Element) {
+        
     }
 }

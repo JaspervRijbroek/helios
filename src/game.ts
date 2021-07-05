@@ -14,7 +14,17 @@ const log = debug('nfsw:game')
 
 export default class Game {
     static db: PrismaClient = new PrismaClient();
+    static instance?: Game;
+
     servers: any = {};
+
+    static getInstance(): Game {
+        if(!this.instance) {
+            this.instance = new Game();
+        }
+
+        return this.instance;
+    }
 
     loadConfig(path: string = `${process.cwd()}/.env`): Game {
         log(`Loading configuration: ${path}`);

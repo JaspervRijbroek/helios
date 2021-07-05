@@ -10,6 +10,7 @@ console.log(green('\\/ /_/ \\___|_|_|\\___/|___/'));
 console.log((debug.enabled('nfsw:game') ? red(bold('Debug mode!')) : '           ') + yellow('        A NFS: World Server'));
 console.log();
 
-new Game()
+Game
+    .getInstance()
     .loadConfig()
     .startServers()

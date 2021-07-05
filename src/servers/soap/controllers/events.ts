@@ -68,11 +68,7 @@ export default class EventsController {
                 include: {
                     event: {
                         include: {
-                            rewards: {
-                                where: {
-                                    rank: parseInt(body.Rank)
-                                }
-                            }
+                            rewards: true
                         }
                     }
                 }
@@ -84,6 +80,21 @@ export default class EventsController {
 
         let event = session.event,
             reward = session.event.rewards[0];
+
+        // Update the personal information.
+        await Game.db.persona.update({
+            where: {
+                id: req.user.currentPersonaId
+            },
+            data: {
+                boost: {
+                    increment: reward.boost || 0
+                },
+                cash: {
+                    increment: reward.cash || 0
+                }
+            }
+        });
 
         return {
             RouteEventResult: {
