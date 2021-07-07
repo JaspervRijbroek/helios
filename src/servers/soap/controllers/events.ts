@@ -74,12 +74,16 @@ export default class EventsController {
                 }
             })
 
-        if(!session || !session.event || !session.event.rewards || !session.event.rewards[0]) {
+        if(!session || !session.event) {
             return {};
         }
 
         let event = session.event,
-            reward = session.event.rewards[0];
+            reward = session.event.rewards[0] || {
+                boost: 500,
+                reputation: 150,
+                cash: 20000
+            };
 
         // Update the personal information.
         await Game.db.persona.update({
@@ -87,6 +91,9 @@ export default class EventsController {
                 id: req.user.currentPersonaId
             },
             data: {
+                rep: {
+                    increment: reward.reputation || 0
+                },
                 boost: {
                     increment: reward.boost || 0
                 },

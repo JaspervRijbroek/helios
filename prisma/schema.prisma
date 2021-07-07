@@ -34,6 +34,15 @@ model Persona {
   userId          Int
   user            User         @relation(fields: [userId], references: [id])
   cars            PersonaCar[]
+  highScore     PersonaHighscore
+}
+
+model PersonaHighscore {
+    id  Int @id @default(autoincrement())
+    personaId   Int
+    persona Persona @relation(fields: [personaId], references: [id])
+    topSpeed    Int
+    fastestLap  Int
 }
 
 model PersonaCar {
