@@ -23,8 +23,7 @@ model Persona {
   name            String
   motto           String       @default("")
   icon            Int
-  level           Int          @default(0)
-  levelPercentage Int          @default(0)
+  experience      Int          @default(0)
   boost           Int          @default(500)
   cash            Int          @default(200000)
   rating          Int          @default(0)

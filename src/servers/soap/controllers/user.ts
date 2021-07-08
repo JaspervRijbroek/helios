@@ -2,6 +2,7 @@ import {Request} from 'express'
 import {Controller, Route} from '../decorators/routing';
 import {v4} from 'uuid';
 import Game from "../../../game";
+import Levels from "../lib/levels";
 
 @Controller()
 export default class UserController {
@@ -32,10 +33,10 @@ export default class UserController {
                             Boost: persona.boost,
                             Cash: persona.cash,
                             IconIndex: persona.icon,
-                            Level: persona.level,
+                            Level: Levels.getLevel(persona.experience),
                             Motto: persona.motto,
                             Name: persona.name,
-                            PercentToLevel: persona.levelPercentage,
+                            PercentToLevel: Levels.getProgress(persona.experience),
                             PersonaId: persona.id,
                             Rating: persona.rating,
                             Rep: persona.rep,

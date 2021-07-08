@@ -9,6 +9,7 @@ import NewsController from './controllers/news';
 import { toJson } from 'xml2json';
 import { parse } from 'js2xmlparser';
 import { gzipSync } from 'zlib';
+import Levels from "./lib/levels";
 
 const log = require('debug')('nfsw:soap');
 
@@ -33,8 +34,6 @@ export default class SoapServer {
         this.server = Express();
         this.server.disable('etag');
         this.server.disable('x-powered-by');
-
-        // this.communicator.emit('event_data', 'data');
     }
 
     controllerRoutes(): Router {

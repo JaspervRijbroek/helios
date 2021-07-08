@@ -24,6 +24,7 @@ export default class EcommerceController {
                 InvalidBasket: [],
                 InventoryItems: [],
                 UpdatedCar: [],
+                Status: 'Success',
                 PurchasedCars: {
                     OwnedCarTrans: []
                 },
