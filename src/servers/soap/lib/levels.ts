@@ -1,7 +1,7 @@
 export default class Levels {
-    static levelCap: number = 60;
-    static start: number = 100;
-    static increment: number = 2;
+    static levelCap: number = parseInt(process.env.LEVEL_CAP as string) || 60;
+    static start: number = parseInt(process.env.LEVEL_CALULATION_START as string) || 100;
+    static increment: number = parseInt(process.env.LEVEL_INCREMENT_FACTOR as string) || 2;
     static levels: number[] = new Array(this.levelCap).fill(null);
 
     static getLevels(): number[] {
