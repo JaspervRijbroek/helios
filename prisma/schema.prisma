@@ -19,29 +19,20 @@ model User {
 }
 
 model Persona {
-  id              Int          @id @default(autoincrement())
-  name            String
-  motto           String       @default("")
-  icon            Int
-  experience      Int          @default(0)
-  boost           Int          @default(500)
-  cash            Int          @default(200000)
-  rating          Int          @default(0)
-  rep             Int          @default(0)
-  repLevel        Int          @default(0)
-  score           Int          @default(0)
-  userId          Int
-  user            User         @relation(fields: [userId], references: [id])
-  cars            PersonaCar[]
-  highScore     PersonaHighscore
-}
-
-model PersonaHighscore {
-    id  Int @id @default(autoincrement())
-    personaId   Int
-    persona Persona @relation(fields: [personaId], references: [id])
-    topSpeed    Int
-    fastestLap  Int
+  id         Int          @id @default(autoincrement())
+  name       String
+  motto      String       @default("")
+  icon       Int
+  experience Int          @default(0)
+  boost      Int          @default(500)
+  cash       Int          @default(200000)
+  rating     Int          @default(0)
+  rep        Int          @default(0)
+  repLevel   Int          @default(0)
+  score      Int          @default(0)
+  userId     Int
+  user       User         @relation(fields: [userId], references: [id])
+  cars       PersonaCar[]
 }
 
 model PersonaCar {
