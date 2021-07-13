@@ -47,7 +47,6 @@ export default class PresenceHandler extends AbstractHandler {
 
     @HandleType('unavailable')
     unavailable(client: ChatClient, packet: Element) {
-        // Loop through all the rooms and check if the client is in there.
         // If so send an unavailable to all the connected clients.
     }
 }

@@ -20,14 +20,15 @@ export default class EcommerceController {
 
         let ecommerceResult = {
             CommerceResultTrans: {
-                CommerceItems: [],
-                InvalidBasket: [],
-                InventoryItems: [],
-                UpdatedCar: [],
-                Status: 'Success',
-                PurchasedCars: {
-                    OwnedCarTrans: []
+                InventoryItems: {
+                    InventoryItemTrans: [{
+                        Hash: 0,
+                        InventoryId: 0,
+                        RemainingUseCount: 0,
+                        ResellPrice: 0
+                    }]
                 },
+                Status: 'Success',
                 Wallets: {
                     WalletTrans: [{
                         Balance: 0,
@@ -169,31 +170,33 @@ export default class EcommerceController {
         });
 
 
-        result.CommerceResultTrans.PurchasedCars.OwnedCarTrans.push({
-            CustomCar: {
-                BaseCar: createCar.baseCar,
-                CarClassHash: createCar.carClassHash,
+        result.CommerceResultTrans.PurchasedCars = {
+            OwnedCarTrans: [{
+                CustomCar: {
+                    BaseCar: createCar.baseCar,
+                    CarClassHash: createCar.carClassHash,
+                    Id: createCar.id,
+                    IsPreset: 'true',
+                    Level: createCar.level,
+                    Name: createCar.name,
+                    Paints: createCar.paints,
+                    PerformanceParts: createCar.performanceParts,
+                    PhysicsProfileHash: createCar.physicsProfileHash,
+                    Rating: createCar.rating,
+                    ResalePrice: createCar.resellValue,
+                    RideHeightDrop: 0,
+                    SkillModParts: createCar.skillModParts,
+                    SkillModSlotCount: createCar.skillModPartsCount,
+                    Version: createCar.version,
+                    Vinyls: createCar.vinyls,
+                    VisualParts: createCar.visualParts
+                },
+                Durability: createCar.durability,
+                Heat: createCar.heat,
                 Id: createCar.id,
-                IsPreset: 'true',
-                Level: createCar.level,
-                Name: createCar.name,
-                Paints: createCar.paints,
-                PerformanceParts: createCar.performanceParts,
-                PhysicsProfileHash: createCar.physicsProfileHash,
-                Rating: createCar.rating,
-                ResalePrice: createCar.resellValue,
-                RideHeightDrop: 0,
-                SkillModParts: createCar.skillModParts,
-                SkillModSlotCount: createCar.skillModPartsCount,
-                Version: createCar.version,
-                Vinyls: createCar.vinyls,
-                VisualParts: createCar.visualParts
-            },
-            Durability: createCar.durability,
-            Heat: createCar.heat,
-            Id: createCar.id,
-            OwnershipType: createCar.ownershipType
-        });
+                OwnershipType: createCar.ownershipType
+            }]
+        };
 
         return car;
     }

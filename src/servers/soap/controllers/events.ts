@@ -68,7 +68,11 @@ export default class EventsController {
                 include: {
                     event: {
                         include: {
-                            rewards: true
+                            rewards: {
+                                where: {
+                                    rank: parseInt(body.Rank)
+                                }
+                            }
                         }
                     }
                 }
@@ -91,7 +95,7 @@ export default class EventsController {
                 id: req.user.currentPersonaId
             },
             data: {
-                rep: {
+                experience: {
                     increment: reward.reputation || 0
                 },
                 boost: {
