@@ -396,8 +396,8 @@ export default class PersonaController {
                 PercentToLevel: Levels.getProgress(persona.experience),
                 PersonaId: persona.id,
                 Rating: persona.rating,
-                Rep: persona.rep,
-                RepAtCurrentLevel: persona.repLevel,
+                Rep: persona.experience,
+                RepAtCurrentLevel: persona.experience - Levels.getCurrentLevelExperience(persona.experience),
                 Score: persona.score
             }
         };
