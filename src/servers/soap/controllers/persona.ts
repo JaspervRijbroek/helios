@@ -419,6 +419,15 @@ export default class PersonaController {
         let car = persona.cars.find(car => car.id == parseInt(req.params.carId)),
             carIndex = car ? persona.cars.indexOf(car) : 0;
 
+        await Game.db.persona.update({
+            where: {
+                id: persona.id
+            },
+            data: {
+                defaultCar: carIndex
+            }
+        });
 
+        return;
     }
 }
