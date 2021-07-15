@@ -88,8 +88,41 @@ export default class Room {
      * This method will broadcast a unavailable to the entire chat.
      * It will generate a message per client.
      */
-    removeClient() {
+    removeClient(leavingClient: ChatClient) {
         // Send a unavailable for the client to all connected clients.
+        this.clients.forEach((client: ChatClient) => {
+            client.send(
+                xml(
+                    'presence',
+                    {
+                        from: this.jid,
+                        to: client.jid,
+                        type: 'unavailable'
+                    },
+                    xml(
+                        'x',
+                        'http://jabber.org/protocol/muc#user',
+                        xml(
+                            'item',
+                            {
+                                affiliation: 'member',
+                                jid: leavingClient.jid,
+                                role: 'none'
+                            }
+                        ),
+                        xml(
+                            'status',
+                            {
+                                code: '110'
+                            }
+                        )
+                    )
+                )
+            )
+        });
+
+        // Filter out the leaving client.
+        this.clients = this.clients.filter((client: ChatClient) => client !== leavingClient);
     }
 
     broadcastMessage(from: ChatClient, channel: string, message: string) {

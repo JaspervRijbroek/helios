@@ -31,6 +31,7 @@ model Persona {
   repLevel   Int          @default(0)
   score      Int          @default(0)
   userId     Int
+  defaultCar Int          @default(0)
   user       User         @relation(fields: [userId], references: [id])
   cars       PersonaCar[]
 }

@@ -372,8 +372,6 @@ export default class PersonaController {
 
     @Route('post', 'DriverPersona/CreatePersona')
     async createPersona(req: Request): Promise<any> {
-        console.log(req.user.id);
-
         let persona = await Game.db.persona.create({
             data: {
                 user: {
@@ -401,5 +399,26 @@ export default class PersonaController {
                 Score: persona.score
             }
         };
+    }
+
+    @Route('put', 'personas/:personaId/defaultcar/:carId')
+    async updateDefaultCar(req: Request): Promise<any> {
+        let persona = await Game.db.persona.findUnique({
+            where: {
+                id: parseInt(req.params.personaId)
+            },
+            include: {
+                cars: true
+            }
+        });
+
+        if(!persona || !persona.cars.length) {
+            return;
+        }
+
+        let car = persona.cars.find(car => car.id == parseInt(req.params.carId)),
+            carIndex = car ? persona.cars.indexOf(car) : 0;
+
+
     }
 }

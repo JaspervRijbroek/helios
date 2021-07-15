@@ -4,7 +4,6 @@
 import 'reflect-metadata';
 
 import debug from "debug";
-import {sync} from "glob";
 import {PrismaClient} from "@prisma/client";
 import SoapServer from "./servers/soap";
 import FreeroamServer from "./servers/freefroam";

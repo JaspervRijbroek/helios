@@ -48,5 +48,7 @@ export default class PresenceHandler extends AbstractHandler {
     @HandleType('unavailable')
     unavailable(client: ChatClient, packet: Element) {
         // If so send an unavailable to all the connected clients.
+        // Send an unavailable back to the current user.
+        return this.getRoom(packet.attrs.to)?.removeClient(client);
     }
 }
