@@ -60,7 +60,7 @@ export default class PersonaController {
                         }
                     })
                 },
-                DefaultOwnedCarIndex: 0,
+                DefaultOwnedCarIndex: persona.defaultCar,
                 ObtainableSlots: {
                     ProductTrans: [{
                         BundleItems: {},
