@@ -1,0 +1,174 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["orderByRelation", "filterJson"]
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  username         String    @unique
+  password         String
+  token            String    @default("")
+  currentPersonaId Int       @default(0)
+  isAdmin          Boolean   @default(false)
+  personas         Persona[]
+}
+
+model Persona {
+  id         Int          @id @default(autoincrement())
+  name       String
+  motto      String       @default("")
+  icon       Int
+  experience Int          @default(0)
+  boost      Int          @default(500)
+  cash       Int          @default(200000)
+  rating     Int          @default(0)
+  rep        Int          @default(0)
+  repLevel   Int          @default(0)
+  score      Int          @default(0)
+  userId     Int
+  defaultCar Int          @default(0)
+  user       User         @relation(fields: [userId], references: [id])
+  cars       PersonaCar[]
+}
+
+model PersonaCar {
+  id                 Int     @id @default(autoincrement())
+  carId              String
+  customCarId        String
+  baseCar            String
+  carClassHash       String
+  physicsProfileHash String
+  isPreset           Boolean
+  level              Int
+  rating             Int
+  version            Int
+  skillModPartsCount Int
+  name               String
+  durability         Int
+  expirationDate     Int
+  heat               Int
+  ownershipType      String
+  resellValue        Int
+  paints             Json?
+  performanceParts   Json?
+  skillModParts      Json?
+  vinyls             Json?
+  visualParts        Json?
+  personaId          Int
+  persona            Persona @relation(fields: [personaId], references: [id])
+}
+
+model Event {
+  id                          Int            @id @default(autoincrement())
+  carClassHash                String
+  coins                       Int
+  engagePoint                 Json?
+  localization                String
+  modeDescriptionLocalization String
+  modeIcon                    String
+  modeId                      String
+  modeLocalization            String
+  enabled                     Boolean
+  locked                      Boolean
+  laps                        Int
+  length                      Float
+  maxClassRating              String
+  maxEntrants                 Int
+  maxLevel                    Int
+  minClassRating              String
+  minEntrants                 Int
+  minLevel                    Int
+  regionLocalization          String
+  rewardModes                 Json?
+  timeLimit                   Int
+  trackLayoutMap              String
+  trackLocalization           String
+  sessions                    EventSession[]
+  rewards                     EventReward[]
+}
+
+model EventSession {
+  id      Int   @id @default(autoincrement())
+  lobbyId Int   @default(0)
+  eventId Int
+  event   Event @relation(fields: [eventId], references: [id])
+}
+
+model EventReward {
+  id           Int    @id @default(autoincrement())
+  reputation   Int
+  experience   Int
+  boost        Int
+  cash         Int
+  rank         Int
+  cardPackName String
+  eventId      Int
+  event        Event  @relation(fields: [eventId], references: [id])
+}
+
+model EcommerceCategory {
+  id           Int                @id @default(autoincrement())
+  name         String
+  internalName String
+  products     EcommerceProduct[]
+}
+
+model EcommerceProduct {
+  id              Int               @id @default(autoincrement())
+  currency        String
+  description     String            @db.LongText
+  duration        Int
+  hash            String
+  icon            String
+  level           Int
+  longDescription String            @db.LongText
+  price           Int
+  priority        Int
+  title           String
+  productType     String
+  secondaryIcon   String
+  useCount        Int
+  visualStyle     String
+  categoryId      Int
+  category        EcommerceCategory @relation(fields: [categoryId], references: [id])
+  dealerCar       DealerCar?
+}
+
+model DealerCar {
+  id                 Int              @id @default(autoincrement())
+  carId              String
+  customCarId        String
+  baseCar            String
+  carClassHash       String
+  physicsProfileHash String
+  isPreset           Boolean
+  level              Int
+  rating             Int
+  version            Int
+  skillModPartsCount Int
+  name               String
+  durability         Int
+  expirationDate     Int
+  heat               Int
+  ownershipType      String
+  resellValue        Int
+  paints             Json?
+  performanceParts   Json?
+  skillModParts      Json?
+  vinyls             Json?
+  visualParts        Json?
+  ecommerceProductId Int              @unique
+  related_car        EcommerceProduct @relation(fields: [ecommerceProductId], references: [id])
+}
+
+model Sceneries {
+  id          Int     @id @default(autoincrement())
+  sceneryId   Int
+  description String
+  active      Boolean
+}

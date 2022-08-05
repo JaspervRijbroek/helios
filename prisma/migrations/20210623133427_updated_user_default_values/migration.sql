@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `User` MODIFY `token` VARCHAR(191) NOT NULL DEFAULT '',
+    MODIFY `currentPersonaId` INTEGER NOT NULL DEFAULT 0,
+    MODIFY `isAdmin` BOOLEAN NOT NULL DEFAULT false;

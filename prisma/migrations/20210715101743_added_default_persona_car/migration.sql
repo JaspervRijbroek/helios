@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Persona` ADD COLUMN `defaultCar` INTEGER NOT NULL DEFAULT 0;

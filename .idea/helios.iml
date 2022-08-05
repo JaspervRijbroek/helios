@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="zeus" />
+    <orderEntry type="module" module-name="nfsw-srv" />
+    <orderEntry type="module" module-name="freeroam-3a1fa7701e5fc2cd8c6eccc89664e2b3e57c9862" />
+    <orderEntry type="module" module-name="helios.wiki" />
+  </component>
+</module>
