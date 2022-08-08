@@ -4,68 +4,43 @@
 import 'reflect-metadata';
 
 import { PrismaClient } from '@prisma/client';
-import { fork } from 'child_process';
-import { sync } from 'glob';
-import { parse } from 'path';
 import EventEmitter from 'events';
+import Client from "./client";
+import SoapServer from "./servers/soap";
+import ChatServer from "./servers/chat";
+import FreeroamServer from "./servers/freeroam";
+import Request from "./request";
+import Response from "./response";
 
-export default class Game {
-    static db: PrismaClient = new PrismaClient();
-    static event: EventEmitter = new EventEmitter();
-    static instance?: Game;
+export default new class Game extends EventEmitter {
+    db: PrismaClient = new PrismaClient();
+    clients: Client[] = [];
+    handlers: any[] = [];
+    servers: any[] = [new SoapServer(this), new ChatServer(this), new FreeroamServer(this)];
 
-    servers: any = {};
+    constructor() {
+        super();
 
-    static getInstance(): Game {
-        if (!this.instance) {
-            this.instance = new Game();
-        }
+        // load in the config from fixed path!
+        require('dotenv').config(`${process.cwd()}/.env`);
 
-        return this.instance;
-    }
+        this.on('package', (client: Client, request: Request, response: Response) => {
+            let handler = this.handlers.find(handler => handler.event == request.event);
 
-    /**
-     * The main process loads the config, as this is env variables it will be forced to all the children.
-     * This way it works without a hitch.
-     *
-     * @param path
-     */
-    loadConfig(path: string = `${process.cwd()}/.env`): Game {
-        require('dotenv').config(path);
+            if(!handler) {
+                return response.fail();
+            }
 
-        return this;
-    }
+            // We have a handler, first fire the events.
+            this.emit(`before.${request.event}`, client, request, response);
 
-    startServers(): Game {
-        // All servers will be started in the same process.
-        sync(`${__dirname}/../servers/*/index.ts`).map((serverPath) => {
-            let pathParts = parse(serverPath);
+            response = handler(client, request, response) as Response;
 
-            this.servers[pathParts.name] = fork(serverPath);
-            this.servers[pathParts.name].on(
-                'message',
-                this.handleMessage.bind(this)
-            );
+            this.emit(`after.${request.event}`, client, request, response);
+
+            return response.send();
         });
 
-        return this;
-    }
-
-    handleMessage(messageData: any): void {
-        const { recipient, data } = messageData;
-
-        this.servers[recipient]?.send(data);
-
-        return;
-    }
-
-    static sendEvent(recipient: 'soap' | 'freeroam' | 'chat', data: any): void {
-        // @ts-ignore
-        process.send({
-            recipient,
-            data,
-        });
-
-        return;
+        this.servers.forEach(server => server.start());
     }
 }
