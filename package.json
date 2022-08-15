@@ -7,6 +7,9 @@
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
     },
+    "bin": {
+        "helios": "./cli/index.js"
+    },
     "packageManager": "yarn@3.0.0",
     "dependencies": {
         "@prisma/client": "3.15.2",
