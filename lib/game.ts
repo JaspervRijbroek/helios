@@ -11,11 +11,12 @@ import ChatServer from "./servers/chat";
 import FreeroamServer from "./servers/freeroam";
 import Request from "./request";
 import Response from "./response";
+import {sync} from "glob";
 
 export default new class Game extends EventEmitter {
     db: PrismaClient = new PrismaClient();
     clients: Client[] = [];
-    handlers: any[] = [];
+    handlers: any[] = sync(`${__dirname}/../handlers/**/*.ts`).map(require);
     servers: any[] = [new SoapServer(this), new ChatServer(this), new FreeroamServer(this)];
 
     constructor() {
@@ -24,23 +25,27 @@ export default new class Game extends EventEmitter {
         // load in the config from fixed path!
         require('dotenv').config(`${process.cwd()}/.env`);
 
-        this.on('package', (client: Client, request: Request, response: Response) => {
+        this.on('package', async (client: Client, request: Request, response: Response) => {
             let handler = this.handlers.find(handler => handler.event == request.event);
 
             if(!handler) {
-                return response.fail();
+                return response.fail(client);
             }
 
             // We have a handler, first fire the events.
             this.emit(`before.${request.event}`, client, request, response);
 
-            response = handler(client, request, response) as Response;
+            response.setData(
+                await handler.default(client, request, response)
+            )
 
             this.emit(`after.${request.event}`, client, request, response);
 
-            return response.send();
+            return response.send(client);
         });
+    }
 
-        this.servers.forEach(server => server.start());
+    start(): void {
+        return this.servers.forEach(server => server.start());
     }
 }

@@ -82,32 +82,4 @@ export default class SoapServer {
 
         next();
     }
-
-    build(req: Request, res: Response, next: () => void) {
-        let keys = Object.keys(res.result),
-            xmlBody: string | Buffer = '';
-
-        if (keys.length) {
-            xmlBody = parse(keys[0], res.result[keys[0]], {
-                declaration: {
-                    include: false,
-                },
-                format: {
-                    doubleQuotes: true,
-                },
-                useSelfClosingTagIfEmpty: true,
-            });
-        }
-
-        xmlBody = gzipSync(xmlBody);
-
-        res.status(200)
-            .header('Content-Length', xmlBody.length.toString())
-            .header('Content-Type', 'application/xml;charset=utf-8')
-            .header('Content-Encoding', 'gzip')
-            .header('Connection', 'close')
-            .send(xmlBody);
-
-        next();
-    }
 }

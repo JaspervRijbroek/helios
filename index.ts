@@ -11,6 +11,4 @@ console.log((debug.enabled('nfsw:game') ? chalk.red(chalk.bold('Debug mode!')) :
 console.log();
 
 Game
-    .getInstance()
-    .loadConfig()
-    .startServers();
+    .start();

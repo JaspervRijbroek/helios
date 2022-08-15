@@ -6,29 +6,38 @@ import Request from "../request";
 import {User} from '@prisma/client';
 import {validate} from "uuid";
 import {compareSync, hashSync} from "bcrypt";
+import {gzipSync} from "zlib";
+import {parse} from "js2xmlparser";
+import Route from "route-parser";
 
 export default class SoapServer extends Server {
+    // So far there is just one url per functionality, this has to do with the nature of SOAP I guess
+    private routes: any[] = [
+        [new Route('/Engine.svc/achievements/loadall'), 'achievements.loadall']
+    ];
+
     constructor(protected game: typeof Game) {
         super();
 
         this.on('request', this.handleRequest);
     }
 
-    async handleRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
-        let client = await this.authenticate(req);
+    start() {
+        this.listen(process.env.SOAP_PORT, () => {
+            console.log(`Server listening on port ${process.env.SOAP_PORT}`);
+        })
+    }
 
-        if(!client) {
-            res.statusCode = 401;
-            res.end();
-            return;
+    async handleRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
+        let client = await this.authenticate(req),
+            response = new Response(this, res),
+            [event, data] = this.findRoute(req);
+
+        if(!client || !event) {
+            return this.reply(new Client(), response.setData(false));
         }
 
-        // Find a client there must always be a client as a user is always authenticated.
-        // So we also have to handle authentication which is done in this server.
-
-        // Parse all the data into a request object and create a response object.
-        let response = new Response(this, res),
-            request = new Request('achievements.loadall', {});
+        let request = new Request(event, data);
 
         this.game.emit('package', client, request, response);
 
@@ -39,10 +48,18 @@ export default class SoapServer extends Server {
         if(!response.getData() && response.reference) {
             response.reference.statusCode = 401;
 
-            return response.reference.send();
+            return response.reference.end();
         }
 
         // Parse the json to xml.
+        let responseXml = this.buildResponse(response.getData());
+
+        response.reference.setHeader('Content-Length', responseXml.length.toString());
+        response.reference.setHeader('Content-Type', 'application/xml;charset=utf-8');
+        response.reference.setHeader('Content-Encoding', 'gzip');
+        response.reference.setHeader('Connection', 'close');
+
+        return response.reference.end(responseXml);
     }
 
     async authenticate(req: IncomingMessage): Promise<false|undefined|User|null> {
@@ -103,5 +120,34 @@ export default class SoapServer extends Server {
 
             return user[0];
         }
+    }
+
+    buildResponse(data: any): Buffer {
+        let keys = Object.keys(data),
+            xmlBody: string | Buffer = '';
+
+        if (keys.length) {
+            xmlBody = parse(keys[0], data[keys[0]], {
+                declaration: {
+                    include: false,
+                },
+                format: {
+                    doubleQuotes: true,
+                },
+                useSelfClosingTagIfEmpty: true,
+            });
+        }
+
+        return gzipSync(xmlBody);
+    }
+
+    private findRoute(req: IncomingMessage): any[] {
+        for(let value of this.routes) {
+            if(value[0].match(req.url)) {
+                return [value[1], {}];
+            }
+        }
+
+        return [false, {}];
     }
 }
