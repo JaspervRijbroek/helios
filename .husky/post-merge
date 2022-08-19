@@ -7,5 +7,5 @@ function changed {
 
 if changed 'yarn.lock'; then
   echo "📦 Dependencies changed, updating!"
-  yarn
+  npm i
 fi
